@@ -31,6 +31,15 @@
 #define WEBSOCKET_REPLY_CHUNK_BYTES (5*1500) /* 5 TCP packets with default MTU */
 #define WEBSOCKET_NOTUSED(V) ((void) V)
 #define WEBSOCKET_IOBUF_LEN 1024
+#define WEBSOCKET_METHOD_GET "Get"
+#define WEBSOCKET_METHOD_POST "Post"
+#define WEBSOCKET_UPGRADE "Upgrade:"
+#define WEBSOCKET_CONNECTION "Connection:"
+#define WEBSOCKET_HOST "Host:"
+#define WEBSOCKET_SEC_WEBSOCKET_VERSION "Sec_WebSocket_Version:"
+#define WEBSOCKET_SEC_WEBSOCKET_KEY "Sec_WebSocket_Key:"
+#define WEBSOCKET_SEC_WEBSOCKET_ORIGIN "Sec_WebSocket_Origin:"
+
 extern struct websocketServer server; /* server global state */
 
 typedef struct {
@@ -45,6 +54,15 @@ typedef struct {
     unsigned char *payload;
 } websocket_frame_t;
 
+typedef struct {
+    unsigned char * Uri;
+    unsigned char * Upgrade;
+    unsigned char * Connection;
+    unsigned char * Sec_WebSocket_Version;
+    unsigned char * Host;
+    unsigned char * Sec_WebSocket_Key;
+    unsigned char * Sec_WebSocket_Origin;
+}handshake_frame_t;
 
 typedef struct websocketClient {
    enum
