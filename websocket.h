@@ -28,6 +28,10 @@
 #include"logs.h"
 #include <sys/uio.h>
 #include <errno.h>
+
+#define WEBSOCKET_OK 0
+#define WEBSOCKET_ERR 1
+
 #define WEBSOCKET_REPLY_CHUNK_BYTES (5*1500) /* 5 TCP packets with default MTU */
 #define WEBSOCKET_NOTUSED(V) ((void) V)
 #define WEBSOCKET_IOBUF_LEN 1024
@@ -39,6 +43,8 @@
 #define WEBSOCKET_SEC_WEBSOCKET_VERSION "Sec_WebSocket_Version:"
 #define WEBSOCKET_SEC_WEBSOCKET_KEY "Sec_WebSocket_Key:"
 #define WEBSOCKET_SEC_WEBSOCKET_ORIGIN "Sec_WebSocket_Origin:"
+
+#define WEBSOCKET_MAX_HEAD_LEVEL 10 //define the max head line of websocket
 
 extern struct websocketServer server; /* server global state */
 
@@ -55,13 +61,15 @@ typedef struct {
 } websocket_frame_t;
 
 typedef struct {
-    unsigned char * Uri;
-    unsigned char * Upgrade;
-    unsigned char * Connection;
-    unsigned char * Sec_WebSocket_Version;
-    unsigned char * Host;
-    unsigned char * Sec_WebSocket_Key;
-    unsigned char * Sec_WebSocket_Origin;
+    sds Method;
+    sds Uri;
+    sds Version;
+    sds Upgrade;
+    sds Connection;
+    sds Sec_WebSocket_Version;
+    sds Host;
+    sds Sec_WebSocket_Key;
+    sds Sec_WebSocket_Origin;
 }handshake_frame_t;
 
 typedef struct websocketClient {
@@ -72,11 +80,13 @@ typedef struct websocketClient {
         ConnectedStage
     }; 
     int fd;
+    int flags;
     int stage; //web socket stage
     sds querybuf;
     list *reply;
     int sentlen;
-    websocket_frame_t frame;
+    websocket_frame_t data_frame;
+    handshake_frame_t handshake_frame;
     time_t lastinteraction; /* time of the last interaction, used for timeout */
     /* Response buffer */
     int bufpos;
@@ -115,5 +125,9 @@ void closeTimedoutClients(void);
 void freeClient(websocketClient *c);
 websocketClient *createClient(int fd);
 void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask);
-
+void processInputBuffer(websocketClient *c);
+int processDataFrame(websocketClient *c);
+int processHandShake(websocketClient *c);
+void resetClient(websocketClient *c); 
+int processCommand(websocketClient *c);
 #endif

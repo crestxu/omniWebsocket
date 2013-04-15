@@ -108,7 +108,7 @@ void freeClient(websocketClient *c) {
     zfree(c);
 }
 websocketClient *createClient(int fd) {
-    websocketClient *c = zmalloc(sizeof(websocketClient));
+    websocketClient *c = (websocketClient*)zmalloc(sizeof(websocketClient));
     c->bufpos = 0;
 
     anetNonBlock(NULL,fd);
@@ -163,6 +163,61 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     } else {
         return;
     }
-//    processInputBuffer(c);
+    processInputBuffer(c);
+}
+void processInputBuffer(websocketClient *c) {
+    /* Keep processing while there is something in the input buffer */
+    while(sdslen(c->querybuf)) {
+        if (c->stage == HandshakeStage)  { //handshake
+            if (processHandShake(c) != WEBSOCKET_OK) break;
+        } else  { //data frame
+            if (processDataFrame(c) != WEBSOCKET_OK) break;
+        }
+
+        if (processCommand(c) == WEBSOCKET_OK)
+                resetClient(c);
+    }
+}
+void resetClient(websocketClient *c) {
+}
+int processHandShake(websocketClient *c) {
+    char *newline = strstr(c->querybuf,"\r\n");
+    int argc, j;
+    sds *argv;
+    size_t querylen;
+
+    /* Nothing to do without a \r\n */
+    if (newline == NULL)
+        return WEBSOCKET_ERR;
+
+    /* Split the input buffer up to the \r\n */
+    querylen = newline-(c->querybuf);
+    argv = sdssplitlen(c->querybuf,querylen," ",1,&argc);
+
+    /* Leave data after the first line of the query in the buffer */
+    c->querybuf = sdsrange(c->querybuf,querylen+2,-1);
+
+    /* Setup argv array on client structure */
+  //  if (c->argv) zfree(c->argv);
+   // c->argv = zmalloc(sizeof(robj*)*argc);
+
+    /* Create redis objects for all arguments. */
+   /* for (c->argc = 0, j = 0; j < argc; j++) {
+        if (sdslen(argv[j])) {
+            c->argv[c->argc] = createObject(REDIS_STRING,argv[j]);
+            c->argc++;
+        } else {
+            sdsfree(argv[j]);
+        }
+    }*/
+    zfree(argv);
+    return WEBSOCKET_OK;
 }
 
+int processDataFrame(websocketClient *c) {
+
+    return WEBSOCKET_OK;
+}
+int processCommand(websocketClient *c) {
+    return WEBSOCKET_OK;
+}
