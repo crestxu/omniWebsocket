@@ -40,9 +40,9 @@
 #define WEBSOCKET_UPGRADE "Upgrade:"
 #define WEBSOCKET_CONNECTION "Connection:"
 #define WEBSOCKET_HOST "Host:"
-#define WEBSOCKET_SEC_WEBSOCKET_VERSION "Sec_WebSocket_Version:"
-#define WEBSOCKET_SEC_WEBSOCKET_KEY "Sec_WebSocket_Key:"
-#define WEBSOCKET_SEC_WEBSOCKET_ORIGIN "Sec_WebSocket_Origin:"
+#define WEBSOCKET_SEC_WEBSOCKET_VERSION "Sec-WebSocket-Version:"
+#define WEBSOCKET_SEC_WEBSOCKET_KEY "Sec-WebSocket-Key:"
+#define WEBSOCKET_SEC_WEBSOCKET_ORIGIN "Sec-WebSocket-Origin:"
 
 #define WEBSOCKET_MAX_HEAD_LEVEL 10 //define the max head line of websocket
 
@@ -130,4 +130,6 @@ int processDataFrame(websocketClient *c);
 int processHandShake(websocketClient *c);
 void resetClient(websocketClient *c); 
 int processCommand(websocketClient *c);
+int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame);
+int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * data_frame);
 #endif

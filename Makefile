@@ -24,4 +24,5 @@ $(OBJ) : $(OBJECTS)
 
 clean :
 	rm -fr *.o
-	rm $(PROGRAM)
+	rm -f $(PROGRAM)
+	rm -f $(TESTOBJ)

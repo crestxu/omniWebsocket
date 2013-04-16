@@ -181,39 +181,127 @@ void processInputBuffer(websocketClient *c) {
 void resetClient(websocketClient *c) {
 }
 int processHandShake(websocketClient *c) {
-    char *newline = strstr(c->querybuf,"\r\n");
-    int argc, j;
-    sds *argv;
-    size_t querylen;
 
-    /* Nothing to do without a \r\n */
-    if (newline == NULL)
+    if(parseWebSocketHead(c->querybuf,&c->handshake_frame)!=WEBSOCKET_OK)
         return WEBSOCKET_ERR;
-
-    /* Split the input buffer up to the \r\n */
-    querylen = newline-(c->querybuf);
-    argv = sdssplitlen(c->querybuf,querylen," ",1,&argc);
-
-    /* Leave data after the first line of the query in the buffer */
-    c->querybuf = sdsrange(c->querybuf,querylen+2,-1);
-
-    /* Setup argv array on client structure */
-  //  if (c->argv) zfree(c->argv);
-   // c->argv = zmalloc(sizeof(robj*)*argc);
-
-    /* Create redis objects for all arguments. */
-   /* for (c->argc = 0, j = 0; j < argc; j++) {
-        if (sdslen(argv[j])) {
-            c->argv[c->argc] = createObject(REDIS_STRING,argv[j]);
-            c->argc++;
-        } else {
-            sdsfree(argv[j]);
-        }
-    }*/
-    zfree(argv);
     return WEBSOCKET_OK;
 }
 
+int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
+{
+    int i=0;
+    while(sdslen(querybuf)>0)
+    {
+
+
+        char *newline = strstr(querybuf,"\r\n");
+        int argc, j;
+        sds *argv;
+        size_t querylen;
+
+        if (newline == NULL)
+            return WEBSOCKET_ERR;
+
+        querylen =newline - querybuf;
+        argv = sdssplitlen(querybuf,querylen," ",1,&argc);
+
+        querybuf = sdsrange(querybuf,querylen+2,-1);
+        if(argc==0) break;
+
+     
+        if(i==0) //first line 
+        {
+            if(argc==3)
+            {
+                handshake_frame->Method=argv[0];
+                handshake_frame->Uri=argv[1];
+                handshake_frame->Version=argv[2];
+
+            }
+            else
+            {
+                 Log(RLOG_WARNING,"bad params in first head of websocket");
+                 return  WEBSOCKET_ERR;
+            }
+
+        }
+        else //other line
+        {
+            if(argc==2)
+            {
+                   switch(argv[0][0])
+                   {
+                       case 'u':
+                       case 'U':
+                           handshake_frame->Upgrade=argv[1];
+                           break;
+                       case 'c':
+                       case 'C':
+                           handshake_frame->Connection=argv[1];
+                           break;
+                       case 'h':
+                       case 'H':
+                           handshake_frame->Host=argv[1];
+                           break;
+                       case 's':
+                       case 'S':
+                           if(!strcasecmp(argv[0],WEBSOCKET_SEC_WEBSOCKET_VERSION)){
+                               handshake_frame->Sec_WebSocket_Version=argv[1];
+                           }
+                           else 
+                               if(!strcasecmp(argv[0],WEBSOCKET_SEC_WEBSOCKET_KEY)){
+                                   handshake_frame->Sec_WebSocket_Key=argv[1];
+                               }else 
+                                   if(!strcasecmp(argv[0],WEBSOCKET_SEC_WEBSOCKET_ORIGIN)){
+                                       handshake_frame->Sec_WebSocket_Origin=argv[1];
+                                   }
+                           break;
+                       default:
+                           break;
+
+                   }
+
+
+            }
+            else
+            {
+                 Log(RLOG_WARNING,"bad params in  head of websocket: %d",argc);
+                 return  WEBSOCKET_ERR;
+            }
+
+        }
+        if(i++>WEBSOCKET_MAX_HEAD_LEVEL)
+        {
+            Log(RLOG_WARNING,"error head in websocket");
+            return  WEBSOCKET_ERR;
+        }
+
+
+/*       for (j = 0; j < argc; j++) {
+            if (sdslen(argv[j])) {
+                printf("sds: %s\r\n",argv[j]);
+            } else {
+    
+                printf("sds: space%s\r\n",argv[j]);
+                sdsfree(argv[j]);
+            }
+        }*/
+        zfree(argv);
+    }
+
+    
+
+
+    Log(RLOG_VERBOSE,"Method:%s\r\nUri:%s\r\nVersion:%s\r\nConnection:%s\r\nSec_key:%s\r\nSec_vesion:%s\r\nSec_origin:%s\r\n",
+            handshake_frame->Method,handshake_frame->Uri,handshake_frame->Version,handshake_frame->Connection,
+            handshake_frame->Sec_WebSocket_Key,handshake_frame->Sec_WebSocket_Version,handshake_frame->Sec_WebSocket_Origin);
+ 
+    return WEBSOCKET_OK;
+}
+int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * data_frame)
+{
+    return WEBSOCKET_OK;
+}
 int processDataFrame(websocketClient *c) {
 
     return WEBSOCKET_OK;
