@@ -167,7 +167,7 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
 }
 void processInputBuffer(websocketClient *c) {
     /* Keep processing while there is something in the input buffer */
-    while(sdslen(c->querybuf)) {
+    while(sdslen(c->querybuf)) { //LT mode Keep process buffer data until sucess
         if (c->stage == HandshakeStage)  { //handshake
             if (processHandShake(c) != WEBSOCKET_OK) break;
         } else  { //data frame
