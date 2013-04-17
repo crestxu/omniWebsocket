@@ -298,8 +298,59 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
  
     return WEBSOCKET_OK;
 }
-int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * data_frame)
+int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
 {
+    unsigned char *buf=querybuf;
+    frame->fin  = (buf[0] >> 7) & 1;
+    frame->rsv1 = (buf[0] >> 6) & 1;
+    frame->rsv2 = (buf[0] >> 5) & 1;
+    frame->rsv3 = (buf[0] >> 4) & 1;
+    frame->opcode = buf[0] & 0xf;
+
+    frame->mask = (buf[1] >> 7) & 1;
+    frame->payload_len = buf[1] & 0x7f;
+
+    if (frame->payload_len == 126) {
+        unsigned short len;
+        memcpy(&len, buf+2, 2);
+        frame->payload_len = ntohs(len);
+        if (frame->mask) {
+             memcpy(&frame->mask_key,buf+4,4);  
+         }
+
+
+     } else if (frame->payload_len == 127) {
+        unsigned short len;
+        memcpy(&len, buf+2, 8);
+        frame->payload_len = ntohll(len);
+
+        if (frame->mask) {
+             memcpy(&frame->mask_key,buf+10,4);  
+         }
+
+ 
+     }
+
+      if (frame.payload_len > 0) {
+        /*if (ngx_http_push_stream_recv(c, rev, &err, aux->data, (ssize_t) frame.payload_len) == NGX_ERROR) {
+            goto closed;
+        }*/
+        //copy data to payload len
+
+        if ((frame.opcode == NGX_HTTP_PUSH_STREAM_WEBSOCKET_TEXT_OPCODE)) {
+            frame.payload = aux->data;
+            if (frame.mask) {
+                for (i = 0; i < frame.payload_len; i++) {
+                    frame.payload[i] = frame.payload[i] ^ frame.mask_key[i % 4];
+                }
+            }
+
+    }
+
+    if (frame->opcode == WEBSOCKET_CLOSE_OPCODE) {
+        
+    }
+
     return WEBSOCKET_OK;
 }
 int processDataFrame(websocketClient *c) {
