@@ -20,13 +20,13 @@ int initServer()
 {
     signal(SIGHUP, SIG_IGN);
     signal(SIGPIPE, SIG_IGN);
-  
+
 
     server.mainthread = pthread_self();
     server.clients = listCreate();
-    
+
     server.el = aeCreateEventLoop();
-      
+
     if (server.port != 0) {
         server.ipfd = anetTcpServer(server.neterr,server.port,server.bindaddr);
         if (server.ipfd == ANET_ERR) {
@@ -40,7 +40,7 @@ int initServer()
     }
     //aeCreateTimeEvent(server.el, 1, serverCron, NULL, NULL);
     if (server.ipfd > 0 && aeCreateFileEvent(server.el,server.ipfd,AE_READABLE,
-        acceptTcpHandler,NULL) == AE_ERR) oom("creating file event");
+                acceptTcpHandler,NULL) == AE_ERR) oom("creating file event");
 
     return 0;
 }
@@ -56,7 +56,7 @@ int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData) {
     /* Show information about connected clients */
     if (!(loops % 50)) {
         Log(RLOG_VERBOSE,"%d clients connected",
-            listLength(server.clients));
+                listLength(server.clients));
     }
 
     /* Close connections of timedout clients */
@@ -79,7 +79,7 @@ void closeTimedoutClients(void) {
     while ((ln = listNext(&li)) != NULL) {
         c = listNodeValue(ln);
         if (server.maxidletime &&
-            (now - c->lastinteraction > server.maxidletime))
+                (now - c->lastinteraction > server.maxidletime))
         {
             Log(RLOG_VERBOSE,"Closing idle client");
             freeClient(c);
@@ -115,7 +115,7 @@ websocketClient *createClient(int fd) {
     anetTcpNoDelay(NULL,fd);
     if (!c) return NULL;
     if (aeCreateFileEvent(server.el,fd,AE_READABLE,
-        readQueryFromClient, c) == AE_ERR)
+                readQueryFromClient, c) == AE_ERR)
     {
         close(fd);
         zfree(c);
@@ -130,9 +130,9 @@ websocketClient *createClient(int fd) {
     //listSetFreeMethod(c->reply,decrRefCount);
     //listSetDupMethod(c->reply,dupClientReplyValue);
     c->stage = HandshakeStage;
-    
+
     listAddNodeTail(server.clients,c);
-    
+
     //initClientMultiState(c);
     return c;
 }
@@ -175,7 +175,7 @@ void processInputBuffer(websocketClient *c) {
         }
 
         if (processCommand(c) == WEBSOCKET_OK)
-                resetClient(c);
+            resetClient(c);
     }
 }
 void resetClient(websocketClient *c) {
@@ -208,7 +208,7 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
         querybuf = sdsrange(querybuf,querylen+2,-1);
         if(argc==0) break;
 
-     
+
         if(i==0) //first line 
         {
             if(argc==3)
@@ -220,8 +220,8 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
             }
             else
             {
-                 Log(RLOG_WARNING,"bad params in first head of websocket");
-                 return  WEBSOCKET_ERR;
+                Log(RLOG_WARNING,"bad params in first head of websocket");
+                return  WEBSOCKET_ERR;
             }
 
         }
@@ -229,44 +229,44 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
         {
             if(argc==2)
             {
-                   switch(argv[0][0])
-                   {
-                       case 'u':
-                       case 'U':
-                           handshake_frame->Upgrade=argv[1];
-                           break;
-                       case 'c':
-                       case 'C':
-                           handshake_frame->Connection=argv[1];
-                           break;
-                       case 'h':
-                       case 'H':
-                           handshake_frame->Host=argv[1];
-                           break;
-                       case 's':
-                       case 'S':
-                           if(!strcasecmp(argv[0],WEBSOCKET_SEC_WEBSOCKET_VERSION)){
-                               handshake_frame->Sec_WebSocket_Version=argv[1];
-                           }
-                           else 
-                               if(!strcasecmp(argv[0],WEBSOCKET_SEC_WEBSOCKET_KEY)){
-                                   handshake_frame->Sec_WebSocket_Key=argv[1];
-                               }else 
-                                   if(!strcasecmp(argv[0],WEBSOCKET_SEC_WEBSOCKET_ORIGIN)){
-                                       handshake_frame->Sec_WebSocket_Origin=argv[1];
-                                   }
-                           break;
-                       default:
-                           break;
+                switch(argv[0][0])
+                {
+                    case 'u':
+                    case 'U':
+                        handshake_frame->Upgrade=argv[1];
+                        break;
+                    case 'c':
+                    case 'C':
+                        handshake_frame->Connection=argv[1];
+                        break;
+                    case 'h':
+                    case 'H':
+                        handshake_frame->Host=argv[1];
+                        break;
+                    case 's':
+                    case 'S':
+                        if(!strcasecmp(argv[0],WEBSOCKET_SEC_WEBSOCKET_VERSION)){
+                            handshake_frame->Sec_WebSocket_Version=argv[1];
+                        }
+                        else 
+                            if(!strcasecmp(argv[0],WEBSOCKET_SEC_WEBSOCKET_KEY)){
+                                handshake_frame->Sec_WebSocket_Key=argv[1];
+                            }else 
+                                if(!strcasecmp(argv[0],WEBSOCKET_SEC_WEBSOCKET_ORIGIN)){
+                                    handshake_frame->Sec_WebSocket_Origin=argv[1];
+                                }
+                            break;
+                    default:
+                            break;
 
-                   }
+                }
 
 
             }
             else
             {
-                 Log(RLOG_WARNING,"bad params in  head of websocket: %d",argc);
-                 return  WEBSOCKET_ERR;
+                Log(RLOG_WARNING,"bad params in  head of websocket: %d",argc);
+                return  WEBSOCKET_ERR;
             }
 
         }
@@ -277,29 +277,31 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
         }
 
 
-/*       for (j = 0; j < argc; j++) {
-            if (sdslen(argv[j])) {
-                printf("sds: %s\r\n",argv[j]);
-            } else {
-    
-                printf("sds: space%s\r\n",argv[j]);
-                sdsfree(argv[j]);
-            }
-        }*/
+        /*       for (j = 0; j < argc; j++) {
+                 if (sdslen(argv[j])) {
+                 printf("sds: %s\r\n",argv[j]);
+                 } else {
+
+                 printf("sds: space%s\r\n",argv[j]);
+                 sdsfree(argv[j]);
+                 }
+                 }*/
         zfree(argv);
     }
 
-    
+
 
 
     Log(RLOG_VERBOSE,"Method:%s\r\nUri:%s\r\nVersion:%s\r\nConnection:%s\r\nSec_key:%s\r\nSec_vesion:%s\r\nSec_origin:%s\r\n",
             handshake_frame->Method,handshake_frame->Uri,handshake_frame->Version,handshake_frame->Connection,
             handshake_frame->Sec_WebSocket_Key,handshake_frame->Sec_WebSocket_Version,handshake_frame->Sec_WebSocket_Origin);
- 
+
     return WEBSOCKET_OK;
 }
 int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
 {
+
+    int datalen,i;
     unsigned char *buf=querybuf;
     frame->fin  = (buf[0] >> 7) & 1;
     frame->rsv1 = (buf[0] >> 6) & 1;
@@ -310,45 +312,56 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
     frame->mask = (buf[1] >> 7) & 1;
     frame->payload_len = buf[1] & 0x7f;
 
+    int offset=2;
     if (frame->payload_len == 126) {
         unsigned short len;
         memcpy(&len, buf+2, 2);
+        offset+=2;
         frame->payload_len = ntohs(len);
         if (frame->mask) {
-             memcpy(&frame->mask_key,buf+4,4);  
-         }
+            offset+=4;
+            memcpy(&frame->mask_key,buf+4,4);  
+        }
 
 
-     } else if (frame->payload_len == 127) {
+    } else if (frame->payload_len == 127) {
         unsigned short len;
         memcpy(&len, buf+2, 8);
-        frame->payload_len = ntohll(len);
+        offset+=8;
+        frame->payload_len = websocket_ntohll(len);
 
         if (frame->mask) {
-             memcpy(&frame->mask_key,buf+10,4);  
-         }
+            offset+=4;
+            memcpy(&frame->mask_key,buf+10,4);  
+        }
 
- 
-     }
-
-      if (frame.payload_len > 0) {
-        /*if (ngx_http_push_stream_recv(c, rev, &err, aux->data, (ssize_t) frame.payload_len) == NGX_ERROR) {
-            goto closed;
-        }*/
-        //copy data to payload len
-
-        if ((frame.opcode == NGX_HTTP_PUSH_STREAM_WEBSOCKET_TEXT_OPCODE)) {
-            frame.payload = aux->data;
-            if (frame.mask) {
-                for (i = 0; i < frame.payload_len; i++) {
-                    frame.payload[i] = frame.payload[i] ^ frame.mask_key[i % 4];
-                }
-            }
 
     }
 
+    if((datalen=(sdslen(querybuf)-offset))!=frame->payload_len)
+    {
+        Log(RLOG_VERBOSE,"desc=recv_error packet_len=%d recv_data_len=%d",frame->payload_len,datalen);
+        return WEBSOCKET_ERR;
+    }
+    if (frame->payload_len > 0) {
+        /*if (ngx_http_push_stream_recv(c, rev, &err, aux->data, (ssize_t) frame.payload_len) == NGX_ERROR) {
+          goto closed;
+          }*/
+        //copy data to payload len
+
+        if ((frame->opcode == WEBSOCKET_TEXT_OPCODE)) {
+            frame->payload = sdsdup(buf+offset);
+            if (frame->mask) {
+                for (i = 0; i < frame->payload_len; i++) {
+                    frame->payload[i] = frame->payload[i] ^ frame->mask_key[i % 4];
+                }
+            }
+
+        }
+    }
+
     if (frame->opcode == WEBSOCKET_CLOSE_OPCODE) {
-        
+
     }
 
     return WEBSOCKET_OK;

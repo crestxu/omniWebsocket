@@ -44,6 +44,11 @@
 #define WEBSOCKET_SEC_WEBSOCKET_KEY "Sec-WebSocket-Key:"
 #define WEBSOCKET_SEC_WEBSOCKET_ORIGIN "Sec-WebSocket-Origin:"
 
+#define WEBSOCKET_TEXT_OPCODE 0x1
+#define WEBSOCKET_CLOSE_OPCODE 0x8
+#define WEBSOCKET_PING_OPCODE 0x9
+#define WEBSOCKET_PONG_OPCODE 0xA
+
 #define WEBSOCKET_MAX_HEAD_LEVEL 10 //define the max head line of websocket
 
 extern struct websocketServer server; /* server global state */
@@ -57,7 +62,7 @@ typedef struct {
     unsigned char mask:1;
     unsigned char mask_key[4];
     unsigned long payload_len;
-    unsigned char *payload;
+    sds payload;
 } websocket_frame_t;
 
 typedef struct {
