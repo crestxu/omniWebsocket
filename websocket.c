@@ -368,6 +368,10 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
 }
 int processDataFrame(websocketClient *c) {
 
+    
+    if(parseWebSocketDataFrame(c->querybuf,&c->data_frame)!=WEBSOCKET_OK)
+        return WEBSOCKET_ERR;
+
     return WEBSOCKET_OK;
 }
 int processCommand(websocketClient *c) {
