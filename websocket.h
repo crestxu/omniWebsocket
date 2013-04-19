@@ -137,4 +137,5 @@ void resetClient(websocketClient *c);
 int processCommand(websocketClient *c);
 int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame);
 int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * data_frame);
+void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask);
 #endif

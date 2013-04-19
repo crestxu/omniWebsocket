@@ -360,6 +360,7 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
         }
     }
 
+    querybuf=sdsrange(querybuf,offset+frame->payload_len,-1);
     if (frame->opcode == WEBSOCKET_CLOSE_OPCODE) {
 
     }
@@ -374,6 +375,132 @@ int processDataFrame(websocketClient *c) {
 
     return WEBSOCKET_OK;
 }
+int _installWriteEvent(websocketClient *c) {
+
+    if (c->fd <= 0) return WEBSOCKET_ERR;
+    if (c->bufpos == 0 && listLength(c->reply) == 0 &&aeCreateFileEvent(server.el, c->fd, AE_WRITABLE,
+        sendReplyToClient, c) == AE_ERR) return WEBSOCKET_ERR;
+    return WEBSOCKET_OK;
+}
+int _addReplyToBuffer(websocketClient *c, char *s, size_t len) {
+    size_t available = sizeof(c->buf)-c->bufpos;
+
+    /* If there already are entries in the reply list, we cannot
+     * add anything more to the static buffer. */
+    if (listLength(c->reply) > 0) return WEBSOCKET_ERR;
+
+    /* Check that the buffer has enough space available for this string. */
+    if (len > available) return WEBSOCKET_ERR;
+
+    memcpy(c->buf+c->bufpos,s,len);
+    c->bufpos+=len;
+    return WEBSOCKET_OK;
+}
+void _addReplySdsToList(websocketClient *c, sds s) {
+    sds *tail;
+    if (listLength(c->reply) == 0) {
+        listAddNodeTail(c->reply,s);
+    } else {
+        tail = listNodeValue(listLast(c->reply));
+
+        /* Append to this object when possible. */
+/*        if (tail != NULL &&
+            sdslen(tail)+sdslen(s) <= WEBSOCKET_REPLY_CHUNK_BYTES)
+        {
+            tail = dupLastObjectIfNeeded(c->reply);
+            tail = sdscatlen(tail,s,sdslen(s));
+            sdsfree(s);
+        } else {*/
+            listAddNodeTail(c->reply,s);
+       // }
+    }
+}
+void addReplySds(websocketClient *c, sds s) {
+    if (_installWriteEvent(c) != WEBSOCKET_OK) {
+        /* The caller expects the sds to be free'd. */
+        sdsfree(s);
+        return;
+    }
+    if (_addReplyToBuffer(c,s,sdslen(s)) == WEBSOCKET_OK) {
+        sdsfree(s);
+    } else {
+        /* This method free's the sds when it is no longer needed. */
+        _addReplySdsToList(c,s);
+    }
+}
+void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask) {
+    websocketClient *c = privdata;
+    int nwritten = 0, totwritten = 0, objlen;
+    sds o;
+    WEBSOCKET_NOTUSED(el);
+    WEBSOCKET_NOTUSED(mask);
+
+    while(c->bufpos > 0 || listLength(c->reply)) {
+        if (c->bufpos > 0) {
+     
+            nwritten = write(fd,c->buf+c->sentlen,c->bufpos-c->sentlen);
+            if (nwritten <= 0) break;
+            c->sentlen += nwritten;
+            totwritten += nwritten;
+
+            /* If the buffer was sent, set bufpos to zero to continue with
+             * the remainder of the reply. */
+            if (c->sentlen == c->bufpos) {
+                c->bufpos = 0;
+                c->sentlen = 0;
+            }
+        } else {
+            o = listNodeValue(listFirst(c->reply));
+            objlen = sdslen(o);
+
+            if (objlen == 0) {
+                listDelNode(c->reply,listFirst(c->reply));
+                continue;
+            }
+
+            nwritten = write(fd, ((char*)o)+c->sentlen,objlen-c->sentlen);
+            if (nwritten <= 0) break;
+            c->sentlen += nwritten;
+            totwritten += nwritten;
+
+            /* If we fully sent the object on head go to the next one */
+            if (c->sentlen == objlen) {
+                listDelNode(c->reply,listFirst(c->reply));
+                c->sentlen = 0;
+            }
+        }
+        /* Note that we avoid to send more thank REDIS_MAX_WRITE_PER_EVENT
+         * bytes, in a single threaded server it's a good idea to serve
+         * other clients as well, even if a very large request comes from
+         * super fast link that is always able to accept data (in real world
+         * scenario think about 'KEYS *' against the loopback interfae) */
+        //if (totwritten > REDIS_MAX_WRITE_PER_EVENT) break;
+    }
+    if (nwritten == -1) {
+        if (errno == EAGAIN) {
+            nwritten = 0;
+        } else {
+                Log(RLOG_VERBOSE,
+                "Error writing to client: %s", strerror(errno));
+            freeClient(c);
+            return;
+        }
+    }
+    if (totwritten > 0) c->lastinteraction = time(NULL);
+    if (listLength(c->reply) == 0) {
+        c->sentlen = 0;
+        aeDeleteFileEvent(server.el,c->fd,AE_WRITABLE);
+    }
+}
+
 int processCommand(websocketClient *c) {
+    if(c->stage==HandshakeStage){ //do hand shake
+
+        char *res="HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: fFBooB7FAkLlXgRSz0BT3v4hq5s=\r\nSec-WebSocket-Origin: null\r\nSec-WebSocket-Location: ws://example.com\r\n";
+        sds m=sdsnew(res);
+        addReplySds(c,m);
+    }
+    else{  //process data
+    }
     return WEBSOCKET_OK;
 }
