@@ -9,7 +9,7 @@
 int main(void)
 {
 
-    char *ip="10.26.190.45";
+    char *ip="127.0.0.1";
     int port=8413;
     server.bindaddr=ip;
     server.port=port;

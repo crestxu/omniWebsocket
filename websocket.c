@@ -1,6 +1,96 @@
 #include"websocket.h"
 
 struct websocketServer server; /* server global state */
+
+
+static void resetDataFrame(websocket_frame_t *dataframe)
+{
+
+    if(dataframe!=NULL)
+    {
+        if(dataframe->payload!=NULL)
+        {
+            sdsfree(dataframe->payload);
+            dataframe->payload=NULL;
+        }
+        memcpy(dataframe,0,sizeof(dataframe));
+
+    }
+}
+static void resetHandShakeFrame(handshake_frame_t *handframe)
+{
+    if(handframe!=NULL)
+    {
+        if(handframe->Connection!=NULL)
+        {
+            sdsfree(handframe->Connection);
+            handframe->Connection=NULL;
+        }
+        if(handframe->Host!=NULL)
+        {
+            sdsfree(handframe->Method);
+            handframe->Method=NULL;
+        }
+        if(handframe->Sec_WebSocket_Key!=NULL)
+        {
+            sdsfree(handframe->Sec_WebSocket_Key);
+            handframe->Sec_WebSocket_Key=NULL;
+        }
+        if(handframe->Sec_WebSocket_Origin!=NULL)
+        {
+            sdsfree(handframe->Sec_WebSocket_Origin);
+            handframe->Sec_WebSocket_Origin=NULL;
+        }
+        if(handframe->Sec_WebSocket_Version!=NULL)
+        {
+            sdsfree(handframe->Sec_WebSocket_Version);
+            handframe->Sec_WebSocket_Version=NULL;
+        }
+        if(handframe->Upgrade!=NULL)
+        {
+            sdsfree(handframe->Upgrade);
+            handframe->Upgrade=NULL;
+        }
+        if(handframe->Uri!=NULL)
+        {
+            sdsfree(handframe->Uri);
+            handframe->Uri=NULL;
+        }
+        if(handframe->Version!=NULL)
+        {
+            sdsfree(handframe->Version);
+            handframe->Version=NULL;
+        }
+
+    }
+
+
+
+}
+
+static void acceptCommonHandler(int fd) {
+    websocketClient *c;
+    if ((c = createClient(fd)) == NULL) {
+        Log(RLOG_WARNING,"Error allocating resoures for the client");
+        close(fd); /* May be already closed, just ingore errors */
+        return;
+    }
+    /* If maxclient directive is set and this is one client more... close the
+     * connection. Note that we create the client instead to check before
+     * for this condition, since now the socket is already set in nonblocking
+     * mode and we can send an error for free using the Kernel I/O */
+    if (server.maxclients && listLength(server.clients) > server.maxclients) {
+        char *err = "-ERR max number of clients reached\r\n";
+
+        /* That's a best effort error message, don't check write errors */
+        if (write(c->fd,err,strlen(err)) == -1) {
+            /* Nothing to do, Just to avoid the warning... */
+        }
+        freeClient(c);
+        return;
+    }
+    server.stat_numconnections++;
+}
 void acceptTcpHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
     int cport, cfd;
     char cip[128];
@@ -14,7 +104,7 @@ void acceptTcpHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
         return;
     }
     Log(RLOG_VERBOSE,"Accepted %s:%d", cip, cport);
-    //acceptCommonHandler(cfd);
+    acceptCommonHandler(cfd);
 }
 int initServer()
 {
@@ -38,7 +128,7 @@ int initServer()
         Log(RLOG_WARNING, "Configured to not listen anywhere, exiting.");
         exit(1);
     }
-    //aeCreateTimeEvent(server.el, 1, serverCron, NULL, NULL);
+    aeCreateTimeEvent(server.el, 1, serverCron, NULL, NULL);
     if (server.ipfd > 0 && aeCreateFileEvent(server.el,server.ipfd,AE_READABLE,
                 acceptTcpHandler,NULL) == AE_ERR) oom("creating file event");
 
@@ -94,6 +184,7 @@ void freeClient(websocketClient *c) {
      * unblockClientWaitingData() to avoid processInputBuffer() will get
      * called. Also it is important to remove the file events after
      * this, because this call adds the READABLE event. */
+    
     sdsfree(c->querybuf);
     c->querybuf = NULL;
 
@@ -163,6 +254,7 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     } else {
         return;
     }
+    Log(RLOG_VERBOSE,"%s",c->querybuf);
     processInputBuffer(c);
 }
 void processInputBuffer(websocketClient *c) {
@@ -179,9 +271,11 @@ void processInputBuffer(websocketClient *c) {
     }
 }
 void resetClient(websocketClient *c) {
+    
 }
 int processHandShake(websocketClient *c) {
 
+    resetHandShakeFrame(&c->handshake_frame);
     if(parseWebSocketHead(c->querybuf,&c->handshake_frame)!=WEBSOCKET_OK)
         return WEBSOCKET_ERR;
     return WEBSOCKET_OK;
@@ -369,7 +463,8 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
 }
 int processDataFrame(websocketClient *c) {
 
-    
+
+    resetDataFrame(&c->data_frame);
     if(parseWebSocketDataFrame(c->querybuf,&c->data_frame)!=WEBSOCKET_OK)
         return WEBSOCKET_ERR;
 
@@ -499,8 +594,10 @@ int processCommand(websocketClient *c) {
         char *res="HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: fFBooB7FAkLlXgRSz0BT3v4hq5s=\r\nSec-WebSocket-Origin: null\r\nSec-WebSocket-Location: ws://example.com\r\n";
         sds m=sdsnew(res);
         addReplySds(c,m);
+        c->stage=ConnectedStage;
     }
     else{  //process data
     }
+
     return WEBSOCKET_OK;
 }
