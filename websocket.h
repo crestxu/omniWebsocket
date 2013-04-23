@@ -26,6 +26,8 @@
 #include"sds.h"
 #include"adlist.h"
 #include"logs.h"
+#include"sha1.h"
+#include"base64.h"
 #include <sys/uio.h>
 #include <errno.h>
 

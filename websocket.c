@@ -13,7 +13,7 @@ static void resetDataFrame(websocket_frame_t *dataframe)
             sdsfree(dataframe->payload);
             dataframe->payload=NULL;
         }
-        memcpy(dataframe,0,sizeof(dataframe));
+        //memcpy(dataframe,0,sizeof(dataframe));
 
     }
 }
@@ -254,7 +254,7 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     } else {
         return;
     }
-    Log(RLOG_VERBOSE,"%s",c->querybuf);
+//    Log(RLOG_VERBOSE,"%s",c->querybuf);
     processInputBuffer(c);
 }
 void processInputBuffer(websocketClient *c) {
@@ -588,11 +588,35 @@ void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     }
 }
 
+
+int generateAcceptKey(sds webKey,char *key,int len)
+{
+    //char buff[1024]={0};
+    unsigned char shastr[20]={0};
+
+    SHA1_CTX context;
+    char *magicstr="258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+    SHA1Init(&context);
+    SHA1Update(&context,webKey,sdslen(webKey));
+    SHA1Update(&context,magicstr,strlen(magicstr));
+    SHA1Final(shastr,&context);
+
+    base64_encode(shastr,20,key,len);
+    Log(RLOG_VERBOSE,"dec=generate_accept_key value=%s",key);
+
+
+    return WEBSOCKET_OK;
+}
 int processCommand(websocketClient *c) {
     if(c->stage==HandshakeStage){ //do hand shake
 
-        char *res="HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: fFBooB7FAkLlXgRSz0BT3v4hq5s=\r\nSec-WebSocket-Origin: null\r\nSec-WebSocket-Location: ws://example.com\r\n";
-        sds m=sdsnew(res);
+        char buff[1024]={0};
+        char *res="HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: %s\r\nSec-WebSocket-Origin: null\r\nSec-WebSocket-Location: ws://example.com\r\n\r\n";
+        
+        char key[128]={0};
+        generateAcceptKey(c->handshake_frame.Sec_WebSocket_Key,key,128);
+        snprintf(buff,1024,res,key);
+        sds m=sdsnew(buff);
         addReplySds(c,m);
         c->stage=ConnectedStage;
     }

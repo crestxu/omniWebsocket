@@ -1,0 +1,940 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AE_ALL_EVENTS	ae.h	47;"	d
+AE_DONT_WAIT	ae.h	48;"	d
+AE_ERR	ae.h	39;"	d
+AE_FILE_EVENTS	ae.h	45;"	d
+AE_NOMORE	ae.h	50;"	d
+AE_NONE	ae.h	41;"	d
+AE_NOTUSED	ae.h	53;"	d
+AE_OK	ae.h	38;"	d
+AE_READABLE	ae.h	42;"	d
+AE_SETSIZE	ae.h	36;"	d
+AE_TIME_EVENTS	ae.h	46;"	d
+AE_WRITABLE	ae.h	43;"	d
+AF_LOCAL	anet.h	39;"	d
+AL_START_HEAD	adlist.h	89;"	d
+AL_START_TAIL	adlist.h	90;"	d
+ANET_CONNECT_NONBLOCK	anet.c	144;"	d	file:
+ANET_CONNECT_NONE	anet.c	143;"	d	file:
+ANET_ERR	anet.h	35;"	d
+ANET_ERR_LEN	anet.h	36;"	d
+ANET_H	anet.h	32;"	d
+ANET_OK	anet.h	34;"	d
+CC	Makefile	/^CC = gcc$/;"	m
+CC	utils/sha1/Makefile	/^CC	= g++$/;"	m
+CFLAGS	utils/sha1/Makefile	/^CFLAGS	= -c -O2 -Wall -D_FILE_OFFSET_BITS=64$/;"	m
+CircularShift	utils/sha1/sha1.cpp	/^unsigned SHA1::CircularShift(int bits, unsigned word)$/;"	f	class:SHA1	signature:(int bits, unsigned word)
+CircularShift	utils/sha1/sha1.h	/^        inline unsigned CircularShift(int bits, unsigned word);$/;"	p	class:SHA1	access:private	signature:(int bits, unsigned word)
+Computed	utils/sha1/sha1.h	/^        bool Computed;                      \/\/ Is the digest computed?$/;"	m	class:SHA1	access:private
+ConnectedStage	protocol/WebsocketConnectionContext.h	/^		ConnectedStage$/;"	e	enum:WebsocketConnectionContext::__anon1
+ConnectedStage	websocket.h	/^        ConnectedStage$/;"	e	enum:websocketClient::__anon5
+Connection	websocket.h	/^    sds Connection;$/;"	m	struct:__anon4	access:public
+Corrupted	utils/sha1/sha1.h	/^        bool Corrupted;                     \/\/ Is the message digest corruped?$/;"	m	class:SHA1	access:private
+DICT_ERR	dict.h	40;"	d
+DICT_HT_INITIAL_SIZE	dict.h	85;"	d
+DICT_NOTUSED	dict.h	43;"	d
+DICT_OK	dict.h	39;"	d
+DICT_STATS_VECTLEN	dict.c	581;"	d	file:
+DataMessage	protocol/WebsocketMessage.h	/^		DataMessage,$/;"	e	enum:WebsocketMessage::__anon2
+Decode	protocol/WebsocketDataMessage.cpp	/^bool WebsocketDataMessage::Decode()$/;"	f	class:WebsocketDataMessage	signature:()
+Decode	protocol/WebsocketDataMessage.h	/^	bool Decode();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+DisplayMessageDigest	utils/sha1/shatest.cpp	/^void DisplayMessageDigest(unsigned *message_digest)$/;"	f	signature:(unsigned *message_digest)
+DisplayMessageDigest	utils/sha1/shatest.cpp	/^void DisplayMessageDigest(unsigned *message_digest);$/;"	p	file:	signature:(unsigned *message_digest)
+Encode	protocol/WebsocketDataMessage.cpp	/^bool WebsocketDataMessage::Encode()$/;"	f	class:WebsocketDataMessage	signature:()
+Encode	protocol/WebsocketDataMessage.h	/^    bool Encode();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+GetArg1	protocol/WebsocketDataMessage.cpp	/^std::string WebsocketDataMessage::GetArg1()$/;"	f	class:WebsocketDataMessage	signature:()
+GetArg1	protocol/WebsocketDataMessage.h	/^	string GetArg1();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+GetArg2	protocol/WebsocketDataMessage.cpp	/^std::string WebsocketDataMessage::GetArg2()$/;"	f	class:WebsocketDataMessage	signature:()
+GetArg2	protocol/WebsocketDataMessage.h	/^	string GetArg2();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+GetEncodedData	protocol/WebsocketDataMessage.cpp	/^std::string WebsocketDataMessage::GetEncodedData()$/;"	f	class:WebsocketDataMessage	signature:()
+GetEncodedData	protocol/WebsocketDataMessage.h	/^	string GetEncodedData();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+GetField	protocol/WebsocketHandshakeMessage.cpp	/^std::string WebsocketHandshakeMessage::GetField( string key )$/;"	f	class:WebsocketHandshakeMessage	signature:( string key )
+GetField	protocol/WebsocketHandshakeMessage.h	/^	string GetField(string key);$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:(string key)
+GetServiceId	protocol/WebsocketDataMessage.cpp	/^int WebsocketDataMessage::GetServiceId()$/;"	f	class:WebsocketDataMessage	signature:()
+GetServiceId	protocol/WebsocketDataMessage.h	/^	int GetServiceId();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+GetStage	protocol/WebsocketConnectionContext.cpp	/^int WebsocketConnectionContext::GetStage()$/;"	f	class:WebsocketConnectionContext	signature:()
+GetStage	protocol/WebsocketConnectionContext.h	/^	int GetStage();$/;"	p	class:WebsocketConnectionContext	access:public	signature:()
+GetType	protocol/WebsocketMessage.h	/^	int GetType()$/;"	f	class:WebsocketMessage	access:public	signature:()
+H	utils/sha1/sha1.h	/^        unsigned H[5];                      \/\/ Message digest buffers$/;"	m	class:SHA1	access:private
+HAVE_BACKTRACE	config.h	45;"	d
+HAVE_EPOLL	config.h	50;"	d
+HAVE_KQUEUE	config.h	54;"	d
+HAVE_MALLOC_SIZE	config.h	15;"	d
+HAVE_MALLOC_SIZE	config.h	20;"	d
+HAVE_PROCFS	config.h	35;"	d
+HAVE_TASKINFO	config.h	40;"	d
+Handshake	protocol/WebsocketMessage.h	/^		Handshake = 0,$/;"	e	enum:WebsocketMessage::__anon2
+HandshakeStage	protocol/WebsocketConnectionContext.h	/^		HandshakeStage = 0,$/;"	e	enum:WebsocketConnectionContext::__anon1
+HandshakeStage	websocket.h	/^        HandshakeStage = 0,$/;"	e	enum:websocketClient::__anon5
+Host	websocket.h	/^    sds Host;$/;"	m	struct:__anon4	access:public
+INCLUDES	Makefile	/^INCLUDES=-I. $/;"	m
+Input	utils/sha1/sha1.cpp	/^void SHA1::Input(   const char  *message_array,$/;"	f	class:SHA1	signature:( const char *message_array, unsigned length)
+Input	utils/sha1/sha1.cpp	/^void SHA1::Input(   const unsigned char *message_array,$/;"	f	class:SHA1	signature:( const unsigned char *message_array, unsigned length)
+Input	utils/sha1/sha1.cpp	/^void SHA1::Input(char message_element)$/;"	f	class:SHA1	signature:(char message_element)
+Input	utils/sha1/sha1.cpp	/^void SHA1::Input(unsigned char message_element)$/;"	f	class:SHA1	signature:(unsigned char message_element)
+Input	utils/sha1/sha1.h	/^        void Input( const char  *message_array,$/;"	p	class:SHA1	access:public	signature:( const char *message_array, unsigned length)
+Input	utils/sha1/sha1.h	/^        void Input( const unsigned char *message_array,$/;"	p	class:SHA1	access:public	signature:( const unsigned char *message_array, unsigned length)
+Input	utils/sha1/sha1.h	/^        void Input(char message_element);$/;"	p	class:SHA1	access:public	signature:(char message_element)
+Input	utils/sha1/sha1.h	/^        void Input(unsigned char message_element);$/;"	p	class:SHA1	access:public	signature:(unsigned char message_element)
+LIBS	utils/sha1/Makefile	/^LIBS	=$/;"	m
+LONG_LONG_MAX	logs.c	10;"	d	file:
+Length_High	utils/sha1/sha1.h	/^        unsigned Length_High;               \/\/ Message length in bits$/;"	m	class:SHA1	access:private
+Length_Low	utils/sha1/sha1.h	/^        unsigned Length_Low;                \/\/ Message length in bits$/;"	m	class:SHA1	access:private
+Log	logs.c	/^void Log(int level, const char *fmt, ...) {$/;"	f	signature:(int level, const char *fmt, ...)
+Log	logs.h	/^void Log(int level, const char *fmt, ...);$/;"	p	signature:(int level, const char *fmt, ...)
+LogFromHandler	logs.c	/^void LogFromHandler(int level, const char *msg) {$/;"	f	signature:(int level, const char *msg)
+LogFromHandler	logs.h	/^void LogFromHandler(int level, const char *msg);$/;"	p	signature:(int level, const char *msg)
+LogRaw	logs.c	/^void LogRaw(int level, const char *msg) {$/;"	f	signature:(int level, const char *msg)
+LogRaw	logs.h	/^void LogRaw(int level, const char *msg);$/;"	p	signature:(int level, const char *msg)
+LoginStage	protocol/WebsocketConnectionContext.h	/^		LoginStage,$/;"	e	enum:WebsocketConnectionContext::__anon1
+LoginStage	websocket.h	/^        LoginStage,$/;"	e	enum:websocketClient::__anon5
+MAX_LOGMSG_LEN	logs.h	9;"	d
+MCXXFLAGS	Makefile	/^MCXXFLAGS =-g -pg  -pipe$/;"	m
+Message_Block	utils/sha1/sha1.h	/^        unsigned char Message_Block[64];    \/\/ 512-bit message blocks$/;"	m	class:SHA1	access:private
+Message_Block_Index	utils/sha1/sha1.h	/^        int Message_Block_Index;            \/\/ Index into message block array$/;"	m	class:SHA1	access:private
+Method	websocket.h	/^    sds Method;$/;"	m	struct:__anon4	access:public
+OBJ	Makefile	/^OBJ=WServer$/;"	m
+OBJECTS	Makefile	/^OBJECTS =main.o websocket.o anet.o ae.o ae_epoll.o adlist.o dict.o sds.o logs.o zmalloc.o$/;"	m
+OBJS	utils/sha1/Makefile	/^OBJS	= sha1.o$/;"	m
+PREFIX_SIZE	zmalloc.c	39;"	d	file:
+PREFIX_SIZE	zmalloc.c	42;"	d	file:
+PREFIX_SIZE	zmalloc.c	44;"	d	file:
+PROGRAM	Makefile	/^PROGRAM = $(OBJ)$/;"	m
+PadMessage	utils/sha1/sha1.cpp	/^void SHA1::PadMessage()$/;"	f	class:SHA1	signature:()
+PadMessage	utils/sha1/sha1.h	/^        void PadMessage();$/;"	p	class:SHA1	access:private	signature:()
+Parse	protocol/WebsocketHandshakeMessage.cpp	/^bool WebsocketHandshakeMessage::Parse()$/;"	f	class:WebsocketHandshakeMessage	signature:()
+Parse	protocol/WebsocketHandshakeMessage.h	/^	bool Parse();$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:()
+ProcessHandshake	protocol/WebsocketProtocol.cpp	/^bool WebsocketProtocol::ProcessHandshake( WebsocketHandshakeMessage& request, WebsocketHandshakeMessage& response )$/;"	f	class:WebsocketProtocol	signature:( WebsocketHandshakeMessage& request, WebsocketHandshakeMessage& response )
+ProcessHandshake	protocol/WebsocketProtocol.h	/^    static bool ProcessHandshake( WebsocketHandshakeMessage& request, WebsocketHandshakeMessage& response );$/;"	p	class:WebsocketProtocol	access:public	signature:( WebsocketHandshakeMessage& request, WebsocketHandshakeMessage& response )
+ProcessMessageBlock	utils/sha1/sha1.cpp	/^void SHA1::ProcessMessageBlock()$/;"	f	class:SHA1	signature:()
+ProcessMessageBlock	utils/sha1/sha1.h	/^        void ProcessMessageBlock();$/;"	p	class:SHA1	access:private	signature:()
+RLOG_DEBUG	logs.h	5;"	d
+RLOG_NOTICE	logs.h	7;"	d
+RLOG_RAW	logs.h	4;"	d
+RLOG_VERBOSE	logs.h	6;"	d
+RLOG_WARNING	logs.h	8;"	d
+Reset	utils/sha1/sha1.cpp	/^void SHA1::Reset()$/;"	f	class:SHA1	signature:()
+Reset	utils/sha1/sha1.h	/^        void Reset();$/;"	p	class:SHA1	access:public	signature:()
+Result	utils/sha1/sha1.cpp	/^bool SHA1::Result(unsigned *message_digest_array)$/;"	f	class:SHA1	signature:(unsigned *message_digest_array)
+Result	utils/sha1/sha1.h	/^        bool Result(unsigned *message_digest_array);$/;"	p	class:SHA1	access:public	signature:(unsigned *message_digest_array)
+SDS_ABORT_ON_OOM	sds.c	31;"	d	file:
+SHA1	utils/sha1/sha1.cpp	/^SHA1::SHA1()$/;"	f	class:SHA1	signature:()
+SHA1	utils/sha1/sha1.h	/^        SHA1();$/;"	p	class:SHA1	access:public	signature:()
+SHA1	utils/sha1/sha1.h	/^class SHA1$/;"	c
+SHA1::CircularShift	utils/sha1/sha1.cpp	/^unsigned SHA1::CircularShift(int bits, unsigned word)$/;"	f	class:SHA1	signature:(int bits, unsigned word)
+SHA1::CircularShift	utils/sha1/sha1.h	/^        inline unsigned CircularShift(int bits, unsigned word);$/;"	p	class:SHA1	access:private	signature:(int bits, unsigned word)
+SHA1::Computed	utils/sha1/sha1.h	/^        bool Computed;                      \/\/ Is the digest computed?$/;"	m	class:SHA1	access:private
+SHA1::Corrupted	utils/sha1/sha1.h	/^        bool Corrupted;                     \/\/ Is the message digest corruped?$/;"	m	class:SHA1	access:private
+SHA1::H	utils/sha1/sha1.h	/^        unsigned H[5];                      \/\/ Message digest buffers$/;"	m	class:SHA1	access:private
+SHA1::Input	utils/sha1/sha1.cpp	/^void SHA1::Input(   const char  *message_array,$/;"	f	class:SHA1	signature:( const char *message_array, unsigned length)
+SHA1::Input	utils/sha1/sha1.cpp	/^void SHA1::Input(   const unsigned char *message_array,$/;"	f	class:SHA1	signature:( const unsigned char *message_array, unsigned length)
+SHA1::Input	utils/sha1/sha1.cpp	/^void SHA1::Input(char message_element)$/;"	f	class:SHA1	signature:(char message_element)
+SHA1::Input	utils/sha1/sha1.cpp	/^void SHA1::Input(unsigned char message_element)$/;"	f	class:SHA1	signature:(unsigned char message_element)
+SHA1::Input	utils/sha1/sha1.h	/^        void Input( const char  *message_array,$/;"	p	class:SHA1	access:public	signature:( const char *message_array, unsigned length)
+SHA1::Input	utils/sha1/sha1.h	/^        void Input( const unsigned char *message_array,$/;"	p	class:SHA1	access:public	signature:( const unsigned char *message_array, unsigned length)
+SHA1::Input	utils/sha1/sha1.h	/^        void Input(char message_element);$/;"	p	class:SHA1	access:public	signature:(char message_element)
+SHA1::Input	utils/sha1/sha1.h	/^        void Input(unsigned char message_element);$/;"	p	class:SHA1	access:public	signature:(unsigned char message_element)
+SHA1::Length_High	utils/sha1/sha1.h	/^        unsigned Length_High;               \/\/ Message length in bits$/;"	m	class:SHA1	access:private
+SHA1::Length_Low	utils/sha1/sha1.h	/^        unsigned Length_Low;                \/\/ Message length in bits$/;"	m	class:SHA1	access:private
+SHA1::Message_Block	utils/sha1/sha1.h	/^        unsigned char Message_Block[64];    \/\/ 512-bit message blocks$/;"	m	class:SHA1	access:private
+SHA1::Message_Block_Index	utils/sha1/sha1.h	/^        int Message_Block_Index;            \/\/ Index into message block array$/;"	m	class:SHA1	access:private
+SHA1::PadMessage	utils/sha1/sha1.cpp	/^void SHA1::PadMessage()$/;"	f	class:SHA1	signature:()
+SHA1::PadMessage	utils/sha1/sha1.h	/^        void PadMessage();$/;"	p	class:SHA1	access:private	signature:()
+SHA1::ProcessMessageBlock	utils/sha1/sha1.cpp	/^void SHA1::ProcessMessageBlock()$/;"	f	class:SHA1	signature:()
+SHA1::ProcessMessageBlock	utils/sha1/sha1.h	/^        void ProcessMessageBlock();$/;"	p	class:SHA1	access:private	signature:()
+SHA1::Reset	utils/sha1/sha1.cpp	/^void SHA1::Reset()$/;"	f	class:SHA1	signature:()
+SHA1::Reset	utils/sha1/sha1.h	/^        void Reset();$/;"	p	class:SHA1	access:public	signature:()
+SHA1::Result	utils/sha1/sha1.cpp	/^bool SHA1::Result(unsigned *message_digest_array)$/;"	f	class:SHA1	signature:(unsigned *message_digest_array)
+SHA1::Result	utils/sha1/sha1.h	/^        bool Result(unsigned *message_digest_array);$/;"	p	class:SHA1	access:public	signature:(unsigned *message_digest_array)
+SHA1::SHA1	utils/sha1/sha1.cpp	/^SHA1::SHA1()$/;"	f	class:SHA1	signature:()
+SHA1::SHA1	utils/sha1/sha1.h	/^        SHA1();$/;"	p	class:SHA1	access:public	signature:()
+SHA1::operator <<	utils/sha1/sha1.cpp	/^SHA1& SHA1::operator<<(const char *message_array)$/;"	f	class:SHA1	signature:(const char *message_array)
+SHA1::operator <<	utils/sha1/sha1.cpp	/^SHA1& SHA1::operator<<(const char message_element)$/;"	f	class:SHA1	signature:(const char message_element)
+SHA1::operator <<	utils/sha1/sha1.cpp	/^SHA1& SHA1::operator<<(const unsigned char *message_array)$/;"	f	class:SHA1	signature:(const unsigned char *message_array)
+SHA1::operator <<	utils/sha1/sha1.cpp	/^SHA1& SHA1::operator<<(const unsigned char message_element)$/;"	f	class:SHA1	signature:(const unsigned char message_element)
+SHA1::operator <<	utils/sha1/sha1.h	/^        SHA1& operator<<(const char *message_array);$/;"	p	class:SHA1	access:public	signature:(const char *message_array)
+SHA1::operator <<	utils/sha1/sha1.h	/^        SHA1& operator<<(const char message_element);$/;"	p	class:SHA1	access:public	signature:(const char message_element)
+SHA1::operator <<	utils/sha1/sha1.h	/^        SHA1& operator<<(const unsigned char *message_array);$/;"	p	class:SHA1	access:public	signature:(const unsigned char *message_array)
+SHA1::operator <<	utils/sha1/sha1.h	/^        SHA1& operator<<(const unsigned char message_element);$/;"	p	class:SHA1	access:public	signature:(const unsigned char message_element)
+SHA1::~SHA1	utils/sha1/sha1.cpp	/^SHA1::~SHA1()$/;"	f	class:SHA1	signature:()
+SHA1::~SHA1	utils/sha1/sha1.h	/^        virtual ~SHA1();$/;"	p	class:SHA1	access:public	signature:()
+SHA1_COMPARE	utils/sha1/shacmp.cpp	31;"	d	file:
+SHA1_FILE_ERROR	utils/sha1/shacmp.cpp	34;"	d	file:
+SHA1_NO_COMPARE	utils/sha1/shacmp.cpp	32;"	d	file:
+SHA1_USAGE_ERROR	utils/sha1/shacmp.cpp	33;"	d	file:
+Sec_WebSocket_Key	websocket.h	/^    sds Sec_WebSocket_Key;$/;"	m	struct:__anon4	access:public
+Sec_WebSocket_Origin	websocket.h	/^    sds Sec_WebSocket_Origin;$/;"	m	struct:__anon4	access:public
+Sec_WebSocket_Version	websocket.h	/^    sds Sec_WebSocket_Version;$/;"	m	struct:__anon4	access:public
+Serialize	protocol/WebsocketHandshakeMessage.cpp	/^string WebsocketHandshakeMessage::Serialize( )$/;"	f	class:WebsocketHandshakeMessage	signature:( )
+Serialize	protocol/WebsocketHandshakeMessage.h	/^	string Serialize();$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:()
+SetArguments	protocol/WebsocketDataMessage.cpp	/^void WebsocketDataMessage::SetArguments( string arg1, string arg2 \/*= ""*\/ )$/;"	f	class:WebsocketDataMessage	signature:( string arg1, string arg2 )
+SetArguments	protocol/WebsocketDataMessage.h	/^	void SetArguments(string arg1, string arg2 = "");$/;"	p	class:WebsocketDataMessage	access:public	signature:(string arg1, string arg2 = Ó)
+SetField	protocol/WebsocketHandshakeMessage.cpp	/^void WebsocketHandshakeMessage::SetField( string key, string val )$/;"	f	class:WebsocketHandshakeMessage	signature:( string key, string val )
+SetField	protocol/WebsocketHandshakeMessage.h	/^	void SetField(string key, string val);$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:(string key, string val)
+SetServiceId	protocol/WebsocketDataMessage.cpp	/^void WebsocketDataMessage::SetServiceId( int serviceId )$/;"	f	class:WebsocketDataMessage	signature:( int serviceId )
+SetServiceId	protocol/WebsocketDataMessage.h	/^	void SetServiceId(int serviceId);$/;"	p	class:WebsocketDataMessage	access:public	signature:(int serviceId)
+SetStage	protocol/WebsocketConnectionContext.cpp	/^void WebsocketConnectionContext::SetStage( int stage )$/;"	f	class:WebsocketConnectionContext	signature:( int stage )
+SetStage	protocol/WebsocketConnectionContext.h	/^	void SetStage(int stage);$/;"	p	class:WebsocketConnectionContext	access:public	signature:(int stage)
+TESTA	utils/sha1/shatest.cpp	29;"	d	file:
+TESTB	utils/sha1/shatest.cpp	30;"	d	file:
+TESTOBJ	Makefile	/^TESTOBJ=utest$/;"	m
+TESTOBJECTS	Makefile	/^TESTOBJECTS =test.o websocket.o anet.o ae.o ae_epoll.o adlist.o dict.o sds.o logs.o zmalloc.o$/;"	m
+UTILS_H	logs.h	2;"	d
+Upgrade	websocket.h	/^    sds Upgrade;$/;"	m	struct:__anon4	access:public
+Uri	websocket.h	/^    sds Uri;$/;"	m	struct:__anon4	access:public
+Version	websocket.h	/^    sds Version;$/;"	m	struct:__anon4	access:public
+WEBSOCKETPROTOCOL_API	protocol/Symbols.h	10;"	d
+WEBSOCKETPROTOCOL_API	protocol/Symbols.h	12;"	d
+WEBSOCKET_CONNECTION	websocket.h	41;"	d
+WEBSOCKET_ERR	websocket.h	33;"	d
+WEBSOCKET_H	websocket.h	18;"	d
+WEBSOCKET_HOST	websocket.h	42;"	d
+WEBSOCKET_IOBUF_LEN	websocket.h	37;"	d
+WEBSOCKET_MAX_HEAD_LEVEL	websocket.h	47;"	d
+WEBSOCKET_METHOD_GET	websocket.h	38;"	d
+WEBSOCKET_METHOD_POST	websocket.h	39;"	d
+WEBSOCKET_NOTUSED	websocket.h	36;"	d
+WEBSOCKET_OK	websocket.h	32;"	d
+WEBSOCKET_REPLY_CHUNK_BYTES	websocket.h	35;"	d
+WEBSOCKET_SEC_WEBSOCKET_KEY	websocket.h	44;"	d
+WEBSOCKET_SEC_WEBSOCKET_ORIGIN	websocket.h	45;"	d
+WEBSOCKET_SEC_WEBSOCKET_VERSION	websocket.h	43;"	d
+WEBSOCKET_UPGRADE	websocket.h	40;"	d
+WebsocketConnectionContext	protocol/WebsocketConnectionContext.cpp	/^WebsocketConnectionContext::WebsocketConnectionContext()$/;"	f	class:WebsocketConnectionContext	signature:()
+WebsocketConnectionContext	protocol/WebsocketConnectionContext.h	/^	WebsocketConnectionContext();$/;"	p	class:WebsocketConnectionContext	access:public	signature:()
+WebsocketConnectionContext	protocol/WebsocketConnectionContext.h	/^class WEBSOCKETPROTOCOL_API WebsocketConnectionContext : public ConnectionContext$/;"	c	inherits:ConnectionContext
+WebsocketConnectionContext::ConnectedStage	protocol/WebsocketConnectionContext.h	/^		ConnectedStage$/;"	e	enum:WebsocketConnectionContext::__anon1
+WebsocketConnectionContext::GetStage	protocol/WebsocketConnectionContext.cpp	/^int WebsocketConnectionContext::GetStage()$/;"	f	class:WebsocketConnectionContext	signature:()
+WebsocketConnectionContext::GetStage	protocol/WebsocketConnectionContext.h	/^	int GetStage();$/;"	p	class:WebsocketConnectionContext	access:public	signature:()
+WebsocketConnectionContext::HandshakeStage	protocol/WebsocketConnectionContext.h	/^		HandshakeStage = 0,$/;"	e	enum:WebsocketConnectionContext::__anon1
+WebsocketConnectionContext::LoginStage	protocol/WebsocketConnectionContext.h	/^		LoginStage,$/;"	e	enum:WebsocketConnectionContext::__anon1
+WebsocketConnectionContext::SetStage	protocol/WebsocketConnectionContext.cpp	/^void WebsocketConnectionContext::SetStage( int stage )$/;"	f	class:WebsocketConnectionContext	signature:( int stage )
+WebsocketConnectionContext::SetStage	protocol/WebsocketConnectionContext.h	/^	void SetStage(int stage);$/;"	p	class:WebsocketConnectionContext	access:public	signature:(int stage)
+WebsocketConnectionContext::WebsocketConnectionContext	protocol/WebsocketConnectionContext.cpp	/^WebsocketConnectionContext::WebsocketConnectionContext()$/;"	f	class:WebsocketConnectionContext	signature:()
+WebsocketConnectionContext::WebsocketConnectionContext	protocol/WebsocketConnectionContext.h	/^	WebsocketConnectionContext();$/;"	p	class:WebsocketConnectionContext	access:public	signature:()
+WebsocketConnectionContext::stage	protocol/WebsocketConnectionContext.h	/^	int stage;$/;"	m	class:WebsocketConnectionContext	access:private
+WebsocketConnectionContext::~WebsocketConnectionContext	protocol/WebsocketConnectionContext.cpp	/^WebsocketConnectionContext::~WebsocketConnectionContext(void)$/;"	f	class:WebsocketConnectionContext	signature:(void)
+WebsocketConnectionContext::~WebsocketConnectionContext	protocol/WebsocketConnectionContext.h	/^	~WebsocketConnectionContext(void);$/;"	p	class:WebsocketConnectionContext	access:public	signature:(void)
+WebsocketDataMessage	protocol/WebsocketDataMessage.cpp	/^WebsocketDataMessage::WebsocketDataMessage( int serviceId )$/;"	f	class:WebsocketDataMessage	signature:( int serviceId )
+WebsocketDataMessage	protocol/WebsocketDataMessage.cpp	/^WebsocketDataMessage::WebsocketDataMessage(const char* buffer)$/;"	f	class:WebsocketDataMessage	signature:(const char* buffer)
+WebsocketDataMessage	protocol/WebsocketDataMessage.h	/^	WebsocketDataMessage(const char* buffer);$/;"	p	class:WebsocketDataMessage	access:public	signature:(const char* buffer)
+WebsocketDataMessage	protocol/WebsocketDataMessage.h	/^	WebsocketDataMessage(int serviceId);$/;"	p	class:WebsocketDataMessage	access:public	signature:(int serviceId)
+WebsocketDataMessage	protocol/WebsocketDataMessage.h	/^class WEBSOCKETPROTOCOL_API WebsocketDataMessage : public WebsocketMessage$/;"	c	inherits:WebsocketMessage
+WebsocketDataMessage::Decode	protocol/WebsocketDataMessage.cpp	/^bool WebsocketDataMessage::Decode()$/;"	f	class:WebsocketDataMessage	signature:()
+WebsocketDataMessage::Decode	protocol/WebsocketDataMessage.h	/^	bool Decode();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+WebsocketDataMessage::Encode	protocol/WebsocketDataMessage.cpp	/^bool WebsocketDataMessage::Encode()$/;"	f	class:WebsocketDataMessage	signature:()
+WebsocketDataMessage::Encode	protocol/WebsocketDataMessage.h	/^    bool Encode();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+WebsocketDataMessage::GetArg1	protocol/WebsocketDataMessage.cpp	/^std::string WebsocketDataMessage::GetArg1()$/;"	f	class:WebsocketDataMessage	signature:()
+WebsocketDataMessage::GetArg1	protocol/WebsocketDataMessage.h	/^	string GetArg1();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+WebsocketDataMessage::GetArg2	protocol/WebsocketDataMessage.cpp	/^std::string WebsocketDataMessage::GetArg2()$/;"	f	class:WebsocketDataMessage	signature:()
+WebsocketDataMessage::GetArg2	protocol/WebsocketDataMessage.h	/^	string GetArg2();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+WebsocketDataMessage::GetEncodedData	protocol/WebsocketDataMessage.cpp	/^std::string WebsocketDataMessage::GetEncodedData()$/;"	f	class:WebsocketDataMessage	signature:()
+WebsocketDataMessage::GetEncodedData	protocol/WebsocketDataMessage.h	/^	string GetEncodedData();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+WebsocketDataMessage::GetServiceId	protocol/WebsocketDataMessage.cpp	/^int WebsocketDataMessage::GetServiceId()$/;"	f	class:WebsocketDataMessage	signature:()
+WebsocketDataMessage::GetServiceId	protocol/WebsocketDataMessage.h	/^	int GetServiceId();$/;"	p	class:WebsocketDataMessage	access:public	signature:()
+WebsocketDataMessage::SetArguments	protocol/WebsocketDataMessage.cpp	/^void WebsocketDataMessage::SetArguments( string arg1, string arg2 \/*= ""*\/ )$/;"	f	class:WebsocketDataMessage	signature:( string arg1, string arg2 )
+WebsocketDataMessage::SetArguments	protocol/WebsocketDataMessage.h	/^	void SetArguments(string arg1, string arg2 = "");$/;"	p	class:WebsocketDataMessage	access:public	signature:(string arg1, string arg2 = Ó)
+WebsocketDataMessage::SetServiceId	protocol/WebsocketDataMessage.cpp	/^void WebsocketDataMessage::SetServiceId( int serviceId )$/;"	f	class:WebsocketDataMessage	signature:( int serviceId )
+WebsocketDataMessage::SetServiceId	protocol/WebsocketDataMessage.h	/^	void SetServiceId(int serviceId);$/;"	p	class:WebsocketDataMessage	access:public	signature:(int serviceId)
+WebsocketDataMessage::WebsocketDataMessage	protocol/WebsocketDataMessage.cpp	/^WebsocketDataMessage::WebsocketDataMessage( int serviceId )$/;"	f	class:WebsocketDataMessage	signature:( int serviceId )
+WebsocketDataMessage::WebsocketDataMessage	protocol/WebsocketDataMessage.cpp	/^WebsocketDataMessage::WebsocketDataMessage(const char* buffer)$/;"	f	class:WebsocketDataMessage	signature:(const char* buffer)
+WebsocketDataMessage::WebsocketDataMessage	protocol/WebsocketDataMessage.h	/^	WebsocketDataMessage(const char* buffer);$/;"	p	class:WebsocketDataMessage	access:public	signature:(const char* buffer)
+WebsocketDataMessage::WebsocketDataMessage	protocol/WebsocketDataMessage.h	/^	WebsocketDataMessage(int serviceId);$/;"	p	class:WebsocketDataMessage	access:public	signature:(int serviceId)
+WebsocketDataMessage::arg1	protocol/WebsocketDataMessage.h	/^	string arg1;$/;"	m	class:WebsocketDataMessage	access:private
+WebsocketDataMessage::arg2	protocol/WebsocketDataMessage.h	/^	string arg2;$/;"	m	class:WebsocketDataMessage	access:private
+WebsocketDataMessage::raw	protocol/WebsocketDataMessage.h	/^	string raw;$/;"	m	class:WebsocketDataMessage	access:private
+WebsocketDataMessage::serviceId	protocol/WebsocketDataMessage.h	/^	int serviceId;$/;"	m	class:WebsocketDataMessage	access:private
+WebsocketDataMessage::~WebsocketDataMessage	protocol/WebsocketDataMessage.cpp	/^WebsocketDataMessage::~WebsocketDataMessage(void)$/;"	f	class:WebsocketDataMessage	signature:(void)
+WebsocketDataMessage::~WebsocketDataMessage	protocol/WebsocketDataMessage.h	/^	~WebsocketDataMessage(void);$/;"	p	class:WebsocketDataMessage	access:public	signature:(void)
+WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.cpp	/^WebsocketHandshakeMessage::WebsocketHandshakeMessage()$/;"	f	class:WebsocketHandshakeMessage	signature:()
+WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.cpp	/^WebsocketHandshakeMessage::WebsocketHandshakeMessage(char* pRaw, int nSize)$/;"	f	class:WebsocketHandshakeMessage	signature:(char* pRaw, int nSize)
+WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.h	/^	WebsocketHandshakeMessage();$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:()
+WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.h	/^	WebsocketHandshakeMessage(char* pRaw, int nSize);$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:(char* pRaw, int nSize)
+WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.h	/^class WEBSOCKETPROTOCOL_API WebsocketHandshakeMessage : public WebsocketMessage {$/;"	c	inherits:WebsocketMessage
+WebsocketHandshakeMessage::GetField	protocol/WebsocketHandshakeMessage.cpp	/^std::string WebsocketHandshakeMessage::GetField( string key )$/;"	f	class:WebsocketHandshakeMessage	signature:( string key )
+WebsocketHandshakeMessage::GetField	protocol/WebsocketHandshakeMessage.h	/^	string GetField(string key);$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:(string key)
+WebsocketHandshakeMessage::Parse	protocol/WebsocketHandshakeMessage.cpp	/^bool WebsocketHandshakeMessage::Parse()$/;"	f	class:WebsocketHandshakeMessage	signature:()
+WebsocketHandshakeMessage::Parse	protocol/WebsocketHandshakeMessage.h	/^	bool Parse();$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:()
+WebsocketHandshakeMessage::Serialize	protocol/WebsocketHandshakeMessage.cpp	/^string WebsocketHandshakeMessage::Serialize( )$/;"	f	class:WebsocketHandshakeMessage	signature:( )
+WebsocketHandshakeMessage::Serialize	protocol/WebsocketHandshakeMessage.h	/^	string Serialize();$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:()
+WebsocketHandshakeMessage::SetField	protocol/WebsocketHandshakeMessage.cpp	/^void WebsocketHandshakeMessage::SetField( string key, string val )$/;"	f	class:WebsocketHandshakeMessage	signature:( string key, string val )
+WebsocketHandshakeMessage::SetField	protocol/WebsocketHandshakeMessage.h	/^	void SetField(string key, string val);$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:(string key, string val)
+WebsocketHandshakeMessage::WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.cpp	/^WebsocketHandshakeMessage::WebsocketHandshakeMessage()$/;"	f	class:WebsocketHandshakeMessage	signature:()
+WebsocketHandshakeMessage::WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.cpp	/^WebsocketHandshakeMessage::WebsocketHandshakeMessage(char* pRaw, int nSize)$/;"	f	class:WebsocketHandshakeMessage	signature:(char* pRaw, int nSize)
+WebsocketHandshakeMessage::WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.h	/^	WebsocketHandshakeMessage();$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:()
+WebsocketHandshakeMessage::WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.h	/^	WebsocketHandshakeMessage(char* pRaw, int nSize);$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:(char* pRaw, int nSize)
+WebsocketHandshakeMessage::fields	protocol/WebsocketHandshakeMessage.h	/^	map<string, string> fields;$/;"	m	class:WebsocketHandshakeMessage	access:private
+WebsocketHandshakeMessage::m_method	protocol/WebsocketHandshakeMessage.h	/^	string m_method;$/;"	m	class:WebsocketHandshakeMessage	access:private
+WebsocketHandshakeMessage::m_uri	protocol/WebsocketHandshakeMessage.h	/^	string m_uri;$/;"	m	class:WebsocketHandshakeMessage	access:private
+WebsocketHandshakeMessage::m_version	protocol/WebsocketHandshakeMessage.h	/^	string m_version;$/;"	m	class:WebsocketHandshakeMessage	access:private
+WebsocketHandshakeMessage::nSize	protocol/WebsocketHandshakeMessage.h	/^	int nSize;$/;"	m	class:WebsocketHandshakeMessage	access:private
+WebsocketHandshakeMessage::pRaw	protocol/WebsocketHandshakeMessage.h	/^	char* pRaw;$/;"	m	class:WebsocketHandshakeMessage	access:private
+WebsocketHandshakeMessage::~WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.cpp	/^WebsocketHandshakeMessage::~WebsocketHandshakeMessage(void)$/;"	f	class:WebsocketHandshakeMessage	signature:(void)
+WebsocketHandshakeMessage::~WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.h	/^	~WebsocketHandshakeMessage(void);$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:(void)
+WebsocketMessage	protocol/WebsocketMessage.h	/^	WebsocketMessage(int type)$/;"	f	class:WebsocketMessage	access:public	signature:(int type)
+WebsocketMessage	protocol/WebsocketMessage.h	/^class WEBSOCKETPROTOCOL_API WebsocketMessage : public IncomingPacket, public OutgoingPacket {$/;"	c	inherits:IncomingPacket,OutgoingPacket
+WebsocketMessage::DataMessage	protocol/WebsocketMessage.h	/^		DataMessage,$/;"	e	enum:WebsocketMessage::__anon2
+WebsocketMessage::GetType	protocol/WebsocketMessage.h	/^	int GetType()$/;"	f	class:WebsocketMessage	access:public	signature:()
+WebsocketMessage::Handshake	protocol/WebsocketMessage.h	/^		Handshake = 0,$/;"	e	enum:WebsocketMessage::__anon2
+WebsocketMessage::WebsocketMessage	protocol/WebsocketMessage.h	/^	WebsocketMessage(int type)$/;"	f	class:WebsocketMessage	access:public	signature:(int type)
+WebsocketMessage::type	protocol/WebsocketMessage.h	/^	int type;$/;"	m	class:WebsocketMessage	access:private
+WebsocketMessage::~WebsocketMessage	protocol/WebsocketMessage.h	/^	~WebsocketMessage(void)$/;"	f	class:WebsocketMessage	access:public	signature:(void)
+WebsocketProtocol	protocol/WebsocketProtocol.cpp	/^WebsocketProtocol::WebsocketProtocol()$/;"	f	class:WebsocketProtocol	signature:()
+WebsocketProtocol	protocol/WebsocketProtocol.h	/^	WebsocketProtocol(void);$/;"	p	class:WebsocketProtocol	access:public	signature:(void)
+WebsocketProtocol	protocol/WebsocketProtocol.h	/^class WEBSOCKETPROTOCOL_API WebsocketProtocol : public Protocol {$/;"	c	inherits:Protocol
+WebsocketProtocol::ProcessHandshake	protocol/WebsocketProtocol.cpp	/^bool WebsocketProtocol::ProcessHandshake( WebsocketHandshakeMessage& request, WebsocketHandshakeMessage& response )$/;"	f	class:WebsocketProtocol	signature:( WebsocketHandshakeMessage& request, WebsocketHandshakeMessage& response )
+WebsocketProtocol::ProcessHandshake	protocol/WebsocketProtocol.h	/^    static bool ProcessHandshake( WebsocketHandshakeMessage& request, WebsocketHandshakeMessage& response );$/;"	p	class:WebsocketProtocol	access:public	signature:( WebsocketHandshakeMessage& request, WebsocketHandshakeMessage& response )
+WebsocketProtocol::WebsocketProtocol	protocol/WebsocketProtocol.cpp	/^WebsocketProtocol::WebsocketProtocol()$/;"	f	class:WebsocketProtocol	signature:()
+WebsocketProtocol::WebsocketProtocol	protocol/WebsocketProtocol.h	/^	WebsocketProtocol(void);$/;"	p	class:WebsocketProtocol	access:public	signature:(void)
+WebsocketProtocol::decodeIncomingPacket	protocol/WebsocketProtocol.cpp	/^int WebsocketProtocol::decodeIncomingPacket( PushFramework::IncomingPacket* pPacket, int& serviceId )$/;"	f	class:WebsocketProtocol	signature:( PushFramework::IncomingPacket* pPacket, int& serviceId )
+WebsocketProtocol::decodeIncomingPacket	protocol/WebsocketProtocol.h	/^    virtual int decodeIncomingPacket(PushFramework::IncomingPacket* pPacket, int& serviceId);$/;"	p	class:WebsocketProtocol	access:public	signature:(PushFramework::IncomingPacket* pPacket, int& serviceId)
+WebsocketProtocol::disposeIncomingPacket	protocol/WebsocketProtocol.h	/^    virtual void disposeIncomingPacket(PushFramework::IncomingPacket* pPacket)$/;"	f	class:WebsocketProtocol	access:public	signature:(PushFramework::IncomingPacket* pPacket)
+WebsocketProtocol::disposeOutgoingPacket	protocol/WebsocketProtocol.h	/^    virtual void disposeOutgoingPacket(PushFramework::OutgoingPacket* pPacket)$/;"	f	class:WebsocketProtocol	access:public	signature:(PushFramework::OutgoingPacket* pPacket)
+WebsocketProtocol::encodeOutgoingPacket	protocol/WebsocketProtocol.cpp	/^int WebsocketProtocol::encodeOutgoingPacket( PushFramework::OutgoingPacket& packet )$/;"	f	class:WebsocketProtocol	signature:( PushFramework::OutgoingPacket& packet )
+WebsocketProtocol::encodeOutgoingPacket	protocol/WebsocketProtocol.h	/^    virtual int encodeOutgoingPacket(PushFramework::OutgoingPacket& packet);$/;"	p	class:WebsocketProtocol	access:public	signature:(PushFramework::OutgoingPacket& packet)
+WebsocketProtocol::frameOutgoingPacket	protocol/WebsocketProtocol.cpp	/^int WebsocketProtocol::frameOutgoingPacket( PushFramework::OutgoingPacket& packet, PushFramework::DataBuffer& buffer, unsigned int& nWrittenBytes )$/;"	f	class:WebsocketProtocol	signature:( PushFramework::OutgoingPacket& packet, PushFramework::DataBuffer& buffer, unsigned int& nWrittenBytes )
+WebsocketProtocol::frameOutgoingPacket	protocol/WebsocketProtocol.h	/^    virtual int frameOutgoingPacket(PushFramework::OutgoingPacket& packet, PushFramework::DataBuffer& buffer, unsigned int& nWrittenBytes);$/;"	p	class:WebsocketProtocol	access:public	signature:(PushFramework::OutgoingPacket& packet, PushFramework::DataBuffer& buffer, unsigned int& nWrittenBytes)
+WebsocketProtocol::tryDeframeIncomingPacket	protocol/WebsocketProtocol.cpp	/^int WebsocketProtocol::tryDeframeIncomingPacket( PushFramework::DataBuffer& buffer, PushFramework::IncomingPacket*& pPacket, int& serviceId, unsigned int& nExtractedBytes, ConnectionContext* pContext )$/;"	f	class:WebsocketProtocol	signature:( PushFramework::DataBuffer& buffer, PushFramework::IncomingPacket*& pPacket, int& serviceId, unsigned int& nExtractedBytes, ConnectionContext* pContext )
+WebsocketProtocol::tryDeframeIncomingPacket	protocol/WebsocketProtocol.h	/^    virtual int tryDeframeIncomingPacket(PushFramework::DataBuffer& buffer, PushFramework::IncomingPacket*& pPacket, int& serviceId, unsigned int& nExtractedBytes, ConnectionContext* pContext);$/;"	p	class:WebsocketProtocol	access:public	signature:(PushFramework::DataBuffer& buffer, PushFramework::IncomingPacket*& pPacket, int& serviceId, unsigned int& nExtractedBytes, ConnectionContext* pContext)
+ZMALLOC_MAX_ALLOC_STAT	zmalloc.h	45;"	d
+_BSD_SOURCE	fmacros.h	4;"	d
+_FILE_OFFSET_BITS	fmacros.h	13;"	d
+_LARGEFILE_SOURCE	fmacros.h	12;"	d
+_REDIS_FMACRO_H	fmacros.h	2;"	d
+_SHA1_H_	utils/sha1/sha1.h	25;"	d
+_XOPEN_SOURCE	fmacros.h	7;"	d
+_XOPEN_SOURCE	fmacros.h	9;"	d
+_ZMALLOC_H	zmalloc.h	32;"	d
+__ADLIST_H__	adlist.h	32;"	d
+__AE_H__	ae.h	34;"	d
+__CONFIG_H	config.h	2;"	d
+__DICT_H	dict.h	37;"	d
+__SDS_H	sds.h	32;"	d
+__anon3::fin	websocket.h	/^    unsigned char fin:1;$/;"	m	struct:__anon3	access:public
+__anon3::mask	websocket.h	/^    unsigned char mask:1;$/;"	m	struct:__anon3	access:public
+__anon3::mask_key	websocket.h	/^    unsigned char mask_key[4];$/;"	m	struct:__anon3	access:public
+__anon3::opcode	websocket.h	/^    unsigned char opcode:4;$/;"	m	struct:__anon3	access:public
+__anon3::payload	websocket.h	/^    unsigned char *payload;$/;"	m	struct:__anon3	access:public
+__anon3::payload_len	websocket.h	/^    unsigned long payload_len;$/;"	m	struct:__anon3	access:public
+__anon3::rsv1	websocket.h	/^    unsigned char rsv1:1;$/;"	m	struct:__anon3	access:public
+__anon3::rsv2	websocket.h	/^    unsigned char rsv2:1;$/;"	m	struct:__anon3	access:public
+__anon3::rsv3	websocket.h	/^    unsigned char rsv3:1;$/;"	m	struct:__anon3	access:public
+__anon4::Connection	websocket.h	/^    sds Connection;$/;"	m	struct:__anon4	access:public
+__anon4::Host	websocket.h	/^    sds Host;$/;"	m	struct:__anon4	access:public
+__anon4::Method	websocket.h	/^    sds Method;$/;"	m	struct:__anon4	access:public
+__anon4::Sec_WebSocket_Key	websocket.h	/^    sds Sec_WebSocket_Key;$/;"	m	struct:__anon4	access:public
+__anon4::Sec_WebSocket_Origin	websocket.h	/^    sds Sec_WebSocket_Origin;$/;"	m	struct:__anon4	access:public
+__anon4::Sec_WebSocket_Version	websocket.h	/^    sds Sec_WebSocket_Version;$/;"	m	struct:__anon4	access:public
+__anon4::Upgrade	websocket.h	/^    sds Upgrade;$/;"	m	struct:__anon4	access:public
+__anon4::Uri	websocket.h	/^    sds Uri;$/;"	m	struct:__anon4	access:public
+__anon4::Version	websocket.h	/^    sds Version;$/;"	m	struct:__anon4	access:public
+_dictClear	dict.c	/^int _dictClear(dict *d, dictht *ht)$/;"	f	signature:(dict *d, dictht *ht)
+_dictExpandIfNeeded	dict.c	/^static int _dictExpandIfNeeded(dict *d)$/;"	f	file:	signature:(dict *d)
+_dictExpandIfNeeded	dict.c	/^static int _dictExpandIfNeeded(dict *ht);$/;"	p	file:	signature:(dict *ht)
+_dictInit	dict.c	/^int _dictInit(dict *d, dictType *type,$/;"	f	signature:(dict *d, dictType *type, void *privDataPtr)
+_dictInit	dict.c	/^static int _dictInit(dict *ht, dictType *type, void *privDataPtr);$/;"	p	file:	signature:(dict *ht, dictType *type, void *privDataPtr)
+_dictKeyIndex	dict.c	/^static int _dictKeyIndex(dict *d, const void *key)$/;"	f	file:	signature:(dict *d, const void *key)
+_dictKeyIndex	dict.c	/^static int _dictKeyIndex(dict *ht, const void *key);$/;"	p	file:	signature:(dict *ht, const void *key)
+_dictNextPower	dict.c	/^static unsigned long _dictNextPower(unsigned long size)$/;"	f	file:	signature:(unsigned long size)
+_dictNextPower	dict.c	/^static unsigned long _dictNextPower(unsigned long size);$/;"	p	file:	signature:(unsigned long size)
+_dictPrintStatsHt	dict.c	/^static void _dictPrintStatsHt(dictht *ht) {$/;"	f	file:	signature:(dictht *ht)
+_dictRehashStep	dict.c	/^static void _dictRehashStep(dict *d) {$/;"	f	file:	signature:(dict *d)
+_dictReset	dict.c	/^static void _dictReset(dictht *ht)$/;"	f	file:	signature:(dictht *ht)
+acceptTcpHandler	websocket.c	/^void acceptTcpHandler(aeEventLoop *el, int fd, void *privdata, int mask) {$/;"	f	signature:(aeEventLoop *el, int fd, void *privdata, int mask)
+aeAddMillisecondsToNow	ae.c	/^static void aeAddMillisecondsToNow(long long milliseconds, long *sec, long *ms) {$/;"	f	file:	signature:(long long milliseconds, long *sec, long *ms)
+aeApiAddEvent	ae_epoll.c	/^static int aeApiAddEvent(aeEventLoop *eventLoop, int fd, int mask) {$/;"	f	file:	signature:(aeEventLoop *eventLoop, int fd, int mask)
+aeApiCreate	ae_epoll.c	/^static int aeApiCreate(aeEventLoop *eventLoop) {$/;"	f	file:	signature:(aeEventLoop *eventLoop)
+aeApiDelEvent	ae_epoll.c	/^static void aeApiDelEvent(aeEventLoop *eventLoop, int fd, int delmask) {$/;"	f	file:	signature:(aeEventLoop *eventLoop, int fd, int delmask)
+aeApiFree	ae_epoll.c	/^static void aeApiFree(aeEventLoop *eventLoop) {$/;"	f	file:	signature:(aeEventLoop *eventLoop)
+aeApiName	ae_epoll.c	/^static char *aeApiName(void) {$/;"	f	file:	signature:(void)
+aeApiPoll	ae_epoll.c	/^static int aeApiPoll(aeEventLoop *eventLoop, struct timeval *tvp) {$/;"	f	file:	signature:(aeEventLoop *eventLoop, struct timeval *tvp)
+aeApiState	ae_epoll.c	/^typedef struct aeApiState {$/;"	s	file:
+aeApiState	ae_epoll.c	/^} aeApiState;$/;"	t	typeref:struct:aeApiState	file:
+aeApiState::epfd	ae_epoll.c	/^    int epfd;$/;"	m	struct:aeApiState	file:	access:public
+aeApiState::events	ae_epoll.c	/^    struct epoll_event events[AE_SETSIZE];$/;"	m	struct:aeApiState	typeref:struct:aeApiState::epoll_event	file:	access:public
+aeBeforeSleepProc	ae.h	/^typedef void aeBeforeSleepProc(struct aeEventLoop *eventLoop);$/;"	t
+aeCreateEventLoop	ae.c	/^aeEventLoop *aeCreateEventLoop(void) {$/;"	f	signature:(void)
+aeCreateEventLoop	ae.h	/^aeEventLoop *aeCreateEventLoop(void);$/;"	p	signature:(void)
+aeCreateFileEvent	ae.c	/^int aeCreateFileEvent(aeEventLoop *eventLoop, int fd, int mask,$/;"	f	signature:(aeEventLoop *eventLoop, int fd, int mask, aeFileProc *proc, void *clientData)
+aeCreateFileEvent	ae.h	/^int aeCreateFileEvent(aeEventLoop *eventLoop, int fd, int mask,$/;"	p	signature:(aeEventLoop *eventLoop, int fd, int mask, aeFileProc *proc, void *clientData)
+aeCreateTimeEvent	ae.c	/^long long aeCreateTimeEvent(aeEventLoop *eventLoop, long long milliseconds,$/;"	f	signature:(aeEventLoop *eventLoop, long long milliseconds, aeTimeProc *proc, void *clientData, aeEventFinalizerProc *finalizerProc)
+aeCreateTimeEvent	ae.h	/^long long aeCreateTimeEvent(aeEventLoop *eventLoop, long long milliseconds,$/;"	p	signature:(aeEventLoop *eventLoop, long long milliseconds, aeTimeProc *proc, void *clientData, aeEventFinalizerProc *finalizerProc)
+aeDeleteEventLoop	ae.c	/^void aeDeleteEventLoop(aeEventLoop *eventLoop) {$/;"	f	signature:(aeEventLoop *eventLoop)
+aeDeleteEventLoop	ae.h	/^void aeDeleteEventLoop(aeEventLoop *eventLoop);$/;"	p	signature:(aeEventLoop *eventLoop)
+aeDeleteFileEvent	ae.c	/^void aeDeleteFileEvent(aeEventLoop *eventLoop, int fd, int mask)$/;"	f	signature:(aeEventLoop *eventLoop, int fd, int mask)
+aeDeleteFileEvent	ae.h	/^void aeDeleteFileEvent(aeEventLoop *eventLoop, int fd, int mask);$/;"	p	signature:(aeEventLoop *eventLoop, int fd, int mask)
+aeDeleteTimeEvent	ae.c	/^int aeDeleteTimeEvent(aeEventLoop *eventLoop, long long id)$/;"	f	signature:(aeEventLoop *eventLoop, long long id)
+aeDeleteTimeEvent	ae.h	/^int aeDeleteTimeEvent(aeEventLoop *eventLoop, long long id);$/;"	p	signature:(aeEventLoop *eventLoop, long long id)
+aeEventFinalizerProc	ae.h	/^typedef void aeEventFinalizerProc(struct aeEventLoop *eventLoop, void *clientData);$/;"	t
+aeEventLoop	ae.h	/^typedef struct aeEventLoop {$/;"	s
+aeEventLoop	ae.h	/^} aeEventLoop;$/;"	t	typeref:struct:aeEventLoop
+aeEventLoop::apidata	ae.h	/^    void *apidata; \/* This is used for polling API specific data *\/$/;"	m	struct:aeEventLoop	access:public
+aeEventLoop::beforesleep	ae.h	/^    aeBeforeSleepProc *beforesleep;$/;"	m	struct:aeEventLoop	access:public
+aeEventLoop::events	ae.h	/^    aeFileEvent events[AE_SETSIZE]; \/* Registered events *\/$/;"	m	struct:aeEventLoop	access:public
+aeEventLoop::fired	ae.h	/^    aeFiredEvent fired[AE_SETSIZE]; \/* Fired events *\/$/;"	m	struct:aeEventLoop	access:public
+aeEventLoop::maxfd	ae.h	/^    int maxfd;$/;"	m	struct:aeEventLoop	access:public
+aeEventLoop::stop	ae.h	/^    int stop;$/;"	m	struct:aeEventLoop	access:public
+aeEventLoop::timeEventHead	ae.h	/^    aeTimeEvent *timeEventHead;$/;"	m	struct:aeEventLoop	access:public
+aeEventLoop::timeEventNextId	ae.h	/^    long long timeEventNextId;$/;"	m	struct:aeEventLoop	access:public
+aeFileEvent	ae.h	/^typedef struct aeFileEvent {$/;"	s
+aeFileEvent	ae.h	/^} aeFileEvent;$/;"	t	typeref:struct:aeFileEvent
+aeFileEvent::clientData	ae.h	/^    void *clientData;$/;"	m	struct:aeFileEvent	access:public
+aeFileEvent::mask	ae.h	/^    int mask; \/* one of AE_(READABLE|WRITABLE) *\/$/;"	m	struct:aeFileEvent	access:public
+aeFileEvent::rfileProc	ae.h	/^    aeFileProc *rfileProc;$/;"	m	struct:aeFileEvent	access:public
+aeFileEvent::wfileProc	ae.h	/^    aeFileProc *wfileProc;$/;"	m	struct:aeFileEvent	access:public
+aeFileProc	ae.h	/^typedef void aeFileProc(struct aeEventLoop *eventLoop, int fd, void *clientData, int mask);$/;"	t
+aeFiredEvent	ae.h	/^typedef struct aeFiredEvent {$/;"	s
+aeFiredEvent	ae.h	/^} aeFiredEvent;$/;"	t	typeref:struct:aeFiredEvent
+aeFiredEvent::fd	ae.h	/^    int fd;$/;"	m	struct:aeFiredEvent	access:public
+aeFiredEvent::mask	ae.h	/^    int mask;$/;"	m	struct:aeFiredEvent	access:public
+aeGetApiName	ae.c	/^char *aeGetApiName(void) {$/;"	f	signature:(void)
+aeGetApiName	ae.h	/^char *aeGetApiName(void);$/;"	p	signature:(void)
+aeGetTime	ae.c	/^static void aeGetTime(long *seconds, long *milliseconds)$/;"	f	file:	signature:(long *seconds, long *milliseconds)
+aeMain	ae.c	/^void aeMain(aeEventLoop *eventLoop) {$/;"	f	signature:(aeEventLoop *eventLoop)
+aeMain	ae.h	/^void aeMain(aeEventLoop *eventLoop);$/;"	p	signature:(aeEventLoop *eventLoop)
+aeProcessEvents	ae.c	/^int aeProcessEvents(aeEventLoop *eventLoop, int flags)$/;"	f	signature:(aeEventLoop *eventLoop, int flags)
+aeProcessEvents	ae.h	/^int aeProcessEvents(aeEventLoop *eventLoop, int flags);$/;"	p	signature:(aeEventLoop *eventLoop, int flags)
+aeSearchNearestTimer	ae.c	/^static aeTimeEvent *aeSearchNearestTimer(aeEventLoop *eventLoop)$/;"	f	file:	signature:(aeEventLoop *eventLoop)
+aeSetBeforeSleepProc	ae.c	/^void aeSetBeforeSleepProc(aeEventLoop *eventLoop, aeBeforeSleepProc *beforesleep) {$/;"	f	signature:(aeEventLoop *eventLoop, aeBeforeSleepProc *beforesleep)
+aeSetBeforeSleepProc	ae.h	/^void aeSetBeforeSleepProc(aeEventLoop *eventLoop, aeBeforeSleepProc *beforesleep);$/;"	p	signature:(aeEventLoop *eventLoop, aeBeforeSleepProc *beforesleep)
+aeStop	ae.c	/^void aeStop(aeEventLoop *eventLoop) {$/;"	f	signature:(aeEventLoop *eventLoop)
+aeStop	ae.h	/^void aeStop(aeEventLoop *eventLoop);$/;"	p	signature:(aeEventLoop *eventLoop)
+aeTimeEvent	ae.h	/^typedef struct aeTimeEvent {$/;"	s
+aeTimeEvent	ae.h	/^} aeTimeEvent;$/;"	t	typeref:struct:aeTimeEvent
+aeTimeEvent::clientData	ae.h	/^    void *clientData;$/;"	m	struct:aeTimeEvent	access:public
+aeTimeEvent::finalizerProc	ae.h	/^    aeEventFinalizerProc *finalizerProc;$/;"	m	struct:aeTimeEvent	access:public
+aeTimeEvent::id	ae.h	/^    long long id; \/* time event identifier. *\/$/;"	m	struct:aeTimeEvent	access:public
+aeTimeEvent::next	ae.h	/^    struct aeTimeEvent *next;$/;"	m	struct:aeTimeEvent	typeref:struct:aeTimeEvent::aeTimeEvent	access:public
+aeTimeEvent::timeProc	ae.h	/^    aeTimeProc *timeProc;$/;"	m	struct:aeTimeEvent	access:public
+aeTimeEvent::when_ms	ae.h	/^    long when_ms; \/* milliseconds *\/$/;"	m	struct:aeTimeEvent	access:public
+aeTimeEvent::when_sec	ae.h	/^    long when_sec; \/* seconds *\/$/;"	m	struct:aeTimeEvent	access:public
+aeTimeProc	ae.h	/^typedef int aeTimeProc(struct aeEventLoop *eventLoop, long long id, void *clientData);$/;"	t
+aeWait	ae.c	/^int aeWait(int fd, int mask, long long milliseconds) {$/;"	f	signature:(int fd, int mask, long long milliseconds)
+aeWait	ae.h	/^int aeWait(int fd, int mask, long long milliseconds);$/;"	p	signature:(int fd, int mask, long long milliseconds)
+anetCreateSocket	anet.c	/^static int anetCreateSocket(char *err, int domain) {$/;"	f	file:	signature:(char *err, int domain)
+anetGenericAccept	anet.c	/^static int anetGenericAccept(char *err, int s, struct sockaddr *sa, socklen_t *len) {$/;"	f	file:	signature:(char *err, int s, struct sockaddr *sa, socklen_t *len)
+anetListen	anet.c	/^static int anetListen(char *err, int s, struct sockaddr *sa, socklen_t len) {$/;"	f	file:	signature:(char *err, int s, struct sockaddr *sa, socklen_t len)
+anetNonBlock	anet.c	/^int anetNonBlock(char *err, int fd)$/;"	f	signature:(char *err, int fd)
+anetNonBlock	anet.h	/^int anetNonBlock(char *err, int fd);$/;"	p	signature:(char *err, int fd)
+anetRead	anet.c	/^int anetRead(int fd, char *buf, int count)$/;"	f	signature:(int fd, char *buf, int count)
+anetRead	anet.h	/^int anetRead(int fd, char *buf, int count);$/;"	p	signature:(int fd, char *buf, int count)
+anetResolve	anet.c	/^int anetResolve(char *err, char *host, char *ipbuf)$/;"	f	signature:(char *err, char *host, char *ipbuf)
+anetResolve	anet.h	/^int anetResolve(char *err, char *host, char *ipbuf);$/;"	p	signature:(char *err, char *host, char *ipbuf)
+anetSetError	anet.c	/^static void anetSetError(char *err, const char *fmt, ...)$/;"	f	file:	signature:(char *err, const char *fmt, ...)
+anetSetSendBuffer	anet.c	/^int anetSetSendBuffer(char *err, int fd, int buffsize)$/;"	f	signature:(char *err, int fd, int buffsize)
+anetTcpAccept	anet.c	/^int anetTcpAccept(char *err, int s, char *ip, int *port) {$/;"	f	signature:(char *err, int s, char *ip, int *port)
+anetTcpAccept	anet.h	/^int anetTcpAccept(char *err, int serversock, char *ip, int *port);$/;"	p	signature:(char *err, int serversock, char *ip, int *port)
+anetTcpConnect	anet.c	/^int anetTcpConnect(char *err, char *addr, int port)$/;"	f	signature:(char *err, char *addr, int port)
+anetTcpConnect	anet.h	/^int anetTcpConnect(char *err, char *addr, int port);$/;"	p	signature:(char *err, char *addr, int port)
+anetTcpGenericConnect	anet.c	/^static int anetTcpGenericConnect(char *err, char *addr, int port, int flags)$/;"	f	file:	signature:(char *err, char *addr, int port, int flags)
+anetTcpKeepAlive	anet.c	/^int anetTcpKeepAlive(char *err, int fd)$/;"	f	signature:(char *err, int fd)
+anetTcpKeepAlive	anet.h	/^int anetTcpKeepAlive(char *err, int fd);$/;"	p	signature:(char *err, int fd)
+anetTcpNoDelay	anet.c	/^int anetTcpNoDelay(char *err, int fd)$/;"	f	signature:(char *err, int fd)
+anetTcpNoDelay	anet.h	/^int anetTcpNoDelay(char *err, int fd);$/;"	p	signature:(char *err, int fd)
+anetTcpNonBlockConnect	anet.c	/^int anetTcpNonBlockConnect(char *err, char *addr, int port)$/;"	f	signature:(char *err, char *addr, int port)
+anetTcpNonBlockConnect	anet.h	/^int anetTcpNonBlockConnect(char *err, char *addr, int port);$/;"	p	signature:(char *err, char *addr, int port)
+anetTcpServer	anet.c	/^int anetTcpServer(char *err, int port, char *bindaddr)$/;"	f	signature:(char *err, int port, char *bindaddr)
+anetTcpServer	anet.h	/^int anetTcpServer(char *err, int port, char *bindaddr);$/;"	p	signature:(char *err, int port, char *bindaddr)
+anetUnixAccept	anet.c	/^int anetUnixAccept(char *err, int s) {$/;"	f	signature:(char *err, int s)
+anetUnixAccept	anet.h	/^int anetUnixAccept(char *err, int serversock);$/;"	p	signature:(char *err, int serversock)
+anetUnixConnect	anet.c	/^int anetUnixConnect(char *err, char *path)$/;"	f	signature:(char *err, char *path)
+anetUnixConnect	anet.h	/^int anetUnixConnect(char *err, char *path);$/;"	p	signature:(char *err, char *path)
+anetUnixGenericConnect	anet.c	/^int anetUnixGenericConnect(char *err, char *path, int flags)$/;"	f	signature:(char *err, char *path, int flags)
+anetUnixNonBlockConnect	anet.c	/^int anetUnixNonBlockConnect(char *err, char *path)$/;"	f	signature:(char *err, char *path)
+anetUnixNonBlockConnect	anet.h	/^int anetUnixNonBlockConnect(char *err, char *path);$/;"	p	signature:(char *err, char *path)
+anetUnixServer	anet.c	/^int anetUnixServer(char *err, char *path)$/;"	f	signature:(char *err, char *path)
+anetUnixServer	anet.h	/^int anetUnixServer(char *err, char *path);$/;"	p	signature:(char *err, char *path)
+anetWrite	anet.c	/^int anetWrite(int fd, char *buf, int count)$/;"	f	signature:(int fd, char *buf, int count)
+anetWrite	anet.h	/^int anetWrite(int fd, char *buf, int count);$/;"	p	signature:(int fd, char *buf, int count)
+aof_fsync	config.h	59;"	d
+aof_fsync	config.h	61;"	d
+apidata	ae.h	/^    void *apidata; \/* This is used for polling API specific data *\/$/;"	m	struct:aeEventLoop	access:public
+arg1	protocol/WebsocketDataMessage.h	/^	string arg1;$/;"	m	class:WebsocketDataMessage	access:private
+arg2	protocol/WebsocketDataMessage.h	/^	string arg2;$/;"	m	class:WebsocketDataMessage	access:private
+base64_chars	utils/base64/base64.cpp	/^static const std::string base64_chars = $/;"	v	file:
+base64_decode	utils/base64/base64.cpp	/^std::string base64_decode(std::string const& encoded_string) {$/;"	f	signature:(std::string const& encoded_string)
+base64_decode	utils/base64/base64.h	/^std::string base64_decode(std::string const& s);$/;"	p	signature:(std::string const& s)
+base64_encode	utils/base64/base64.cpp	/^std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {$/;"	f	signature:(unsigned char const* bytes_to_encode, unsigned int in_len)
+base64_encode	utils/base64/base64.h	/^std::string base64_encode(unsigned char const* , unsigned int len);$/;"	p	signature:(unsigned char const* , unsigned int len)
+beforesleep	ae.h	/^    aeBeforeSleepProc *beforesleep;$/;"	m	struct:aeEventLoop	access:public
+bindaddr	websocket.h	/^    char *bindaddr;$/;"	m	struct:websocketServer	access:public
+buf	sds.h	/^    char buf[];$/;"	m	struct:sdshdr	access:public
+buf	websocket.h	/^    char buf[WEBSOCKET_REPLY_CHUNK_BYTES];$/;"	m	struct:websocketClient	access:public
+bufpos	websocket.h	/^    int bufpos;$/;"	m	struct:websocketClient	access:public
+calloc	zmalloc.c	51;"	d	file:
+clientData	ae.h	/^    void *clientData;$/;"	m	struct:aeFileEvent	access:public
+clientData	ae.h	/^    void *clientData;$/;"	m	struct:aeTimeEvent	access:public
+clients	websocket.h	/^    list *clients;$/;"	m	struct:websocketServer	access:public
+closeTimedoutClients	websocket.c	/^void closeTimedoutClients(void) {$/;"	f	signature:(void)
+closeTimedoutClients	websocket.h	/^void closeTimedoutClients(void);$/;"	p	signature:(void)
+createClient	websocket.c	/^websocketClient *createClient(int fd) {$/;"	f	signature:(int fd)
+createClient	websocket.h	/^websocketClient *createClient(int fd);$/;"	p	signature:(int fd)
+cronloops	websocket.h	/^    int cronloops;              \/* number of times the cron function run *\/$/;"	m	struct:websocketServer	access:public
+d	dict.h	/^    dict *d;$/;"	m	struct:dictIterator	access:public
+daemonize	websocket.h	/^    int daemonize;$/;"	m	struct:websocketServer	access:public
+data_frame	websocket.h	/^    websocket_frame_t data_frame;$/;"	m	struct:websocketClient	access:public
+decodeIncomingPacket	protocol/WebsocketProtocol.cpp	/^int WebsocketProtocol::decodeIncomingPacket( PushFramework::IncomingPacket* pPacket, int& serviceId )$/;"	f	class:WebsocketProtocol	signature:( PushFramework::IncomingPacket* pPacket, int& serviceId )
+decodeIncomingPacket	protocol/WebsocketProtocol.h	/^    virtual int decodeIncomingPacket(PushFramework::IncomingPacket* pPacket, int& serviceId);$/;"	p	class:WebsocketProtocol	access:public	signature:(PushFramework::IncomingPacket* pPacket, int& serviceId)
+dict	dict.h	/^typedef struct dict {$/;"	s
+dict	dict.h	/^} dict;$/;"	t	typeref:struct:dict
+dict::ht	dict.h	/^    dictht ht[2];$/;"	m	struct:dict	access:public
+dict::iterators	dict.h	/^    int iterators; \/* number of iterators currently running *\/$/;"	m	struct:dict	access:public
+dict::privdata	dict.h	/^    void *privdata;$/;"	m	struct:dict	access:public
+dict::rehashidx	dict.h	/^    int rehashidx; \/* rehashing not in progress if rehashidx == -1 *\/$/;"	m	struct:dict	access:public
+dict::type	dict.h	/^    dictType *type;$/;"	m	struct:dict	access:public
+dictAdd	dict.c	/^int dictAdd(dict *d, void *key, void *val)$/;"	f	signature:(dict *d, void *key, void *val)
+dictAdd	dict.h	/^int dictAdd(dict *d, void *key, void *val);$/;"	p	signature:(dict *d, void *key, void *val)
+dictCompareHashKeys	dict.h	110;"	d
+dictCreate	dict.c	/^dict *dictCreate(dictType *type,$/;"	f	signature:(dictType *type, void *privDataPtr)
+dictCreate	dict.h	/^dict *dictCreate(dictType *type, void *privDataPtr);$/;"	p	signature:(dictType *type, void *privDataPtr)
+dictDelete	dict.c	/^int dictDelete(dict *ht, const void *key) {$/;"	f	signature:(dict *ht, const void *key)
+dictDelete	dict.h	/^int dictDelete(dict *d, const void *key);$/;"	p	signature:(dict *d, const void *key)
+dictDeleteNoFree	dict.c	/^int dictDeleteNoFree(dict *ht, const void *key) {$/;"	f	signature:(dict *ht, const void *key)
+dictDeleteNoFree	dict.h	/^int dictDeleteNoFree(dict *d, const void *key);$/;"	p	signature:(dict *d, const void *key)
+dictDisableResize	dict.c	/^void dictDisableResize(void) {$/;"	f	signature:(void)
+dictDisableResize	dict.h	/^void dictDisableResize(void);$/;"	p	signature:(void)
+dictEmpty	dict.c	/^void dictEmpty(dict *d) {$/;"	f	signature:(dict *d)
+dictEmpty	dict.h	/^void dictEmpty(dict *d);$/;"	p	signature:(dict *d)
+dictEnableResize	dict.c	/^void dictEnableResize(void) {$/;"	f	signature:(void)
+dictEnableResize	dict.h	/^void dictEnableResize(void);$/;"	p	signature:(void)
+dictEntry	dict.h	/^typedef struct dictEntry {$/;"	s
+dictEntry	dict.h	/^} dictEntry;$/;"	t	typeref:struct:dictEntry
+dictEntry::key	dict.h	/^    void *key;$/;"	m	struct:dictEntry	access:public
+dictEntry::next	dict.h	/^    struct dictEntry *next;$/;"	m	struct:dictEntry	typeref:struct:dictEntry::dictEntry	access:public
+dictEntry::val	dict.h	/^    void *val;$/;"	m	struct:dictEntry	access:public
+dictExpand	dict.c	/^int dictExpand(dict *d, unsigned long size)$/;"	f	signature:(dict *d, unsigned long size)
+dictExpand	dict.h	/^int dictExpand(dict *d, unsigned long size);$/;"	p	signature:(dict *d, unsigned long size)
+dictFetchValue	dict.c	/^void *dictFetchValue(dict *d, const void *key) {$/;"	f	signature:(dict *d, const void *key)
+dictFetchValue	dict.h	/^void *dictFetchValue(dict *d, const void *key);$/;"	p	signature:(dict *d, const void *key)
+dictFind	dict.c	/^dictEntry *dictFind(dict *d, const void *key)$/;"	f	signature:(dict *d, const void *key)
+dictFind	dict.h	/^dictEntry * dictFind(dict *d, const void *key);$/;"	p	signature:(dict *d, const void *key)
+dictFreeEntryKey	dict.h	99;"	d
+dictFreeEntryVal	dict.h	88;"	d
+dictGenCaseHashFunction	dict.c	/^unsigned int dictGenCaseHashFunction(const unsigned char *buf, int len) {$/;"	f	signature:(const unsigned char *buf, int len)
+dictGenCaseHashFunction	dict.h	/^unsigned int dictGenCaseHashFunction(const unsigned char *buf, int len);$/;"	p	signature:(const unsigned char *buf, int len)
+dictGenHashFunction	dict.c	/^unsigned int dictGenHashFunction(const unsigned char *buf, int len) {$/;"	f	signature:(const unsigned char *buf, int len)
+dictGenHashFunction	dict.h	/^unsigned int dictGenHashFunction(const unsigned char *buf, int len);$/;"	p	signature:(const unsigned char *buf, int len)
+dictGenericDelete	dict.c	/^static int dictGenericDelete(dict *d, const void *key, int nofree)$/;"	f	file:	signature:(dict *d, const void *key, int nofree)
+dictGetEntryKey	dict.h	117;"	d
+dictGetEntryVal	dict.h	118;"	d
+dictGetIterator	dict.c	/^dictIterator *dictGetIterator(dict *d)$/;"	f	signature:(dict *d)
+dictGetIterator	dict.h	/^dictIterator *dictGetIterator(dict *d);$/;"	p	signature:(dict *d)
+dictGetRandomKey	dict.c	/^dictEntry *dictGetRandomKey(dict *d)$/;"	f	signature:(dict *d)
+dictGetRandomKey	dict.h	/^dictEntry *dictGetRandomKey(dict *d);$/;"	p	signature:(dict *d)
+dictHashKey	dict.h	115;"	d
+dictIdentityHashFunction	dict.c	/^unsigned int dictIdentityHashFunction(unsigned int key)$/;"	f	signature:(unsigned int key)
+dictIntHashFunction	dict.c	/^unsigned int dictIntHashFunction(unsigned int key)$/;"	f	signature:(unsigned int key)
+dictIsRehashing	dict.h	121;"	d
+dictIterator	dict.h	/^typedef struct dictIterator {$/;"	s
+dictIterator	dict.h	/^} dictIterator;$/;"	t	typeref:struct:dictIterator
+dictIterator::d	dict.h	/^    dict *d;$/;"	m	struct:dictIterator	access:public
+dictIterator::entry	dict.h	/^    dictEntry *entry, *nextEntry;$/;"	m	struct:dictIterator	access:public
+dictIterator::index	dict.h	/^    int index;$/;"	m	struct:dictIterator	access:public
+dictIterator::nextEntry	dict.h	/^    dictEntry *entry, *nextEntry;$/;"	m	struct:dictIterator	access:public
+dictIterator::table	dict.h	/^    int table;$/;"	m	struct:dictIterator	access:public
+dictNext	dict.c	/^dictEntry *dictNext(dictIterator *iter)$/;"	f	signature:(dictIterator *iter)
+dictNext	dict.h	/^dictEntry *dictNext(dictIterator *iter);$/;"	p	signature:(dictIterator *iter)
+dictPrintStats	dict.c	/^void dictPrintStats(dict *d) {$/;"	f	signature:(dict *d)
+dictPrintStats	dict.h	/^void dictPrintStats(dict *d);$/;"	p	signature:(dict *d)
+dictRehash	dict.c	/^int dictRehash(dict *d, int n) {$/;"	f	signature:(dict *d, int n)
+dictRehash	dict.h	/^int dictRehash(dict *d, int n);$/;"	p	signature:(dict *d, int n)
+dictRehashMilliseconds	dict.c	/^int dictRehashMilliseconds(dict *d, int ms) {$/;"	f	signature:(dict *d, int ms)
+dictRehashMilliseconds	dict.h	/^int dictRehashMilliseconds(dict *d, int ms);$/;"	p	signature:(dict *d, int ms)
+dictRelease	dict.c	/^void dictRelease(dict *d)$/;"	f	signature:(dict *d)
+dictRelease	dict.h	/^void dictRelease(dict *d);$/;"	p	signature:(dict *d)
+dictReleaseIterator	dict.c	/^void dictReleaseIterator(dictIterator *iter)$/;"	f	signature:(dictIterator *iter)
+dictReleaseIterator	dict.h	/^void dictReleaseIterator(dictIterator *iter);$/;"	p	signature:(dictIterator *iter)
+dictReplace	dict.c	/^int dictReplace(dict *d, void *key, void *val)$/;"	f	signature:(dict *d, void *key, void *val)
+dictReplace	dict.h	/^int dictReplace(dict *d, void *key, void *val);$/;"	p	signature:(dict *d, void *key, void *val)
+dictResize	dict.c	/^int dictResize(dict *d)$/;"	f	signature:(dict *d)
+dictResize	dict.h	/^int dictResize(dict *d);$/;"	p	signature:(dict *d)
+dictSetHashKey	dict.h	103;"	d
+dictSetHashVal	dict.h	92;"	d
+dictSize	dict.h	120;"	d
+dictSlots	dict.h	119;"	d
+dictType	dict.h	/^typedef struct dictType {$/;"	s
+dictType	dict.h	/^} dictType;$/;"	t	typeref:struct:dictType
+dictType::hashFunction	dict.h	/^    unsigned int (*hashFunction)(const void *key);$/;"	m	struct:dictType	access:public
+dictType::keyCompare	dict.h	/^    int (*keyCompare)(void *privdata, const void *key1, const void *key2);$/;"	m	struct:dictType	access:public
+dictType::keyDestructor	dict.h	/^    void (*keyDestructor)(void *privdata, void *key);$/;"	m	struct:dictType	access:public
+dictType::keyDup	dict.h	/^    void *(*keyDup)(void *privdata, const void *key);$/;"	m	struct:dictType	access:public
+dictType::valDestructor	dict.h	/^    void (*valDestructor)(void *privdata, void *obj);$/;"	m	struct:dictType	access:public
+dictType::valDup	dict.h	/^    void *(*valDup)(void *privdata, const void *obj);$/;"	m	struct:dictType	access:public
+dict_can_resize	dict.c	/^static int dict_can_resize = 1;$/;"	v	file:
+dict_force_resize_ratio	dict.c	/^static unsigned int dict_force_resize_ratio = 5;$/;"	v	file:
+dictht	dict.h	/^typedef struct dictht {$/;"	s
+dictht	dict.h	/^} dictht;$/;"	t	typeref:struct:dictht
+dictht::size	dict.h	/^    unsigned long size;$/;"	m	struct:dictht	access:public
+dictht::sizemask	dict.h	/^    unsigned long sizemask;$/;"	m	struct:dictht	access:public
+dictht::table	dict.h	/^    dictEntry **table;$/;"	m	struct:dictht	access:public
+dictht::used	dict.h	/^    unsigned long used;$/;"	m	struct:dictht	access:public
+direction	adlist.h	/^    int direction;$/;"	m	struct:listIter	access:public
+disposeIncomingPacket	protocol/WebsocketProtocol.h	/^    virtual void disposeIncomingPacket(PushFramework::IncomingPacket* pPacket)$/;"	f	class:WebsocketProtocol	access:public	signature:(PushFramework::IncomingPacket* pPacket)
+disposeOutgoingPacket	protocol/WebsocketProtocol.h	/^    virtual void disposeOutgoingPacket(PushFramework::OutgoingPacket* pPacket)$/;"	f	class:WebsocketProtocol	access:public	signature:(PushFramework::OutgoingPacket* pPacket)
+dup	adlist.h	/^    void *(*dup)(void *ptr);$/;"	m	struct:list	access:public
+el	websocket.h	/^    aeEventLoop *el;$/;"	m	struct:websocketServer	access:public
+encodeOutgoingPacket	protocol/WebsocketProtocol.cpp	/^int WebsocketProtocol::encodeOutgoingPacket( PushFramework::OutgoingPacket& packet )$/;"	f	class:WebsocketProtocol	signature:( PushFramework::OutgoingPacket& packet )
+encodeOutgoingPacket	protocol/WebsocketProtocol.h	/^    virtual int encodeOutgoingPacket(PushFramework::OutgoingPacket& packet);$/;"	p	class:WebsocketProtocol	access:public	signature:(PushFramework::OutgoingPacket& packet)
+entry	dict.h	/^    dictEntry *entry, *nextEntry;$/;"	m	struct:dictIterator	access:public
+epfd	ae_epoll.c	/^    int epfd;$/;"	m	struct:aeApiState	file:	access:public
+errMsg	main.c	/^char errMsg[1024];$/;"	v
+events	ae.h	/^    aeFileEvent events[AE_SETSIZE]; \/* Registered events *\/$/;"	m	struct:aeEventLoop	access:public
+events	ae_epoll.c	/^    struct epoll_event events[AE_SETSIZE];$/;"	m	struct:aeApiState	typeref:struct:aeApiState::epoll_event	file:	access:public
+fd	ae.h	/^    int fd;$/;"	m	struct:aeFiredEvent	access:public
+fd	websocket.h	/^    int fd;$/;"	m	struct:websocketClient	access:public
+fields	protocol/WebsocketHandshakeMessage.h	/^	map<string, string> fields;$/;"	m	class:WebsocketHandshakeMessage	access:private
+fin	websocket.h	/^    unsigned char fin:1;$/;"	m	struct:__anon3	access:public
+finalizerProc	ae.h	/^    aeEventFinalizerProc *finalizerProc;$/;"	m	struct:aeTimeEvent	access:public
+fired	ae.h	/^    aeFiredEvent fired[AE_SETSIZE]; \/* Fired events *\/$/;"	m	struct:aeEventLoop	access:public
+flags	websocket.h	/^    int flags;$/;"	m	struct:websocketClient	access:public
+frameOutgoingPacket	protocol/WebsocketProtocol.cpp	/^int WebsocketProtocol::frameOutgoingPacket( PushFramework::OutgoingPacket& packet, PushFramework::DataBuffer& buffer, unsigned int& nWrittenBytes )$/;"	f	class:WebsocketProtocol	signature:( PushFramework::OutgoingPacket& packet, PushFramework::DataBuffer& buffer, unsigned int& nWrittenBytes )
+frameOutgoingPacket	protocol/WebsocketProtocol.h	/^    virtual int frameOutgoingPacket(PushFramework::OutgoingPacket& packet, PushFramework::DataBuffer& buffer, unsigned int& nWrittenBytes);$/;"	p	class:WebsocketProtocol	access:public	signature:(PushFramework::OutgoingPacket& packet, PushFramework::DataBuffer& buffer, unsigned int& nWrittenBytes)
+free	adlist.h	/^    void (*free)(void *ptr);$/;"	m	struct:list	access:public
+free	sds.h	/^    int free;$/;"	m	struct:sdshdr	access:public
+free	zmalloc.c	53;"	d	file:
+freeClient	websocket.c	/^void freeClient(websocketClient *c) {$/;"	f	signature:(websocketClient *c)
+freeClient	websocket.h	/^void freeClient(websocketClient *c);$/;"	p	signature:(websocketClient *c)
+handshake_frame	websocket.h	/^    handshake_frame_t handshake_frame;$/;"	m	struct:websocketClient	access:public
+handshake_frame_t	websocket.h	/^}handshake_frame_t;$/;"	t	typeref:struct:__anon4
+hashFunction	dict.h	/^    unsigned int (*hashFunction)(const void *key);$/;"	m	struct:dictType	access:public
+head	adlist.h	/^    listNode *head;$/;"	m	struct:list	access:public
+ht	dict.h	/^    dictht ht[2];$/;"	m	struct:dict	access:public
+id	ae.h	/^    long long id; \/* time event identifier. *\/$/;"	m	struct:aeTimeEvent	access:public
+index	dict.h	/^    int index;$/;"	m	struct:dictIterator	access:public
+initServer	websocket.c	/^int initServer()$/;"	f
+initServer	websocket.h	/^int initServer();$/;"	p	signature:()
+ipfd	websocket.h	/^    int ipfd;$/;"	m	struct:websocketServer	access:public
+is_base64	utils/base64/base64.cpp	/^static inline bool is_base64(unsigned char c) {$/;"	f	file:	signature:(unsigned char c)
+iterators	dict.h	/^    int iterators; \/* number of iterators currently running *\/$/;"	m	struct:dict	access:public
+key	dict.h	/^    void *key;$/;"	m	struct:dictEntry	access:public
+keyCompare	dict.h	/^    int (*keyCompare)(void *privdata, const void *key1, const void *key2);$/;"	m	struct:dictType	access:public
+keyDestructor	dict.h	/^    void (*keyDestructor)(void *privdata, void *key);$/;"	m	struct:dictType	access:public
+keyDup	dict.h	/^    void *(*keyDup)(void *privdata, const void *key);$/;"	m	struct:dictType	access:public
+lastinteraction	websocket.h	/^    time_t lastinteraction; \/* time of the last interaction, used for timeout *\/$/;"	m	struct:websocketClient	access:public
+len	adlist.h	/^    unsigned int len;$/;"	m	struct:list	access:public
+len	sds.h	/^    int len;$/;"	m	struct:sdshdr	access:public
+list	adlist.h	/^typedef struct list {$/;"	s
+list	adlist.h	/^} list;$/;"	t	typeref:struct:list
+list::dup	adlist.h	/^    void *(*dup)(void *ptr);$/;"	m	struct:list	access:public
+list::free	adlist.h	/^    void (*free)(void *ptr);$/;"	m	struct:list	access:public
+list::head	adlist.h	/^    listNode *head;$/;"	m	struct:list	access:public
+list::len	adlist.h	/^    unsigned int len;$/;"	m	struct:list	access:public
+list::match	adlist.h	/^    int (*match)(void *ptr, void *key);$/;"	m	struct:list	access:public
+list::tail	adlist.h	/^    listNode *tail;$/;"	m	struct:list	access:public
+listAddNodeHead	adlist.c	/^list *listAddNodeHead(list *list, void *value)$/;"	f	signature:(list *list, void *value)
+listAddNodeHead	adlist.h	/^list *listAddNodeHead(list *list, void *value);$/;"	p	signature:(list *list, void *value)
+listAddNodeTail	adlist.c	/^list *listAddNodeTail(list *list, void *value)$/;"	f	signature:(list *list, void *value)
+listAddNodeTail	adlist.h	/^list *listAddNodeTail(list *list, void *value);$/;"	p	signature:(list *list, void *value)
+listCreate	adlist.c	/^list *listCreate(void)$/;"	f	signature:(void)
+listCreate	adlist.h	/^list *listCreate(void);$/;"	p	signature:(void)
+listDelNode	adlist.c	/^void listDelNode(list *list, listNode *node)$/;"	f	signature:(list *list, listNode *node)
+listDelNode	adlist.h	/^void listDelNode(list *list, listNode *node);$/;"	p	signature:(list *list, listNode *node)
+listDup	adlist.c	/^list *listDup(list *orig)$/;"	f	signature:(list *orig)
+listDup	adlist.h	/^list *listDup(list *orig);$/;"	p	signature:(list *orig)
+listFirst	adlist.h	58;"	d
+listGetDupMethod	adlist.h	68;"	d
+listGetFree	adlist.h	69;"	d
+listGetIterator	adlist.c	/^listIter *listGetIterator(list *list, int direction)$/;"	f	signature:(list *list, int direction)
+listGetIterator	adlist.h	/^listIter *listGetIterator(list *list, int direction);$/;"	p	signature:(list *list, int direction)
+listGetMatchMethod	adlist.h	70;"	d
+listIndex	adlist.c	/^listNode *listIndex(list *list, int index) {$/;"	f	signature:(list *list, int index)
+listIndex	adlist.h	/^listNode *listIndex(list *list, int index);$/;"	p	signature:(list *list, int index)
+listInsertNode	adlist.c	/^list *listInsertNode(list *list, listNode *old_node, void *value, int after) {$/;"	f	signature:(list *list, listNode *old_node, void *value, int after)
+listInsertNode	adlist.h	/^list *listInsertNode(list *list, listNode *old_node, void *value, int after);$/;"	p	signature:(list *list, listNode *old_node, void *value, int after)
+listIter	adlist.h	/^typedef struct listIter {$/;"	s
+listIter	adlist.h	/^} listIter;$/;"	t	typeref:struct:listIter
+listIter::direction	adlist.h	/^    int direction;$/;"	m	struct:listIter	access:public
+listIter::next	adlist.h	/^    listNode *next;$/;"	m	struct:listIter	access:public
+listLast	adlist.h	59;"	d
+listLength	adlist.h	57;"	d
+listNext	adlist.c	/^listNode *listNext(listIter *iter)$/;"	f	signature:(listIter *iter)
+listNext	adlist.h	/^listNode *listNext(listIter *iter);$/;"	p	signature:(listIter *iter)
+listNextNode	adlist.h	61;"	d
+listNode	adlist.h	/^typedef struct listNode {$/;"	s
+listNode	adlist.h	/^} listNode;$/;"	t	typeref:struct:listNode
+listNode::next	adlist.h	/^    struct listNode *next;$/;"	m	struct:listNode	typeref:struct:listNode::listNode	access:public
+listNode::prev	adlist.h	/^    struct listNode *prev;$/;"	m	struct:listNode	typeref:struct:listNode::listNode	access:public
+listNode::value	adlist.h	/^    void *value;$/;"	m	struct:listNode	access:public
+listNodeValue	adlist.h	62;"	d
+listPrevNode	adlist.h	60;"	d
+listRelease	adlist.c	/^void listRelease(list *list)$/;"	f	signature:(list *list)
+listRelease	adlist.h	/^void listRelease(list *list);$/;"	p	signature:(list *list)
+listReleaseIterator	adlist.c	/^void listReleaseIterator(listIter *iter) {$/;"	f	signature:(listIter *iter)
+listReleaseIterator	adlist.h	/^void listReleaseIterator(listIter *iter);$/;"	p	signature:(listIter *iter)
+listRewind	adlist.c	/^void listRewind(list *list, listIter *li) {$/;"	f	signature:(list *list, listIter *li)
+listRewind	adlist.h	/^void listRewind(list *list, listIter *li);$/;"	p	signature:(list *list, listIter *li)
+listRewindTail	adlist.c	/^void listRewindTail(list *list, listIter *li) {$/;"	f	signature:(list *list, listIter *li)
+listRewindTail	adlist.h	/^void listRewindTail(list *list, listIter *li);$/;"	p	signature:(list *list, listIter *li)
+listSearchKey	adlist.c	/^listNode *listSearchKey(list *list, void *key)$/;"	f	signature:(list *list, void *key)
+listSearchKey	adlist.h	/^listNode *listSearchKey(list *list, void *key);$/;"	p	signature:(list *list, void *key)
+listSetDupMethod	adlist.h	64;"	d
+listSetFreeMethod	adlist.h	65;"	d
+listSetMatchMethod	adlist.h	66;"	d
+ll2string	logs.c	/^int ll2string(char *s, size_t len, long long value) {$/;"	f	signature:(char *s, size_t len, long long value)
+ll2string	logs.h	/^int ll2string(char *s, size_t len, long long value) ;$/;"	p	signature:(char *s, size_t len, long long value)
+loading_start_time	websocket.h	/^    time_t loading_start_time;$/;"	m	struct:websocketServer	access:public
+logfile	websocket.h	/^    char *logfile;$/;"	m	struct:websocketServer	access:public
+m_method	protocol/WebsocketHandshakeMessage.h	/^	string m_method;$/;"	m	class:WebsocketHandshakeMessage	access:private
+m_uri	protocol/WebsocketHandshakeMessage.h	/^	string m_uri;$/;"	m	class:WebsocketHandshakeMessage	access:private
+m_version	protocol/WebsocketHandshakeMessage.h	/^	string m_version;$/;"	m	class:WebsocketHandshakeMessage	access:private
+main	main.c	/^int main(void)$/;"	f	signature:(void)
+main	sds.c	/^int main(void) {$/;"	f	signature:(void)
+main	test.c	/^int main(void)$/;"	f	signature:(void)
+main	utils/sha1/sha.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
+main	utils/sha1/shacmp.cpp	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
+main	utils/sha1/shatest.cpp	/^int main()$/;"	f	signature:()
+mainthread	websocket.h	/^    pthread_t mainthread;$/;"	m	struct:websocketServer	access:public
+malloc	zmalloc.c	50;"	d	file:
+mask	ae.h	/^    int mask; \/* one of AE_(READABLE|WRITABLE) *\/$/;"	m	struct:aeFileEvent	access:public
+mask	ae.h	/^    int mask;$/;"	m	struct:aeFiredEvent	access:public
+mask	websocket.h	/^    unsigned char mask:1;$/;"	m	struct:__anon3	access:public
+mask_key	websocket.h	/^    unsigned char mask_key[4];$/;"	m	struct:__anon3	access:public
+match	adlist.h	/^    int (*match)(void *ptr, void *key);$/;"	m	struct:list	access:public
+maxclients	websocket.h	/^    unsigned int maxclients;$/;"	m	struct:websocketServer	access:public
+maxfd	ae.h	/^    int maxfd;$/;"	m	struct:aeEventLoop	access:public
+maxidletime	websocket.h	/^    int maxidletime;$/;"	m	struct:websocketServer	access:public
+memtoll	logs.c	/^long long memtoll(const char *p, int *err) {$/;"	f	signature:(const char *p, int *err)
+mstime	logs.h	/^long long mstime(void);$/;"	p	signature:(void)
+nSize	protocol/WebsocketHandshakeMessage.h	/^	int nSize;$/;"	m	class:WebsocketHandshakeMessage	access:private
+neterr	websocket.h	/^    char neterr[ANET_ERR_LEN];$/;"	m	struct:websocketServer	access:public
+next	adlist.h	/^    listNode *next;$/;"	m	struct:listIter	access:public
+next	adlist.h	/^    struct listNode *next;$/;"	m	struct:listNode	typeref:struct:listNode::listNode	access:public
+next	ae.h	/^    struct aeTimeEvent *next;$/;"	m	struct:aeTimeEvent	typeref:struct:aeTimeEvent::aeTimeEvent	access:public
+next	dict.h	/^    struct dictEntry *next;$/;"	m	struct:dictEntry	typeref:struct:dictEntry::dictEntry	access:public
+nextEntry	dict.h	/^    dictEntry *entry, *nextEntry;$/;"	m	struct:dictIterator	access:public
+oom	logs.c	/^void oom(const char *msg) {$/;"	f	signature:(const char *msg)
+oom	logs.h	/^void oom(const char *msg);$/;"	p	signature:(const char *msg)
+opcode	websocket.h	/^    unsigned char opcode:4;$/;"	m	struct:__anon3	access:public
+operator <<	utils/sha1/sha1.cpp	/^SHA1& SHA1::operator<<(const char *message_array)$/;"	f	class:SHA1	signature:(const char *message_array)
+operator <<	utils/sha1/sha1.cpp	/^SHA1& SHA1::operator<<(const char message_element)$/;"	f	class:SHA1	signature:(const char message_element)
+operator <<	utils/sha1/sha1.cpp	/^SHA1& SHA1::operator<<(const unsigned char *message_array)$/;"	f	class:SHA1	signature:(const unsigned char *message_array)
+operator <<	utils/sha1/sha1.cpp	/^SHA1& SHA1::operator<<(const unsigned char message_element)$/;"	f	class:SHA1	signature:(const unsigned char message_element)
+operator <<	utils/sha1/sha1.h	/^        SHA1& operator<<(const char *message_array);$/;"	p	class:SHA1	access:public	signature:(const char *message_array)
+operator <<	utils/sha1/sha1.h	/^        SHA1& operator<<(const char message_element);$/;"	p	class:SHA1	access:public	signature:(const char message_element)
+operator <<	utils/sha1/sha1.h	/^        SHA1& operator<<(const unsigned char *message_array);$/;"	p	class:SHA1	access:public	signature:(const unsigned char *message_array)
+operator <<	utils/sha1/sha1.h	/^        SHA1& operator<<(const unsigned char message_element);$/;"	p	class:SHA1	access:public	signature:(const unsigned char message_element)
+pRaw	protocol/WebsocketHandshakeMessage.h	/^	char* pRaw;$/;"	m	class:WebsocketHandshakeMessage	access:private
+parseWebSocketDataFrame	websocket.c	/^int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * data_frame)$/;"	f	signature:(sds querybuf,websocket_frame_t * data_frame)
+parseWebSocketDataFrame	websocket.h	/^int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * data_frame);$/;"	p	signature:(sds querybuf,websocket_frame_t * data_frame)
+parseWebSocketHead	websocket.c	/^int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)$/;"	f	signature:(sds querybuf,handshake_frame_t * handshake_frame)
+parseWebSocketHead	websocket.h	/^int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame);$/;"	p	signature:(sds querybuf,handshake_frame_t * handshake_frame)
+payload	websocket.h	/^    unsigned char *payload;$/;"	m	struct:__anon3	access:public
+payload_len	websocket.h	/^    unsigned long payload_len;$/;"	m	struct:__anon3	access:public
+port	websocket.h	/^    int port;$/;"	m	struct:websocketServer	access:public
+prev	adlist.h	/^    struct listNode *prev;$/;"	m	struct:listNode	typeref:struct:listNode::listNode	access:public
+print5	main.c	/^int print5(struct aeEventLoop *loop, long long id, void *clientData)$/;"	f	signature:(struct aeEventLoop *loop, long long id, void *clientData)
+privdata	dict.h	/^    void *privdata;$/;"	m	struct:dict	access:public
+processCommand	websocket.c	/^int processCommand(websocketClient *c) {$/;"	f	signature:(websocketClient *c)
+processCommand	websocket.h	/^int processCommand(websocketClient *c);$/;"	p	signature:(websocketClient *c)
+processDataFrame	websocket.c	/^int processDataFrame(websocketClient *c) {$/;"	f	signature:(websocketClient *c)
+processDataFrame	websocket.h	/^int processDataFrame(websocketClient *c);$/;"	p	signature:(websocketClient *c)
+processHandShake	websocket.c	/^int processHandShake(websocketClient *c) {$/;"	f	signature:(websocketClient *c)
+processHandShake	websocket.h	/^int processHandShake(websocketClient *c);$/;"	p	signature:(websocketClient *c)
+processInputBuffer	websocket.c	/^void processInputBuffer(websocketClient *c) {$/;"	f	signature:(websocketClient *c)
+processInputBuffer	websocket.h	/^void processInputBuffer(websocketClient *c);$/;"	p	signature:(websocketClient *c)
+processTimeEvents	ae.c	/^static int processTimeEvents(aeEventLoop *eventLoop) {$/;"	f	file:	signature:(aeEventLoop *eventLoop)
+querybuf	websocket.h	/^    sds querybuf;$/;"	m	struct:websocketClient	access:public
+raw	protocol/WebsocketDataMessage.h	/^	string raw;$/;"	m	class:WebsocketDataMessage	access:private
+readClient	main.c	/^void readClient(aeEventLoop *el, int fd, void *privdata, int mask){$/;"	f	signature:(aeEventLoop *el, int fd, void *privdata, int mask)
+readQueryFromClient	websocket.c	/^void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {$/;"	f	signature:(aeEventLoop *el, int fd, void *privdata, int mask)
+readQueryFromClient	websocket.h	/^void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask);$/;"	p	signature:(aeEventLoop *el, int fd, void *privdata, int mask)
+realloc	zmalloc.c	52;"	d	file:
+redis_fstat	config.h	26;"	d
+redis_fstat	config.h	29;"	d
+redis_malloc_size	config.h	16;"	d
+redis_malloc_size	config.h	21;"	d
+redis_stat	config.h	27;"	d
+redis_stat	config.h	30;"	d
+rehashidx	dict.h	/^    int rehashidx; \/* rehashing not in progress if rehashidx == -1 *\/$/;"	m	struct:dict	access:public
+reply	websocket.h	/^    list *reply;$/;"	m	struct:websocketClient	access:public
+resetClient	websocket.c	/^void resetClient(websocketClient *c) {$/;"	f	signature:(websocketClient *c)
+resetClient	websocket.h	/^void resetClient(websocketClient *c); $/;"	p	signature:(websocketClient *c)
+rfileProc	ae.h	/^    aeFileProc *rfileProc;$/;"	m	struct:aeFileEvent	access:public
+rsv1	websocket.h	/^    unsigned char rsv1:1;$/;"	m	struct:__anon3	access:public
+rsv2	websocket.h	/^    unsigned char rsv2:1;$/;"	m	struct:__anon3	access:public
+rsv3	websocket.h	/^    unsigned char rsv3:1;$/;"	m	struct:__anon3	access:public
+sds	sds.h	/^typedef char *sds;$/;"	t
+sdsMakeRoomFor	sds.c	/^static sds sdsMakeRoomFor(sds s, size_t addlen) {$/;"	f	file:	signature:(sds s, size_t addlen)
+sdsOomAbort	sds.c	/^static void sdsOomAbort(void) {$/;"	f	file:	signature:(void)
+sdsavail	sds.c	/^size_t sdsavail(sds s) {$/;"	f	signature:(sds s)
+sdsavail	sds.h	/^size_t sdsavail(sds s);$/;"	p	signature:(sds s)
+sdscat	sds.c	/^sds sdscat(sds s, char *t) {$/;"	f	signature:(sds s, char *t)
+sdscat	sds.h	/^sds sdscat(sds s, char *t);$/;"	p	signature:(sds s, char *t)
+sdscatlen	sds.c	/^sds sdscatlen(sds s, void *t, size_t len) {$/;"	f	signature:(sds s, void *t, size_t len)
+sdscatlen	sds.h	/^sds sdscatlen(sds s, void *t, size_t len);$/;"	p	signature:(sds s, void *t, size_t len)
+sdscatprintf	sds.c	/^sds sdscatprintf(sds s, const char *fmt, ...) {$/;"	f	signature:(sds s, const char *fmt, ...)
+sdscatprintf	sds.h	/^sds sdscatprintf(sds s, const char *fmt, ...)$/;"	p	signature:(sds s, const char *fmt, ...)
+sdscatprintf	sds.h	/^sds sdscatprintf(sds s, const char *fmt, ...);$/;"	p	signature:(sds s, const char *fmt, ...)
+sdscatrepr	sds.c	/^sds sdscatrepr(sds s, char *p, size_t len) {$/;"	f	signature:(sds s, char *p, size_t len)
+sdscatrepr	sds.h	/^sds sdscatrepr(sds s, char *p, size_t len);$/;"	p	signature:(sds s, char *p, size_t len)
+sdscatvprintf	sds.c	/^sds sdscatvprintf(sds s, const char *fmt, va_list ap) {$/;"	f	signature:(sds s, const char *fmt, va_list ap)
+sdscatvprintf	sds.h	/^sds sdscatvprintf(sds s, const char *fmt, va_list ap);$/;"	p	signature:(sds s, const char *fmt, va_list ap)
+sdscmp	sds.c	/^int sdscmp(sds s1, sds s2) {$/;"	f	signature:(sds s1, sds s2)
+sdscmp	sds.h	/^int sdscmp(sds s1, sds s2);$/;"	p	signature:(sds s1, sds s2)
+sdscpy	sds.c	/^sds sdscpy(sds s, char *t) {$/;"	f	signature:(sds s, char *t)
+sdscpy	sds.h	/^sds sdscpy(sds s, char *t);$/;"	p	signature:(sds s, char *t)
+sdscpylen	sds.c	/^sds sdscpylen(sds s, char *t, size_t len) {$/;"	f	signature:(sds s, char *t, size_t len)
+sdscpylen	sds.h	/^sds sdscpylen(sds s, char *t, size_t len);$/;"	p	signature:(sds s, char *t, size_t len)
+sdsdup	sds.c	/^sds sdsdup(const sds s) {$/;"	f	signature:(const sds s)
+sdsdup	sds.h	/^sds sdsdup(const sds s);$/;"	p	signature:(const sds s)
+sdsempty	sds.c	/^sds sdsempty(void) {$/;"	f	signature:(void)
+sdsempty	sds.h	/^sds sdsempty();$/;"	p	signature:()
+sdsfree	sds.c	/^void sdsfree(sds s) {$/;"	f	signature:(sds s)
+sdsfree	sds.h	/^void sdsfree(sds s);$/;"	p	signature:(sds s)
+sdsfreesplitres	sds.c	/^void sdsfreesplitres(sds *tokens, int count) {$/;"	f	signature:(sds *tokens, int count)
+sdsfreesplitres	sds.h	/^void sdsfreesplitres(sds *tokens, int count);$/;"	p	signature:(sds *tokens, int count)
+sdsfromlonglong	sds.c	/^sds sdsfromlonglong(long long value) {$/;"	f	signature:(long long value)
+sdsfromlonglong	sds.h	/^sds sdsfromlonglong(long long value);$/;"	p	signature:(long long value)
+sdsgrowzero	sds.c	/^sds sdsgrowzero(sds s, size_t len) {$/;"	f	signature:(sds s, size_t len)
+sdsgrowzero	sds.h	/^sds sdsgrowzero(sds s, size_t len);$/;"	p	signature:(sds s, size_t len)
+sdshdr	sds.h	/^struct sdshdr {$/;"	s
+sdshdr::buf	sds.h	/^    char buf[];$/;"	m	struct:sdshdr	access:public
+sdshdr::free	sds.h	/^    int free;$/;"	m	struct:sdshdr	access:public
+sdshdr::len	sds.h	/^    int len;$/;"	m	struct:sdshdr	access:public
+sdslen	sds.c	/^size_t sdslen(const sds s) {$/;"	f	signature:(const sds s)
+sdslen	sds.h	/^size_t sdslen(const sds s);$/;"	p	signature:(const sds s)
+sdsnew	sds.c	/^sds sdsnew(const char *init) {$/;"	f	signature:(const char *init)
+sdsnew	sds.h	/^sds sdsnew(const char *init);$/;"	p	signature:(const char *init)
+sdsnewlen	sds.c	/^sds sdsnewlen(const void *init, size_t initlen) {$/;"	f	signature:(const void *init, size_t initlen)
+sdsnewlen	sds.h	/^sds sdsnewlen(const void *init, size_t initlen);$/;"	p	signature:(const void *init, size_t initlen)
+sdsrange	sds.c	/^sds sdsrange(sds s, int start, int end) {$/;"	f	signature:(sds s, int start, int end)
+sdsrange	sds.h	/^sds sdsrange(sds s, int start, int end);$/;"	p	signature:(sds s, int start, int end)
+sdssplitargs	sds.c	/^sds *sdssplitargs(char *line, int *argc) {$/;"	f	signature:(char *line, int *argc)
+sdssplitargs	sds.h	/^sds *sdssplitargs(char *line, int *argc);$/;"	p	signature:(char *line, int *argc)
+sdssplitlen	sds.c	/^sds *sdssplitlen(char *s, int len, char *sep, int seplen, int *count) {$/;"	f	signature:(char *s, int len, char *sep, int seplen, int *count)
+sdssplitlen	sds.h	/^sds *sdssplitlen(char *s, int len, char *sep, int seplen, int *count);$/;"	p	signature:(char *s, int len, char *sep, int seplen, int *count)
+sdstolower	sds.c	/^void sdstolower(sds s) {$/;"	f	signature:(sds s)
+sdstolower	sds.h	/^void sdstolower(sds s);$/;"	p	signature:(sds s)
+sdstoupper	sds.c	/^void sdstoupper(sds s) {$/;"	f	signature:(sds s)
+sdstoupper	sds.h	/^void sdstoupper(sds s);$/;"	p	signature:(sds s)
+sdstrim	sds.c	/^sds sdstrim(sds s, const char *cset) {$/;"	f	signature:(sds s, const char *cset)
+sdstrim	sds.h	/^sds sdstrim(sds s, const char *cset);$/;"	p	signature:(sds s, const char *cset)
+sdsupdatelen	sds.c	/^void sdsupdatelen(sds s) {$/;"	f	signature:(sds s)
+sdsupdatelen	sds.h	/^void sdsupdatelen(sds s);$/;"	p	signature:(sds s)
+sendReplyToClient	main.c	/^void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask);$/;"	p	file:	signature:(aeEventLoop *el, int fd, void *privdata, int mask)
+sendReplyToClient	main.c	/^void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask){$/;"	f	signature:(aeEventLoop *el, int fd, void *privdata, int mask)
+sentlen	websocket.h	/^    int sentlen;$/;"	m	struct:websocketClient	access:public
+server	logs.c	/^struct websocketServer server; \/* server global state *\/$/;"	v	typeref:struct:websocketServer
+server	websocket.c	/^struct websocketServer server; \/* server global state *\/$/;"	v	typeref:struct:websocketServer
+serverCron	websocket.c	/^int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData) {$/;"	f	signature:(struct aeEventLoop *eventLoop, long long id, void *clientData)
+serverCron	websocket.h	/^int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData);$/;"	p	signature:(struct aeEventLoop *eventLoop, long long id, void *clientData)
+serviceId	protocol/WebsocketDataMessage.h	/^	int serviceId;$/;"	m	class:WebsocketDataMessage	access:private
+size	dict.h	/^    unsigned long size;$/;"	m	struct:dictht	access:public
+sizemask	dict.h	/^    unsigned long sizemask;$/;"	m	struct:dictht	access:public
+stage	protocol/WebsocketConnectionContext.h	/^	int stage;$/;"	m	class:WebsocketConnectionContext	access:private
+stage	websocket.h	/^    int stage; \/\/web socket stage$/;"	m	struct:websocketClient	access:public
+stat_numconnections	websocket.h	/^    long long stat_numconnections;  \/* number of connections received *\/$/;"	m	struct:websocketServer	access:public
+stat_starttime	websocket.h	/^    time_t stat_starttime;          \/* server start time *\/$/;"	m	struct:websocketServer	access:public
+stop	ae.h	/^    int stop;$/;"	m	struct:aeEventLoop	access:public
+stringmatch	logs.c	/^int stringmatch(const char *pattern, const char *string, int nocase) {$/;"	f	signature:(const char *pattern, const char *string, int nocase)
+stringmatchlen	logs.c	/^int stringmatchlen(const char *pattern, int patternLen,$/;"	f	signature:(const char *pattern, int patternLen, const char *string, int stringLen, int nocase)
+syslog_enabled	websocket.h	/^    int syslog_enabled;$/;"	m	struct:websocketServer	access:public
+syslog_facility	websocket.h	/^    int syslog_facility;$/;"	m	struct:websocketServer	access:public
+syslog_ident	websocket.h	/^    char *syslog_ident;$/;"	m	struct:websocketServer	access:public
+table	dict.h	/^    dictEntry **table;$/;"	m	struct:dictht	access:public
+table	dict.h	/^    int table;$/;"	m	struct:dictIterator	access:public
+tail	adlist.h	/^    listNode *tail;$/;"	m	struct:list	access:public
+tcphandler	main.c	/^void tcphandler(aeEventLoop *el, int fd, void *privdata, int mask) {$/;"	f	signature:(aeEventLoop *el, int fd, void *privdata, int mask)
+testHandShake	test.c	/^int testHandShake()$/;"	f
+timeEventHead	ae.h	/^    aeTimeEvent *timeEventHead;$/;"	m	struct:aeEventLoop	access:public
+timeEventNextId	ae.h	/^    long long timeEventNextId;$/;"	m	struct:aeEventLoop	access:public
+timeInMilliseconds	dict.c	/^long long timeInMilliseconds(void) {$/;"	f	signature:(void)
+timeProc	ae.h	/^    aeTimeProc *timeProc;$/;"	m	struct:aeTimeEvent	access:public
+tryDeframeIncomingPacket	protocol/WebsocketProtocol.cpp	/^int WebsocketProtocol::tryDeframeIncomingPacket( PushFramework::DataBuffer& buffer, PushFramework::IncomingPacket*& pPacket, int& serviceId, unsigned int& nExtractedBytes, ConnectionContext* pContext )$/;"	f	class:WebsocketProtocol	signature:( PushFramework::DataBuffer& buffer, PushFramework::IncomingPacket*& pPacket, int& serviceId, unsigned int& nExtractedBytes, ConnectionContext* pContext )
+tryDeframeIncomingPacket	protocol/WebsocketProtocol.h	/^    virtual int tryDeframeIncomingPacket(PushFramework::DataBuffer& buffer, PushFramework::IncomingPacket*& pPacket, int& serviceId, unsigned int& nExtractedBytes, ConnectionContext* pContext);$/;"	p	class:WebsocketProtocol	access:public	signature:(PushFramework::DataBuffer& buffer, PushFramework::IncomingPacket*& pPacket, int& serviceId, unsigned int& nExtractedBytes, ConnectionContext* pContext)
+type	dict.h	/^    dictType *type;$/;"	m	struct:dict	access:public
+type	protocol/WebsocketMessage.h	/^	int type;$/;"	m	class:WebsocketMessage	access:private
+unixtime	websocket.h	/^    time_t unixtime;    \/* Unix time sampled every second. *\/$/;"	m	struct:websocketServer	access:public
+update_zmalloc_stat_alloc	zmalloc.c	56;"	d	file:
+update_zmalloc_stat_free	zmalloc.c	71;"	d	file:
+usage	utils/sha1/sha.cpp	/^void usage()$/;"	f	signature:()
+usage	utils/sha1/sha.cpp	/^void usage();$/;"	p	file:	signature:()
+usage	utils/sha1/shacmp.cpp	/^void usage()$/;"	f	signature:()
+usage	utils/sha1/shacmp.cpp	/^void usage();$/;"	p	file:	signature:()
+used	dict.h	/^    unsigned long used;$/;"	m	struct:dictht	access:public
+used_memory	zmalloc.c	/^static size_t used_memory = 0;$/;"	v	file:
+used_memory_mutex	zmalloc.c	/^pthread_mutex_t used_memory_mutex = PTHREAD_MUTEX_INITIALIZER;$/;"	v
+ustime	logs.h	/^long long ustime(void);$/;"	p	signature:(void)
+val	dict.h	/^    void *val;$/;"	m	struct:dictEntry	access:public
+valDestructor	dict.h	/^    void (*valDestructor)(void *privdata, void *obj);$/;"	m	struct:dictType	access:public
+valDup	dict.h	/^    void *(*valDup)(void *privdata, const void *obj);$/;"	m	struct:dictType	access:public
+value	adlist.h	/^    void *value;$/;"	m	struct:listNode	access:public
+verbosity	websocket.h	/^    int verbosity;$/;"	m	struct:websocketServer	access:public
+websocketClient	websocket.h	/^typedef struct websocketClient {$/;"	s
+websocketClient	websocket.h	/^} websocketClient;$/;"	t	typeref:struct:websocketClient
+websocketClient::ConnectedStage	websocket.h	/^        ConnectedStage$/;"	e	enum:websocketClient::__anon5
+websocketClient::HandshakeStage	websocket.h	/^        HandshakeStage = 0,$/;"	e	enum:websocketClient::__anon5
+websocketClient::LoginStage	websocket.h	/^        LoginStage,$/;"	e	enum:websocketClient::__anon5
+websocketClient::buf	websocket.h	/^    char buf[WEBSOCKET_REPLY_CHUNK_BYTES];$/;"	m	struct:websocketClient	access:public
+websocketClient::bufpos	websocket.h	/^    int bufpos;$/;"	m	struct:websocketClient	access:public
+websocketClient::data_frame	websocket.h	/^    websocket_frame_t data_frame;$/;"	m	struct:websocketClient	access:public
+websocketClient::fd	websocket.h	/^    int fd;$/;"	m	struct:websocketClient	access:public
+websocketClient::flags	websocket.h	/^    int flags;$/;"	m	struct:websocketClient	access:public
+websocketClient::handshake_frame	websocket.h	/^    handshake_frame_t handshake_frame;$/;"	m	struct:websocketClient	access:public
+websocketClient::lastinteraction	websocket.h	/^    time_t lastinteraction; \/* time of the last interaction, used for timeout *\/$/;"	m	struct:websocketClient	access:public
+websocketClient::querybuf	websocket.h	/^    sds querybuf;$/;"	m	struct:websocketClient	access:public
+websocketClient::reply	websocket.h	/^    list *reply;$/;"	m	struct:websocketClient	access:public
+websocketClient::sentlen	websocket.h	/^    int sentlen;$/;"	m	struct:websocketClient	access:public
+websocketClient::stage	websocket.h	/^    int stage; \/\/web socket stage$/;"	m	struct:websocketClient	access:public
+websocketServer	websocket.h	/^struct websocketServer {$/;"	s
+websocketServer::bindaddr	websocket.h	/^    char *bindaddr;$/;"	m	struct:websocketServer	access:public
+websocketServer::clients	websocket.h	/^    list *clients;$/;"	m	struct:websocketServer	access:public
+websocketServer::cronloops	websocket.h	/^    int cronloops;              \/* number of times the cron function run *\/$/;"	m	struct:websocketServer	access:public
+websocketServer::daemonize	websocket.h	/^    int daemonize;$/;"	m	struct:websocketServer	access:public
+websocketServer::el	websocket.h	/^    aeEventLoop *el;$/;"	m	struct:websocketServer	access:public
+websocketServer::ipfd	websocket.h	/^    int ipfd;$/;"	m	struct:websocketServer	access:public
+websocketServer::loading_start_time	websocket.h	/^    time_t loading_start_time;$/;"	m	struct:websocketServer	access:public
+websocketServer::logfile	websocket.h	/^    char *logfile;$/;"	m	struct:websocketServer	access:public
+websocketServer::mainthread	websocket.h	/^    pthread_t mainthread;$/;"	m	struct:websocketServer	access:public
+websocketServer::maxclients	websocket.h	/^    unsigned int maxclients;$/;"	m	struct:websocketServer	access:public
+websocketServer::maxidletime	websocket.h	/^    int maxidletime;$/;"	m	struct:websocketServer	access:public
+websocketServer::neterr	websocket.h	/^    char neterr[ANET_ERR_LEN];$/;"	m	struct:websocketServer	access:public
+websocketServer::port	websocket.h	/^    int port;$/;"	m	struct:websocketServer	access:public
+websocketServer::stat_numconnections	websocket.h	/^    long long stat_numconnections;  \/* number of connections received *\/$/;"	m	struct:websocketServer	access:public
+websocketServer::stat_starttime	websocket.h	/^    time_t stat_starttime;          \/* server start time *\/$/;"	m	struct:websocketServer	access:public
+websocketServer::syslog_enabled	websocket.h	/^    int syslog_enabled;$/;"	m	struct:websocketServer	access:public
+websocketServer::syslog_facility	websocket.h	/^    int syslog_facility;$/;"	m	struct:websocketServer	access:public
+websocketServer::syslog_ident	websocket.h	/^    char *syslog_ident;$/;"	m	struct:websocketServer	access:public
+websocketServer::unixtime	websocket.h	/^    time_t unixtime;    \/* Unix time sampled every second. *\/$/;"	m	struct:websocketServer	access:public
+websocketServer::verbosity	websocket.h	/^    int verbosity;$/;"	m	struct:websocketServer	access:public
+websocket_frame_t	websocket.h	/^} websocket_frame_t;$/;"	t	typeref:struct:__anon3
+wfileProc	ae.h	/^    aeFileProc *wfileProc;$/;"	m	struct:aeFileEvent	access:public
+when_ms	ae.h	/^    long when_ms; \/* milliseconds *\/$/;"	m	struct:aeTimeEvent	access:public
+when_sec	ae.h	/^    long when_sec; \/* seconds *\/$/;"	m	struct:aeTimeEvent	access:public
+zcalloc	zmalloc.c	/^void *zcalloc(size_t size) {$/;"	f	signature:(size_t size)
+zcalloc	zmalloc.h	/^void *zcalloc(size_t size);$/;"	p	signature:(size_t size)
+zfree	zmalloc.c	/^void zfree(void *ptr) {$/;"	f	signature:(void *ptr)
+zfree	zmalloc.h	/^void zfree(void *ptr);$/;"	p	signature:(void *ptr)
+zmalloc	zmalloc.c	/^void *zmalloc(size_t size) {$/;"	f	signature:(size_t size)
+zmalloc	zmalloc.h	/^void *zmalloc(size_t size);$/;"	p	signature:(size_t size)
+zmalloc_allocations	zmalloc.c	/^size_t zmalloc_allocations[ZMALLOC_MAX_ALLOC_STAT+1];$/;"	v
+zmalloc_allocations_for_size	zmalloc.c	/^size_t zmalloc_allocations_for_size(size_t size) {$/;"	f	signature:(size_t size)
+zmalloc_allocations_for_size	zmalloc.h	/^size_t zmalloc_allocations_for_size(size_t size);$/;"	p	signature:(size_t size)
+zmalloc_enable_thread_safeness	zmalloc.c	/^void zmalloc_enable_thread_safeness(void) {$/;"	f	signature:(void)
+zmalloc_enable_thread_safeness	zmalloc.h	/^void zmalloc_enable_thread_safeness(void);$/;"	p	signature:(void)
+zmalloc_get_fragmentation_ratio	zmalloc.c	/^float zmalloc_get_fragmentation_ratio(void) {$/;"	f	signature:(void)
+zmalloc_get_fragmentation_ratio	zmalloc.h	/^float zmalloc_get_fragmentation_ratio(void);$/;"	p	signature:(void)
+zmalloc_get_rss	zmalloc.c	/^size_t zmalloc_get_rss(void) {$/;"	f	signature:(void)
+zmalloc_get_rss	zmalloc.h	/^size_t zmalloc_get_rss(void);$/;"	p	signature:(void)
+zmalloc_oom	zmalloc.c	/^static void zmalloc_oom(size_t size) {$/;"	f	file:	signature:(size_t size)
+zmalloc_thread_safe	zmalloc.c	/^static int zmalloc_thread_safe = 0;$/;"	v	file:
+zmalloc_used_memory	zmalloc.c	/^size_t zmalloc_used_memory(void) {$/;"	f	signature:(void)
+zmalloc_used_memory	zmalloc.h	/^size_t zmalloc_used_memory(void);$/;"	p	signature:(void)
+zrealloc	zmalloc.c	/^void *zrealloc(void *ptr, size_t size) {$/;"	f	signature:(void *ptr, size_t size)
+zrealloc	zmalloc.h	/^void *zrealloc(void *ptr, size_t size);$/;"	p	signature:(void *ptr, size_t size)
+zstrdup	zmalloc.c	/^char *zstrdup(const char *s) {$/;"	f	signature:(const char *s)
+zstrdup	zmalloc.h	/^char *zstrdup(const char *s);$/;"	p	signature:(const char *s)
+~SHA1	utils/sha1/sha1.cpp	/^SHA1::~SHA1()$/;"	f	class:SHA1	signature:()
+~SHA1	utils/sha1/sha1.h	/^        virtual ~SHA1();$/;"	p	class:SHA1	access:public	signature:()
+~WebsocketConnectionContext	protocol/WebsocketConnectionContext.cpp	/^WebsocketConnectionContext::~WebsocketConnectionContext(void)$/;"	f	class:WebsocketConnectionContext	signature:(void)
+~WebsocketConnectionContext	protocol/WebsocketConnectionContext.h	/^	~WebsocketConnectionContext(void);$/;"	p	class:WebsocketConnectionContext	access:public	signature:(void)
+~WebsocketDataMessage	protocol/WebsocketDataMessage.cpp	/^WebsocketDataMessage::~WebsocketDataMessage(void)$/;"	f	class:WebsocketDataMessage	signature:(void)
+~WebsocketDataMessage	protocol/WebsocketDataMessage.h	/^	~WebsocketDataMessage(void);$/;"	p	class:WebsocketDataMessage	access:public	signature:(void)
+~WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.cpp	/^WebsocketHandshakeMessage::~WebsocketHandshakeMessage(void)$/;"	f	class:WebsocketHandshakeMessage	signature:(void)
+~WebsocketHandshakeMessage	protocol/WebsocketHandshakeMessage.h	/^	~WebsocketHandshakeMessage(void);$/;"	p	class:WebsocketHandshakeMessage	access:public	signature:(void)
+~WebsocketMessage	protocol/WebsocketMessage.h	/^	~WebsocketMessage(void)$/;"	f	class:WebsocketMessage	access:public	signature:(void)

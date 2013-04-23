@@ -3,8 +3,8 @@ TESTOBJ=utest
 MCXXFLAGS =-g -pg  -pipe
 INCLUDES=-I. 
 PROGRAM = $(OBJ)
-OBJECTS =main.o websocket.o anet.o ae.o ae_epoll.o adlist.o dict.o sds.o logs.o zmalloc.o
-TESTOBJECTS =test.o websocket.o anet.o ae.o ae_epoll.o adlist.o dict.o sds.o logs.o zmalloc.o
+OBJECTS =main.o websocket.o base64.o anet.o ae.o sha1.o ae_epoll.o adlist.o dict.o sds.o logs.o zmalloc.o
+TESTOBJECTS =test.o websocket.o base64.o anet.o ae.o sha1.o ae_epoll.o adlist.o dict.o sds.o logs.o zmalloc.o
 
 CC = gcc
 
