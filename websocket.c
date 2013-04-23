@@ -432,10 +432,15 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
 
     }
 
+    if(frame->mask_key)
+    {
+        memcpy(frame->mask_key,buf+offset,4);
+        offset+=4;
+    }
     if((datalen=(sdslen(querybuf)-offset))!=frame->payload_len)
     {
         Log(RLOG_VERBOSE,"desc=recv_error packet_len=%d recv_data_len=%d",frame->payload_len,datalen);
-        return WEBSOCKET_ERR;
+//        return WEBSOCKET_ERR;
     }
     if (frame->payload_len > 0) {
         /*if (ngx_http_push_stream_recv(c, rev, &err, aux->data, (ssize_t) frame.payload_len) == NGX_ERROR) {
@@ -444,7 +449,7 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
         //copy data to payload len
 
         if ((frame->opcode == WEBSOCKET_TEXT_OPCODE)) {
-            frame->payload = sdsdup(buf+offset);
+            frame->payload = sdsrange(buf,offset,frame->payload_len);
             if (frame->mask) {
                 for (i = 0; i < frame->payload_len; i++) {
                     frame->payload[i] = frame->payload[i] ^ frame->mask_key[i % 4];
@@ -452,6 +457,7 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
             }
 
         }
+        Log(RLOG_VERBOSE,"desc=data_frame value=%s",frame->payload);
     }
 
     querybuf=sdsrange(querybuf,offset+frame->payload_len,-1);
@@ -623,5 +629,6 @@ int processCommand(websocketClient *c) {
     else{  //process data
     }
 
+    Log(RLOG_DEBUG,"desc=querylen len=%d",sdslen(c->querybuf));
     return WEBSOCKET_OK;
 }
