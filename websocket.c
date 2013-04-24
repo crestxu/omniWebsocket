@@ -10,7 +10,7 @@ static void resetDataFrame(websocket_frame_t *dataframe)
     {
         if(dataframe->payload!=NULL)
         {
-            sdsfree(dataframe->payload);
+            //sdsfree(dataframe->payload);
             dataframe->payload=NULL;
         }
         //memcpy(dataframe,0,sizeof(dataframe));
@@ -449,7 +449,7 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
         //copy data to payload len
 
         if ((frame->opcode == WEBSOCKET_TEXT_OPCODE)) {
-            frame->payload = sdsrange(buf,offset,frame->payload_len);
+            frame->payload = sdsdup(sdsrange(buf,offset,frame->payload_len));
             if (frame->mask) {
                 for (i = 0; i < frame->payload_len; i++) {
                     frame->payload[i] = frame->payload[i] ^ frame->mask_key[i % 4];
@@ -461,6 +461,8 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
     }
 
     querybuf=sdsrange(querybuf,offset+frame->payload_len,-1);
+
+    Log(RLOG_DEBUG,"desc=after_process_dataframe querybuf_len=%d",sdslen(querybuf));
     if (frame->opcode == WEBSOCKET_CLOSE_OPCODE) {
 
     }
@@ -470,7 +472,7 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
 int processDataFrame(websocketClient *c) {
 
 
-    resetDataFrame(&c->data_frame);
+//    resetDataFrame(&c->data_frame);
     if(parseWebSocketDataFrame(c->querybuf,&c->data_frame)!=WEBSOCKET_OK)
         return WEBSOCKET_ERR;
 
@@ -627,6 +629,9 @@ int processCommand(websocketClient *c) {
         c->stage=ConnectedStage;
     }
     else{  //process data
+        sds mm=sdsnew("hello");
+        addReplySds(c,mm);
+//        resetDataFrame(&c->data_frame);
     }
 
     Log(RLOG_DEBUG,"desc=querylen len=%d",sdslen(c->querybuf));
