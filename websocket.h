@@ -46,10 +46,23 @@
 #define WEBSOCKET_SEC_WEBSOCKET_KEY "Sec-WebSocket-Key:"
 #define WEBSOCKET_SEC_WEBSOCKET_ORIGIN "Sec-WebSocket-Origin:"
 
+
+
+
 #define WEBSOCKET_TEXT_OPCODE 0x1
 #define WEBSOCKET_CLOSE_OPCODE 0x8
 #define WEBSOCKET_PING_OPCODE 0x9
 #define WEBSOCKET_PONG_OPCODE 0xA
+#define WEBSOCKET_LAST_FRAME   0x8
+
+typedef unsigned char u_char;
+typedef unsigned short uint16_t;
+
+static const u_char WEBSOCKET_TEXT_LAST_FRAME_BYTE    =  WEBSOCKET_TEXT_OPCODE  | (WEBSOCKET_LAST_FRAME << 4);
+static const u_char WEBSOCKET_CLOSE_LAST_FRAME_BYTE[] = {WEBSOCKET_CLOSE_OPCODE | (WEBSOCKET_LAST_FRAME << 4), 0x00};
+static const u_char WEBSOCKET_PING_LAST_FRAME_BYTE[]  = {WEBSOCKET_PING_OPCODE  | (WEBSOCKET_LAST_FRAME << 4), 0x00};
+static const u_char WEBSOCKET_PAYLOAD_LEN_16_BYTE   = 126;
+static const u_char WEBSOCKET_PAYLOAD_LEN_64_BYTE   = 127;
 
 #define WEBSOCKET_MAX_HEAD_LEVEL 10 //define the max head line of websocket
 

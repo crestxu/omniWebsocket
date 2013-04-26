@@ -254,7 +254,7 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     } else {
         return;
     }
-//    Log(RLOG_VERBOSE,"%s",c->querybuf);
+//    Log(RLOG_VERBOSE,"rev:%s",c->querybuf);
     processInputBuffer(c);
 }
 void processInputBuffer(websocketClient *c) {
@@ -412,23 +412,12 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
         memcpy(&len, buf+2, 2);
         offset+=2;
         frame->payload_len = ntohs(len);
-        if (frame->mask) {
-            offset+=4;
-            memcpy(&frame->mask_key,buf+4,4);  
-        }
-
 
     } else if (frame->payload_len == 127) {
         unsigned short len;
         memcpy(&len, buf+2, 8);
         offset+=8;
         frame->payload_len = websocket_ntohll(len);
-
-        if (frame->mask) {
-            offset+=4;
-            memcpy(&frame->mask_key,buf+10,4);  
-        }
-
 
     }
 
@@ -442,14 +431,13 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
         Log(RLOG_VERBOSE,"desc=recv_error packet_len=%d recv_data_len=%d",frame->payload_len,datalen);
 //        return WEBSOCKET_ERR;
     }
+    Log(RLOG_DEBUG,"desc=dataframe len=%d",frame->payload_len);
     if (frame->payload_len > 0) {
-        /*if (ngx_http_push_stream_recv(c, rev, &err, aux->data, (ssize_t) frame.payload_len) == NGX_ERROR) {
-          goto closed;
-          }*/
-        //copy data to payload len
+                //copy data to payload len
 
         if ((frame->opcode == WEBSOCKET_TEXT_OPCODE)) {
-            frame->payload = sdsdup(sdsrange(buf,offset,frame->payload_len));
+            frame->payload =sdsempty(); // = sdsdup(sdsrange(buf,offset,frame->payload_len));
+            sdscatlen(frame->payload,buf+offset,frame->payload_len);
             if (frame->mask) {
                 for (i = 0; i < frame->payload_len; i++) {
                     frame->payload[i] = frame->payload[i] ^ frame->mask_key[i % 4];
@@ -470,7 +458,6 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
     return WEBSOCKET_OK;
 }
 int processDataFrame(websocketClient *c) {
-
 
 //    resetDataFrame(&c->data_frame);
     if(parseWebSocketDataFrame(c->querybuf,&c->data_frame)!=WEBSOCKET_OK)
@@ -596,6 +583,30 @@ void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     }
 }
 
+static sds formatted_websocket_frame(sds str)
+{
+    
+    sds frame=sdsempty();
+
+    long len=sdslen(str);
+    if (frame != NULL) {
+        frame = sdscatlen(frame, &WEBSOCKET_TEXT_LAST_FRAME_BYTE, sizeof(WEBSOCKET_TEXT_LAST_FRAME_BYTE));
+
+        if (len <= 125) {
+            frame = sdscatlen(frame, &len, 1);
+        } else if (len < (1 << 16)) {
+            frame = sdscatlen(frame, &WEBSOCKET_PAYLOAD_LEN_16_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_16_BYTE));
+            uint16_t len_net = htons(len);
+            frame = sdscatlen(frame, &len_net, 2);
+        } else {
+            frame = sdscatlen(frame, &WEBSOCKET_PAYLOAD_LEN_64_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_64_BYTE));
+            uint64_t len_net = websocket_ntohll(len);
+            frame = sdscatlen(frame, &len_net, 8);
+        }
+        frame = sdscatlen(frame, str, sdslen(str));
+    }
+    return frame;
+}
 
 int generateAcceptKey(sds webKey,char *key,int len)
 {
@@ -629,9 +640,11 @@ int processCommand(websocketClient *c) {
         c->stage=ConnectedStage;
     }
     else{  //process data
-        sds mm=sdsnew("hello");
+        sds mm2=sdsdup(c->data_frame.payload);
+        sds mm=formatted_websocket_frame(mm2);
         addReplySds(c,mm);
-//        resetDataFrame(&c->data_frame);
+        sdsfree(mm2);
+        resetDataFrame(&c->data_frame);
     }
 
     Log(RLOG_DEBUG,"desc=querylen len=%d",sdslen(c->querybuf));
