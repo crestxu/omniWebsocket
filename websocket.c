@@ -10,8 +10,8 @@ static void resetDataFrame(websocket_frame_t *dataframe)
     {
         if(dataframe->payload!=NULL)
         {
-            //sdsfree(dataframe->payload);
-            dataframe->payload=NULL;
+            sdsfree(dataframe->payload);
+            //dataframe->payload=NULL;
         }
         //memcpy(dataframe,0,sizeof(dataframe));
 
@@ -275,7 +275,7 @@ void resetClient(websocketClient *c) {
 }
 int processHandShake(websocketClient *c) {
 
-    resetHandShakeFrame(&c->handshake_frame);
+    //resetHandShakeFrame(&c->handshake_frame);
     if(parseWebSocketHead(c->querybuf,&c->handshake_frame)!=WEBSOCKET_OK)
         return WEBSOCKET_ERR;
     return WEBSOCKET_OK;
@@ -386,9 +386,9 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
 
 
 
-    Log(RLOG_VERBOSE,"Method:%s\r\nUri:%s\r\nVersion:%s\r\nConnection:%s\r\nSec_key:%s\r\nSec_vesion:%s\r\nSec_origin:%s\r\n",
-            handshake_frame->Method,handshake_frame->Uri,handshake_frame->Version,handshake_frame->Connection,
-            handshake_frame->Sec_WebSocket_Key,handshake_frame->Sec_WebSocket_Version,handshake_frame->Sec_WebSocket_Origin);
+//    Log(RLOG_VERBOSE,"Method:%s\r\nUri:%s\r\nVersion:%s\r\nConnection:%s\r\nSec_key:%s\r\nSec_vesion:%s\r\nSec_origin:%s\r\n",
+  //          handshake_frame->Method,handshake_frame->Uri,handshake_frame->Version,handshake_frame->Connection,
+    //        handshake_frame->Sec_WebSocket_Key,handshake_frame->Sec_WebSocket_Version,handshake_frame->Sec_WebSocket_Origin);
 
     return WEBSOCKET_OK;
 }
@@ -626,6 +626,17 @@ int generateAcceptKey(sds webKey,char *key,int len)
 
     return WEBSOCKET_OK;
 }
+void sendMsg(list *monitors, sds msg) {
+    listNode *ln;
+    listIter li;
+    listRewind(monitors,&li);
+    while((ln = listNext(&li))) {
+        websocketClient *monitor = ln->value;
+        sds tmpmsg=sdsdup(msg);
+        addReplySds(monitor,tmpmsg);
+    }
+}
+
 int processCommand(websocketClient *c) {
     if(c->stage==HandshakeStage){ //do hand shake
 
@@ -642,7 +653,9 @@ int processCommand(websocketClient *c) {
     else{  //process data
         sds mm2=sdsdup(c->data_frame.payload);
         sds mm=formatted_websocket_frame(mm2);
-        addReplySds(c,mm);
+        //addReplySds(c,mm);
+        sendMsg(server.clients,mm);
+        sdsfree(mm);
         sdsfree(mm2);
         resetDataFrame(&c->data_frame);
     }
