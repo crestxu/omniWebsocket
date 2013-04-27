@@ -651,13 +651,16 @@ int processCommand(websocketClient *c) {
         c->stage=ConnectedStage;
     }
     else{  //process data
-        sds mm2=sdsdup(c->data_frame.payload);
-        sds mm=formatted_websocket_frame(mm2);
-        //addReplySds(c,mm);
-        sendMsg(server.clients,mm);
-        sdsfree(mm);
-        sdsfree(mm2);
-        resetDataFrame(&c->data_frame);
+        if(c->data_frame.payload!=NULL)
+        {
+            sds mm2=sdsdup(c->data_frame.payload);
+            sds mm=formatted_websocket_frame(mm2);
+            //addReplySds(c,mm);
+            sendMsg(server.clients,mm);
+            sdsfree(mm);
+            sdsfree(mm2);
+            resetDataFrame(&c->data_frame);
+        }
     }
 
     Log(RLOG_DEBUG,"desc=querylen len=%d",sdslen(c->querybuf));
