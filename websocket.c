@@ -10,7 +10,7 @@ static void resetDataFrame(websocket_frame_t *dataframe)
     {
         if(dataframe->payload!=NULL)
         {
-            //sdsfree(dataframe->payload);
+            sdsfree(dataframe->payload);
             dataframe->payload=NULL;
         }
         //memcpy(dataframe,0,sizeof(dataframe));
@@ -145,7 +145,6 @@ int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData) {
 
     /* Show information about connected clients */
     if (!(loops % 50)) {
-		sendServerPingMsg();
         Log(RLOG_VERBOSE,"%d clients connected",
                 listLength(server.clients));
     }
@@ -158,20 +157,7 @@ int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData) {
     return 100;
 }
 
-void sendServerPingMsg(void){
-	websocketClient *c;
-    listNode *ln;
-    time_t now = time(NULL);
-    listIter li;
 
-    listRewind(server.clients,&li);
-    while ((ln = listNext(&li)) != NULL) {
-        c = listNodeValue(ln);
-		addReplySds(c,formatted_websocket_ping());
-        
-    }
-	
-}
 
 void closeTimedoutClients(void) {
     websocketClient *c;
@@ -201,7 +187,6 @@ void freeClient(websocketClient *c) {
     
     sdsfree(c->querybuf);
     c->querybuf = NULL;
-	resetHandShakeFrame(&c->handshake_frame);
 
     aeDeleteFileEvent(server.el,c->fd,AE_READABLE);
     aeDeleteFileEvent(server.el,c->fd,AE_WRITABLE);
@@ -211,6 +196,8 @@ void freeClient(websocketClient *c) {
     ln = listSearchKey(server.clients,c);
     //assert(ln != NULL);
     listDelNode(server.clients,ln); 
+
+	resetHandShakeFrame(&c->handshake_frame);
     zfree(c);
 }
 websocketClient *createClient(int fd) {
@@ -228,6 +215,7 @@ websocketClient *createClient(int fd) {
         return NULL;
     }
 
+    c->flags=0;
     c->fd = fd;
     c->querybuf = sdsempty();
     c->sentlen = 0;
@@ -275,6 +263,8 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
 void processInputBuffer(websocketClient *c) {
     /* Keep processing while there is something in the input buffer */
     while(sdslen(c->querybuf)) { //LT mode Keep process buffer data until sucess
+
+        if (c->flags & WEBSOCKET_CLOSE_AFTER_REPLY) return;
         if (c->stage == HandshakeStage)  { //handshake
             if (processHandShake(c) != WEBSOCKET_OK) break;
         } else  { //data frame
@@ -286,14 +276,11 @@ void processInputBuffer(websocketClient *c) {
     }
 }
 void resetClient(websocketClient *c) {
-	 resetHandShakeFrame(&c->handshake_frame);
+    
 }
 int processHandShake(websocketClient *c) {
 
-<<<<<<< HEAD
-=======
-    resetHandShakeFrame(&c->handshake_frame);
->>>>>>> parent of 4eb3df1... add boardcast msg handler
+    //resetHandShakeFrame(&c->handshake_frame);
     if(parseWebSocketHead(c->querybuf,&c->handshake_frame)!=WEBSOCKET_OK)
         return WEBSOCKET_ERR;
     return WEBSOCKET_OK;
@@ -389,15 +376,24 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
         }
 
 
+        /*       for (j = 0; j < argc; j++) {
+                 if (sdslen(argv[j])) {
+                 printf("sds: %s\r\n",argv[j]);
+                 } else {
+
+                 printf("sds: space%s\r\n",argv[j]);
+                 sdsfree(argv[j]);
+                 }
+                 }*/
         zfree(argv);
     }
 
 
 
 
-    Log(RLOG_VERBOSE,"Method:%s\r\nUri:%s\r\nVersion:%s\r\nConnection:%s\r\nSec_key:%s\r\nSec_vesion:%s\r\nSec_origin:%s\r\n",
-            handshake_frame->Method,handshake_frame->Uri,handshake_frame->Version,handshake_frame->Connection,
-            handshake_frame->Sec_WebSocket_Key,handshake_frame->Sec_WebSocket_Version,handshake_frame->Sec_WebSocket_Origin);
+//    Log(RLOG_VERBOSE,"Method:%s\r\nUri:%s\r\nVersion:%s\r\nConnection:%s\r\nSec_key:%s\r\nSec_vesion:%s\r\nSec_origin:%s\r\n",
+  //          handshake_frame->Method,handshake_frame->Uri,handshake_frame->Version,handshake_frame->Connection,
+    //        handshake_frame->Sec_WebSocket_Key,handshake_frame->Sec_WebSocket_Version,handshake_frame->Sec_WebSocket_Origin);
 
     return WEBSOCKET_OK;
 }
@@ -461,10 +457,7 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
 
     Log(RLOG_DEBUG,"desc=after_process_dataframe querybuf_len=%d",sdslen(querybuf));
     if (frame->opcode == WEBSOCKET_CLOSE_OPCODE) {
-
-    }
-	if (frame->opcode == WEBSOCKET_PONG_OPCODE) {
-		Log(RLOG_DEBUG,"desc=recv_pong");
+        Log(RLOG_DEBUG,"desc=recv_quit_code");
 
     }
 
@@ -475,6 +468,7 @@ int processDataFrame(websocketClient *c) {
 //    resetDataFrame(&c->data_frame);
     if(parseWebSocketDataFrame(c->querybuf,&c->data_frame)!=WEBSOCKET_OK)
         return WEBSOCKET_ERR;
+
 
     return WEBSOCKET_OK;
 }
@@ -593,18 +587,18 @@ void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     if (listLength(c->reply) == 0) {
         c->sentlen = 0;
         aeDeleteFileEvent(server.el,c->fd,AE_WRITABLE);
+        if (c->flags & WEBSOCKET_CLOSE_AFTER_REPLY)
+        {
+            Log(RLOG_VERBOSE,"desc=client_logout fd=%d",c->fd);
+            freeClient(c);
+        }
     }
 }
-
-
-
-
 static sds formatted_websocket_ping()
 {
     
     sds frame=sdsempty();
 
-    long len=sdslen(str);
     if (frame != NULL) {
         frame = sdscatlen(frame, (void*)&WEBSOCKET_PING_LAST_FRAME_BYTE, sizeof(WEBSOCKET_PING_LAST_FRAME_BYTE));
     }
@@ -620,16 +614,16 @@ static sds formatted_websocket_frame(sds str)
 
     long len=sdslen(str);
     if (frame != NULL) {
-        frame = sdscatlen(frame, (void*)&WEBSOCKET_TEXT_LAST_FRAME_BYTE, sizeof(WEBSOCKET_TEXT_LAST_FRAME_BYTE));
+        frame = sdscatlen(frame, &WEBSOCKET_TEXT_LAST_FRAME_BYTE, sizeof(WEBSOCKET_TEXT_LAST_FRAME_BYTE));
 
         if (len <= 125) {
             frame = sdscatlen(frame, &len, 1);
         } else if (len < (1 << 16)) {
-            frame = sdscatlen(frame, (void*)&WEBSOCKET_PAYLOAD_LEN_16_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_16_BYTE));
+            frame = sdscatlen(frame, &WEBSOCKET_PAYLOAD_LEN_16_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_16_BYTE));
             uint16_t len_net = htons(len);
             frame = sdscatlen(frame, &len_net, 2);
         } else {
-            frame = sdscatlen(frame, (void*)&WEBSOCKET_PAYLOAD_LEN_64_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_64_BYTE));
+            frame = sdscatlen(frame, &WEBSOCKET_PAYLOAD_LEN_64_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_64_BYTE));
             uint64_t len_net = websocket_ntohll(len);
             frame = sdscatlen(frame, &len_net, 8);
         }
@@ -649,12 +643,39 @@ int generateAcceptKey(sds webKey,char *key,int len)
     SHA1Update(&context,webKey,sdslen(webKey));
     SHA1Update(&context,magicstr,strlen(magicstr));
     SHA1Final(shastr,&context);
+
     base64_encode(shastr,20,key,len);
     Log(RLOG_VERBOSE,"dec=generate_accept_key value=%s",key);
 
 
     return WEBSOCKET_OK;
 }
+void sendMsg(list *monitors, sds msg) {
+    listNode *ln;
+    listIter li;
+    listRewind(monitors,&li);
+    while((ln = listNext(&li))) {
+        websocketClient *monitor = ln->value;
+        sds tmpmsg=sdsdup(msg);
+        addReplySds(monitor,tmpmsg);
+    }
+}
+void sendServerPingMsg(void){
+	websocketClient *c;
+    listNode *ln;
+    time_t now = time(NULL);
+    listIter li;
+
+    listRewind(server.clients,&li);
+    while ((ln = listNext(&li)) != NULL) {
+        c = listNodeValue(ln);
+		addReplySds(c,formatted_websocket_ping());
+        
+    }
+	
+}
+
+
 int processCommand(websocketClient *c) {
     if(c->stage==HandshakeStage){ //do hand shake
 
@@ -669,8 +690,9 @@ int processCommand(websocketClient *c) {
         c->stage=ConnectedStage;
     }
     else{  //process data
-<<<<<<< HEAD
-        if(c->data_frame.payload!=NULL)
+
+        
+        if(c->data_frame.payload_len>0)
         {
             sds mm2=sdsdup(c->data_frame.payload);
             sds mm=formatted_websocket_frame(mm2);
@@ -679,16 +701,20 @@ int processCommand(websocketClient *c) {
             sdsfree(mm);
             sdsfree(mm2);
             resetDataFrame(&c->data_frame);
+
+            Log(RLOG_DEBUG,"desc=querylen len=%d",sdslen(c->querybuf));
         }
-=======
-        sds mm2=sdsdup(c->data_frame.payload);
-        sds mm=formatted_websocket_frame(mm2);
-        addReplySds(c,mm);
-        sdsfree(mm2);
-        resetDataFrame(&c->data_frame);
->>>>>>> parent of 4eb3df1... add boardcast msg handler
+        else
+        {
+            if(c->data_frame.opcode==WEBSOCKET_CLOSE_OPCODE)
+            {
+                c->flags |= WEBSOCKET_CLOSE_AFTER_REPLY;
+
+                addReplySds(c,formatted_websocket_ping()); 
+//                freeClient(c);
+            }
+        }
     }
 
-    Log(RLOG_DEBUG,"desc=querylen len=%d",sdslen(c->querybuf));
     return WEBSOCKET_OK;
 }

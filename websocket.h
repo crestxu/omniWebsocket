@@ -66,6 +66,13 @@ static const u_char WEBSOCKET_PAYLOAD_LEN_64_BYTE   = 127;
 
 #define WEBSOCKET_MAX_HEAD_LEVEL 10 //define the max head line of websocket
 
+
+#define WEBSOCKET_BLOCKED 16    /* The client is waiting in a blocking operation */
+#define WEBSOCKET_IO_WAIT 32    /* The client is waiting for Virtual Memory I/O */
+#define WEBSOCKET_CLOSE_AFTER_REPLY 128 /* Close after writing entire reply. */
+#define WEBSOCKET_UNBLOCKED 256 /* This client was unblocked and is stored in
+                                                              server.unblocked_clients */
+
 extern struct websocketServer server; /* server global state */
 
 typedef struct {
