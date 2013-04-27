@@ -187,6 +187,7 @@ void freeClient(websocketClient *c) {
     
     sdsfree(c->querybuf);
     c->querybuf = NULL;
+	resetHandShakeFrame(&c->handshake_frame);
 
     aeDeleteFileEvent(server.el,c->fd,AE_READABLE);
     aeDeleteFileEvent(server.el,c->fd,AE_WRITABLE);
@@ -271,11 +272,10 @@ void processInputBuffer(websocketClient *c) {
     }
 }
 void resetClient(websocketClient *c) {
-    
+	 resetHandShakeFrame(&c->handshake_frame);
 }
 int processHandShake(websocketClient *c) {
 
-    //resetHandShakeFrame(&c->handshake_frame);
     if(parseWebSocketHead(c->querybuf,&c->handshake_frame)!=WEBSOCKET_OK)
         return WEBSOCKET_ERR;
     return WEBSOCKET_OK;
@@ -371,15 +371,6 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
         }
 
 
-        /*       for (j = 0; j < argc; j++) {
-                 if (sdslen(argv[j])) {
-                 printf("sds: %s\r\n",argv[j]);
-                 } else {
-
-                 printf("sds: space%s\r\n",argv[j]);
-                 sdsfree(argv[j]);
-                 }
-                 }*/
         zfree(argv);
     }
 
@@ -583,6 +574,23 @@ void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     }
 }
 
+
+
+
+static sds formatted_websocket_ping()
+{
+    
+    sds frame=sdsempty();
+
+    long len=sdslen(str);
+    if (frame != NULL) {
+        frame = sdscatlen(frame, (void*)&WEBSOCKET_PING_LAST_FRAME_BYTE, sizeof(WEBSOCKET_PING_LAST_FRAME_BYTE));
+    }
+    return frame;
+}
+
+
+
 static sds formatted_websocket_frame(sds str)
 {
     
@@ -590,16 +598,16 @@ static sds formatted_websocket_frame(sds str)
 
     long len=sdslen(str);
     if (frame != NULL) {
-        frame = sdscatlen(frame, &WEBSOCKET_TEXT_LAST_FRAME_BYTE, sizeof(WEBSOCKET_TEXT_LAST_FRAME_BYTE));
+        frame = sdscatlen(frame, (void*)&WEBSOCKET_TEXT_LAST_FRAME_BYTE, sizeof(WEBSOCKET_TEXT_LAST_FRAME_BYTE));
 
         if (len <= 125) {
             frame = sdscatlen(frame, &len, 1);
         } else if (len < (1 << 16)) {
-            frame = sdscatlen(frame, &WEBSOCKET_PAYLOAD_LEN_16_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_16_BYTE));
+            frame = sdscatlen(frame, (void*)&WEBSOCKET_PAYLOAD_LEN_16_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_16_BYTE));
             uint16_t len_net = htons(len);
             frame = sdscatlen(frame, &len_net, 2);
         } else {
-            frame = sdscatlen(frame, &WEBSOCKET_PAYLOAD_LEN_64_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_64_BYTE));
+            frame = sdscatlen(frame, (void*)&WEBSOCKET_PAYLOAD_LEN_64_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_64_BYTE));
             uint64_t len_net = websocket_ntohll(len);
             frame = sdscatlen(frame, &len_net, 8);
         }
@@ -619,7 +627,6 @@ int generateAcceptKey(sds webKey,char *key,int len)
     SHA1Update(&context,webKey,sdslen(webKey));
     SHA1Update(&context,magicstr,strlen(magicstr));
     SHA1Final(shastr,&context);
-
     base64_encode(shastr,20,key,len);
     Log(RLOG_VERBOSE,"dec=generate_accept_key value=%s",key);
 
