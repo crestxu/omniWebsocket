@@ -145,6 +145,7 @@ int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData) {
 
     /* Show information about connected clients */
     if (!(loops % 50)) {
+		sendServerPingMsg();
         Log(RLOG_VERBOSE,"%d clients connected",
                 listLength(server.clients));
     }
@@ -157,7 +158,20 @@ int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData) {
     return 100;
 }
 
+void sendServerPingMsg(void){
+	websocketClient *c;
+    listNode *ln;
+    time_t now = time(NULL);
+    listIter li;
 
+    listRewind(server.clients,&li);
+    while ((ln = listNext(&li)) != NULL) {
+        c = listNodeValue(ln);
+		addReplySds(c,formatted_websocket_ping());
+        
+    }
+	
+}
 
 void closeTimedoutClients(void) {
     websocketClient *c;
@@ -443,6 +457,10 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
 
     Log(RLOG_DEBUG,"desc=after_process_dataframe querybuf_len=%d",sdslen(querybuf));
     if (frame->opcode == WEBSOCKET_CLOSE_OPCODE) {
+
+    }
+	if (frame->opcode == WEBSOCKET_PONG_OPCODE) {
+		Log(RLOG_DEBUG,"desc=recv_pong");
 
     }
 
