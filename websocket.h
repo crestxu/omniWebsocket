@@ -105,7 +105,7 @@ typedef struct websocketClient {
         HandshakeStage = 0,
         LoginStage,
         ConnectedStage
-    }; 
+    }WEB_SOCKET_STATUS; 
     int fd;
     int flags;
     int stage; //web socket stage
@@ -161,5 +161,5 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame);
 int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * data_frame);
 void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask);
 sds formatted_websocket_ping();
-
+void sendServerPingMsg(void);
 #endif

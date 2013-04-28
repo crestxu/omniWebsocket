@@ -8,6 +8,12 @@ static void resetDataFrame(websocket_frame_t *dataframe)
 
     if(dataframe!=NULL)
     {
+        dataframe->payload_len=0;
+        dataframe->fin=0;
+        dataframe->rsv1=0;
+        dataframe->rsv2=0;
+        dataframe->rsv3=0;
+        dataframe->opcode=0;
         if(dataframe->payload!=NULL)
         {
             sdsfree(dataframe->payload);
@@ -16,6 +22,17 @@ static void resetDataFrame(websocket_frame_t *dataframe)
         //memcpy(dataframe,0,sizeof(dataframe));
 
     }
+}
+void initHandShakeFrame(handshake_frame_t *handframe)
+{
+    handframe->Connection=NULL;
+    handframe->Method=NULL;
+    handframe->Sec_WebSocket_Key=NULL;
+    handframe->Sec_WebSocket_Origin=NULL;
+    handframe->Sec_WebSocket_Version=NULL;
+    handframe->Upgrade=NULL;
+    handframe->Uri=NULL;
+    handframe->Version=NULL;
 }
 static void resetHandShakeFrame(handshake_frame_t *handframe)
 {
@@ -145,6 +162,8 @@ int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData) {
 
     /* Show information about connected clients */
     if (!(loops % 50)) {
+
+//        sendServerPingMsg();
         Log(RLOG_VERBOSE,"%d clients connected",
                 listLength(server.clients));
     }
@@ -201,7 +220,7 @@ void freeClient(websocketClient *c) {
     zfree(c);
 }
 websocketClient *createClient(int fd) {
-    websocketClient *c = (websocketClient*)zmalloc(sizeof(websocketClient));
+    websocketClient *c = zmalloc(sizeof(websocketClient));
     c->bufpos = 0;
 
     anetNonBlock(NULL,fd);
@@ -225,6 +244,7 @@ websocketClient *createClient(int fd) {
     //listSetDupMethod(c->reply,dupClientReplyValue);
     c->stage = HandshakeStage;
 
+    initHandShakeFrame(&c->handshake_frame);
     listAddNodeTail(server.clients,c);
 
     //initClientMultiState(c);
@@ -268,7 +288,12 @@ void processInputBuffer(websocketClient *c) {
         if (c->stage == HandshakeStage)  { //handshake
             if (processHandShake(c) != WEBSOCKET_OK) break;
         } else  { //data frame
-            if (processDataFrame(c) != WEBSOCKET_OK) break;
+            if (processDataFrame(c) != WEBSOCKET_OK)
+            {
+             
+                Log(RLOG_WARNING,"desc=recv_data_frame_error");
+                break;
+            }
         }
 
         if (processCommand(c) == WEBSOCKET_OK)
@@ -292,6 +317,11 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
     while(sdslen(querybuf)>0)
     {
 
+
+        //first find the '/r/n/r/n' end of the http head 
+    //    char *tmpend=strstr(querybuf,"\r\n\r\n");
+//        if(tmpend==NULL)
+  //          return WEBSOCKET_ERR;
 
         char *newline = strstr(querybuf,"\r\n");
         int argc, j;
@@ -400,6 +430,10 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
 int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
 {
 
+    if(sdslen(querybuf)<2)
+    {
+        return WEBSOCKET_ERR;
+    }
     int datalen,i;
     unsigned char *buf=querybuf;
     frame->fin  = (buf[0] >> 7) & 1;
@@ -413,18 +447,38 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
 
     int offset=2;
     if (frame->payload_len == 126) {
+  
+          if(sdslen(querybuf)<4)
+          {
+            return WEBSOCKET_ERR;
+          }
+
         unsigned short len;
         memcpy(&len, buf+2, 2);
         offset+=2;
         frame->payload_len = ntohs(len);
 
     } else if (frame->payload_len == 127) {
-        unsigned short len;
+       
+          if(sdslen(querybuf)<10)
+          {
+            return WEBSOCKET_ERR;
+          }
+
+
+        unsigned long len;
         memcpy(&len, buf+2, 8);
         offset+=8;
         frame->payload_len = websocket_ntohll(len);
 
     }
+
+    
+    if(sdslen(querybuf)-offset<4)
+    {
+            return WEBSOCKET_ERR;
+    }
+
 
     if(frame->mask_key)
     {
@@ -434,31 +488,39 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * frame)
     if((datalen=(sdslen(querybuf)-offset))!=frame->payload_len)
     {
         Log(RLOG_VERBOSE,"desc=recv_error packet_len=%d recv_data_len=%d",frame->payload_len,datalen);
-//        return WEBSOCKET_ERR;
+        return WEBSOCKET_ERR;
     }
-    Log(RLOG_DEBUG,"desc=dataframe len=%d",frame->payload_len);
+    else
+    {
+    
+        Log(RLOG_DEBUG,"desc=dataframe len=%d",frame->payload_len);
+    }
     if (frame->payload_len > 0) {
                 //copy data to payload len
 
         if ((frame->opcode == WEBSOCKET_TEXT_OPCODE)) {
-            frame->payload =sdsempty(); // = sdsdup(sdsrange(buf,offset,frame->payload_len));
-            sdscatlen(frame->payload,buf+offset,frame->payload_len);
+            frame->payload =sdsnewlen(buf+offset,frame->payload_len); // = sdsdup(sdsrange(buf,offset,frame->payload_len));
+           // sdscpylen(frame->payload,buf+offset,frame->payload_len);
             if (frame->mask) {
                 for (i = 0; i < frame->payload_len; i++) {
                     frame->payload[i] = frame->payload[i] ^ frame->mask_key[i % 4];
                 }
             }
+            Log(RLOG_VERBOSE,"desc=data_frame value=%s",frame->payload);
 
         }
-        Log(RLOG_VERBOSE,"desc=data_frame value=%s",frame->payload);
     }
 
     querybuf=sdsrange(querybuf,offset+frame->payload_len,-1);
 
-    Log(RLOG_DEBUG,"desc=after_process_dataframe querybuf_len=%d",sdslen(querybuf));
+    Log(RLOG_DEBUG,"desc=after_process_dataframe opcode=%d querybuf_len=%d",frame->opcode,sdslen(querybuf));
     if (frame->opcode == WEBSOCKET_CLOSE_OPCODE) {
         Log(RLOG_DEBUG,"desc=recv_quit_code");
 
+    }
+    if(frame->opcode==WEBSOCKET_PONG_OPCODE)
+    {
+        Log(RLOG_DEBUG,"desc=recv_pong_code");
     }
 
     return WEBSOCKET_OK;
@@ -594,36 +656,35 @@ void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask) {
         }
     }
 }
-static sds formatted_websocket_ping()
+sds formatted_websocket_ping()
 {
     
-    sds frame=sdsempty();
+    sds frame;
 
     if (frame != NULL) {
-        frame = sdscatlen(frame, (void*)&WEBSOCKET_PING_LAST_FRAME_BYTE, sizeof(WEBSOCKET_PING_LAST_FRAME_BYTE));
+        frame = sdsnewlen((void*)&WEBSOCKET_PING_LAST_FRAME_BYTE, sizeof(WEBSOCKET_PING_LAST_FRAME_BYTE));
     }
     return frame;
 }
 
 
 
-static sds formatted_websocket_frame(sds str)
+sds formatted_websocket_frame(sds str)
 {
     
-    sds frame=sdsempty();
+    sds frame= sdsnewlen(&WEBSOCKET_TEXT_LAST_FRAME_BYTE, sizeof(WEBSOCKET_TEXT_LAST_FRAME_BYTE));
 
     long len=sdslen(str);
     if (frame != NULL) {
-        frame = sdscatlen(frame, &WEBSOCKET_TEXT_LAST_FRAME_BYTE, sizeof(WEBSOCKET_TEXT_LAST_FRAME_BYTE));
 
         if (len <= 125) {
             frame = sdscatlen(frame, &len, 1);
         } else if (len < (1 << 16)) {
-            frame = sdscatlen(frame, &WEBSOCKET_PAYLOAD_LEN_16_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_16_BYTE));
+            frame = sdscatlen(frame, (void*)&WEBSOCKET_PAYLOAD_LEN_16_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_16_BYTE));
             uint16_t len_net = htons(len);
             frame = sdscatlen(frame, &len_net, 2);
         } else {
-            frame = sdscatlen(frame, &WEBSOCKET_PAYLOAD_LEN_64_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_64_BYTE));
+            frame = sdscatlen(frame, (void*)&WEBSOCKET_PAYLOAD_LEN_64_BYTE, sizeof(WEBSOCKET_PAYLOAD_LEN_64_BYTE));
             uint64_t len_net = websocket_ntohll(len);
             frame = sdscatlen(frame, &len_net, 8);
         }
@@ -669,7 +730,9 @@ void sendServerPingMsg(void){
     listRewind(server.clients,&li);
     while ((ln = listNext(&li)) != NULL) {
         c = listNodeValue(ln);
-		addReplySds(c,formatted_websocket_ping());
+
+        if(c->stage==ConnectedStage)
+        addReplySds(c,formatted_websocket_ping());
         
     }
 	
@@ -694,15 +757,19 @@ int processCommand(websocketClient *c) {
         
         if(c->data_frame.payload_len>0)
         {
-            sds mm2=sdsdup(c->data_frame.payload);
-            sds mm=formatted_websocket_frame(mm2);
-            //addReplySds(c,mm);
-            sendMsg(server.clients,mm);
-            sdsfree(mm);
-            sdsfree(mm2);
-            resetDataFrame(&c->data_frame);
+            if(strlen(c->data_frame.payload)>0)
+            {
+                sds mm2=sdsdup(c->data_frame.payload);
 
-            Log(RLOG_DEBUG,"desc=querylen len=%d",sdslen(c->querybuf));
+                sds mm=formatted_websocket_frame(mm2);
+                sendMsg(server.clients,mm);
+                sdsfree(mm);
+                sdsfree(mm2);
+                resetDataFrame(&c->data_frame);
+
+                Log(RLOG_DEBUG,"desc=querylen len=%d",sdslen(c->querybuf));
+
+            }
         }
         else
         {
@@ -711,7 +778,6 @@ int processCommand(websocketClient *c) {
                 c->flags |= WEBSOCKET_CLOSE_AFTER_REPLY;
 
                 addReplySds(c,formatted_websocket_ping()); 
-//                freeClient(c);
             }
         }
     }

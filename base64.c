@@ -142,5 +142,4 @@ void base64_decode(unsigned char const *encoded_string,unsigned int len,unsigned
     }
   }
 
-  return ret;
 }
