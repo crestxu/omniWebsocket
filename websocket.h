@@ -64,7 +64,7 @@ static const u_char WEBSOCKET_PING_LAST_FRAME_BYTE[]  = {WEBSOCKET_PING_OPCODE  
 static const u_char WEBSOCKET_PAYLOAD_LEN_16_BYTE   = 126;
 static const u_char WEBSOCKET_PAYLOAD_LEN_64_BYTE   = 127;
 
-#define WEBSOCKET_MAX_HEAD_LEVEL 10 //define the max head line of websocket
+#define WEBSOCKET_MAX_HEAD_LEVEL 20 //define the max head line of websocket
 
 
 #define WEBSOCKET_BLOCKED 16    /* The client is waiting in a blocking operation */

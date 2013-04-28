@@ -277,7 +277,7 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     } else {
         return;
     }
-//    Log(RLOG_VERBOSE,"rev:%s",c->querybuf);
+    Log(RLOG_VERBOSE,"rev:%s",c->querybuf);
     processInputBuffer(c);
 }
 void processInputBuffer(websocketClient *c) {
@@ -395,7 +395,7 @@ int parseWebSocketHead(sds querybuf,handshake_frame_t * handshake_frame)
             else
             {
                 Log(RLOG_WARNING,"bad params in  head of websocket: %d",argc);
-                return  WEBSOCKET_ERR;
+               // return  WEBSOCKET_ERR;
             }
 
         }
