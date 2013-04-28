@@ -73,6 +73,8 @@ static const u_char WEBSOCKET_PAYLOAD_LEN_64_BYTE   = 127;
 #define WEBSOCKET_UNBLOCKED 256 /* This client was unblocked and is stored in
                                                               server.unblocked_clients */
 
+
+
 extern struct websocketServer server; /* server global state */
 
 typedef struct {
@@ -142,6 +144,9 @@ struct websocketServer {
     int syslog_enabled;
     char *syslog_ident;
     int syslog_facility;
+    void (*onData)(void *privdata);
+    void (*onClose)(void *privdata);
+    void (*onOpen)(void *privdata);
     /* Limits */
     unsigned int maxclients;
     time_t unixtime;    /* Unix time sampled every second. */
@@ -162,4 +167,5 @@ int parseWebSocketDataFrame(sds querybuf,websocket_frame_t * data_frame);
 void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask);
 sds formatted_websocket_ping();
 void sendServerPingMsg(void);
+void sendMsg(list *monitors, sds msg);
 #endif

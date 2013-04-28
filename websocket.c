@@ -196,6 +196,13 @@ void closeTimedoutClients(void) {
     }
 }
 void freeClient(websocketClient *c) {
+
+    
+    if(server.onClose!=NULL)
+    {
+        server.onClose(c);
+    }
+
     listNode *ln;
 
     /* Note that if the client we are freeing is blocked into a blocking
@@ -721,6 +728,7 @@ void sendMsg(list *monitors, sds msg) {
         addReplySds(monitor,tmpmsg);
     }
 }
+
 void sendServerPingMsg(void){
 	websocketClient *c;
     listNode *ln;
@@ -757,19 +765,12 @@ int processCommand(websocketClient *c) {
         
         if(c->data_frame.payload_len>0)
         {
-            if(strlen(c->data_frame.payload)>0)
+            if(server.onData!=NULL)
             {
-                sds mm2=sdsdup(c->data_frame.payload);
-
-                sds mm=formatted_websocket_frame(mm2);
-                sendMsg(server.clients,mm);
-                sdsfree(mm);
-                sdsfree(mm2);
-                resetDataFrame(&c->data_frame);
-
-                Log(RLOG_DEBUG,"desc=querylen len=%d",sdslen(c->querybuf));
-
+                server.onData(c);
             }
+            resetDataFrame(&c->data_frame);
+
         }
         else
         {
