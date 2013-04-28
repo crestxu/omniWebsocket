@@ -6,6 +6,24 @@
 #include"anet.h"
 #include"websocket.h"
 
+
+
+void myData(websocketClient *c)
+{
+            if(strlen(c->data_frame.payload)>0)
+            {
+                sds mm2=sdsdup(c->data_frame.payload);
+
+                sds mm=formatted_websocket_frame(mm2);
+                sendMsg(server.clients,mm);
+                sdsfree(mm);
+                sdsfree(mm2);
+ 
+                Log(RLOG_DEBUG,"desc=querylen len=%d",sdslen(c->querybuf));
+
+            }
+
+}
 int main(void)
 {
 
@@ -13,7 +31,10 @@ int main(void)
     int port=8413;
     server.bindaddr=ip;
     server.port=port;
+
+    server.onData=myData;
     initServer();
+
     aeMain(server.el);
     aeDeleteEventLoop(server.el);
 	return 0;
