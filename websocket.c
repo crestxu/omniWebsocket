@@ -247,8 +247,8 @@ websocketClient *createClient(int fd) {
     c->sentlen = 0;
     c->lastinteraction = time(NULL);
     c->reply = listCreate();
-    //listSetFreeMethod(c->reply,decrRefCount);
-    //listSetDupMethod(c->reply,dupClientReplyValue);
+    listSetFreeMethod(c->reply,sdsfree);
+    listSetDupMethod(c->reply,sdsdup);
     c->stage = HandshakeStage;
 
     initHandShakeFrame(&c->handshake_frame);
