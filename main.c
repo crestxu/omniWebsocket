@@ -1,9 +1,7 @@
 #include<stdio.h>
 #include<unistd.h>
 #include<stdlib.h>
-#include"ae.h"
 #include<string.h>
-#include"anet.h"
 #include"websocket.h"
 
 
@@ -31,12 +29,10 @@ int main(void)
     int port=8413;
     server.bindaddr=ip;
     server.port=port;
-
     server.ping_interval=5;
     server.maxidletime=15;
     server.onData=myData;
     initServer();
-
     aeMain(server.el);
     aeDeleteEventLoop(server.el);
 	return 0;

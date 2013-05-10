@@ -30,6 +30,7 @@
 #include"base64.h"
 #include <sys/uio.h>
 #include <errno.h>
+#include"ae.h"
 
 #define WEBSOCKET_OK 0
 #define WEBSOCKET_ERR 1
