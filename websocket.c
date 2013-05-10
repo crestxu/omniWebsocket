@@ -160,10 +160,14 @@ int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData) {
     server.unixtime = time(NULL);
 
 
+    if(server.ping_interval){
+        if(!(loops%(10*server.ping_interval))){
+            sendServerPingMsg();
+        }
+    }
     /* Show information about connected clients */
     if (!(loops % 50)) {
 
-//        sendServerPingMsg();
         Log(RLOG_VERBOSE,"%d clients connected",
                 listLength(server.clients));
     }

@@ -72,7 +72,7 @@ static const u_char WEBSOCKET_PAYLOAD_LEN_64_BYTE   = 127;
 #define WEBSOCKET_CLOSE_AFTER_REPLY 128 /* Close after writing entire reply. */
 #define WEBSOCKET_UNBLOCKED 256 /* This client was unblocked and is stored in
                                                               server.unblocked_clients */
-
+typedef void (*callback_t)(void *privdata);
 
 
 extern struct websocketServer server; /* server global state */
@@ -139,14 +139,18 @@ struct websocketServer {
     /* Configuration */
     int verbosity;
     int maxidletime;
+    int ping_interval;
     int daemonize;
     char *logfile;
     int syslog_enabled;
     char *syslog_ident;
     int syslog_facility;
-    void (*onData)(void *privdata);
-    void (*onClose)(void *privdata);
-    void (*onOpen)(void *privdata);
+    //void (*onData)(void *privdata);
+    //void (*onClose)(void *privdata);
+    //void (*onOpen)(void *privdata);
+    callback_t onData;
+    callback_t onClose;
+    callback_t onOpen;
     /* Limits */
     unsigned int maxclients;
     time_t unixtime;    /* Unix time sampled every second. */

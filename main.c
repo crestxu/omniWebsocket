@@ -32,6 +32,8 @@ int main(void)
     server.bindaddr=ip;
     server.port=port;
 
+    server.ping_interval=5;
+    server.maxidletime=15;
     server.onData=myData;
     initServer();
 
